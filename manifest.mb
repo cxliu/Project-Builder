@@ -1,0 +1,20 @@
+# This is the very top level manifest file being used here. When you have a
+# project made up of components following the code sharing policy, you should
+# follow this structure. Even if some or all parts do not follow the code
+# sharing policy, then this will still be mostly applicable, you may just need
+# to think a bit more carefully when it comes to naming things.
+
+[default]
+# Here we import the manifest files for all of the components we are using. The
+# mbuild component is important, if you don't @import it, none of the M-Build
+# default metadata will be available.
+@import mbuild/manifest.mb
+@import mbuild_android/manifest.mb
+@import mbuild_arm/manifest.mb
+@import mbuild_intel/manifest.mb
+@import mbuild_mips/manifest.mb
+@import mbuild_ti/manifest.mb
+@import mbuild_clang/manifest.mb
+@import example-1/manifest.mb
+@import example-2/manifest.mb
+@import strip_example/manifest.mb

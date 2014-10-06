@@ -1,0 +1,72 @@
+[linker_rvct_armlink]
+@att MAKE_LD = "armcc"
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+[cpp_linker]
+@att MAKE_LDFLAGS += '--cpp'
+
+[processor_armv5te]
+@att MAKE_LDFLAGS += "-L--cpu=5TE"
+
+[processor_armv6]
+@att MAKE_LDFLAGS += "-L--cpu=6"
+
+
+[arm_processor_cortex_a8]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A8.no_neon"
+
+[arm_processor_cortex_a8_neon]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A8"
+
+
+[arm_processor_cortex_a9]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A9.no_neon.no_vfp"
+
+[arm_processor_cortex_a9_vfp]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A9.no_neon"
+
+[arm_processor_cortex_a9_vfp_neon]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A9"
+
+[arm_processor_cortex_a15_vfp_neon]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A15"
+
+[arm_processor_cortex_a7_vfp_neon]
+@att MAKE_LDFLAGS += "-L--cpu=Cortex-A7"
+
+[arm_feature_vfp_soft.os_abi_soft_float]
+@att MAKE_LDFLAGS += "-L--fpu=SoftVFP"
+
+[arm_feature_vfp_v3_d16.os_abi_hard_float]
+@att MAKE_LDFLAGS += "-L--fpu=VFPv3_D16"
+
+[arm_feature_vfp_v3_d16.os_abi_soft_float]
+@att MAKE_LDFLAGS += "-L--fpu=SoftVFP+VFPv3_D16"
+
+[arm_feature_vfp_v3_d32.os_abi_hard_float]
+@att MAKE_LDFLAGS += "-L--fpu=VFPv3"
+
+[arm_feature_vfp_v3_d32.os_abi_soft_float]
+@att MAKE_LDFLAGS += "-L--fpu=SoftVFP+VFPv3"
+
+[arm_feature_vfp_v4_d16.os_abi_hard_float]
+@att MAKE_LDFLAGS += "-L--fpu=VFPv4_D16"
+
+[arm_feature_vfp_v4_d16.os_abi_soft_float]
+@att MAKE_LDFLAGS += "-L--fpu=SoftVFP+VFPv4_D16"
+
+[arm_feature_vfp_v4_d32.os_abi_hard_float]
+@att MAKE_LDFLAGS += "-L--fpu=VFPv4"
+
+[arm_feature_vfp_v4_d32.os_abi_soft_float]
+@att MAKE_LDFLAGS += "-L--fpu=SoftVFP+VFPv4"
+
+[os_qemu]
+@att MAKE_LDFLAGS += '-L--sysv'
+
+[os_rvbare.flavour_arm_simulate]
+@att MAKE_LDFLAGS += '-L--bestdebug'
+
+[linker_rvct_armlink.processor_armv8]
+@att MAKE_LDFLAGS += '--cpu=8-A.64'
+@att MAKE_LDFLAGS += '--fpu=FP-ARMv8'

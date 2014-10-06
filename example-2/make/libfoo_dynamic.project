@@ -1,0 +1,14 @@
+libfoo_dynamic = ProjectSpec(
+    actions=mbuild_compile_and_link,
+    depends=[],
+    build_configuration=mbuild_add_dimensions(
+                          mbuild_union(
+                            mbuild_standard,
+                            arm_support,
+                            ti_support,
+                            intel_support,
+                            mips_support,
+                            clang_support),
+                          ['libfooadd'])
+)
+

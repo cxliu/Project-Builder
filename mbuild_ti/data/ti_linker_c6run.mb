@@ -1,0 +1,160 @@
+[linker_c6run]
+@att MAKE_LD = "c6runapp-cc"
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+[linker_c6run.mbuild_sensible_defaults]
+@add linker_c6run_flags
+
+[linker_c6run_flags]
+@att MAKE_LDFLAGS += '$(TI_LINK_COMMAND_FILE)'
+
+[linker_c6run_flags.config_type_console]
+@att MAKE_REQUIRE_ENVIRONMENT_VARIABLES.TI_LINK_COMMAND_FILE = "The file is used to pass options, arguments and memory layout of your target platform to linker."
+
+
+
+##### 1. coffabi #####
+
+##############################
+##### c64/c64+ processor #####
+[linker_c6run.os_tisim_coffabi.processor_c64.ti_dsplib_c64_style]
+@att MAKE_LDLIBS += "-ldsplib_c64_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c64plus.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c64plus.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_coff.lib"
+##############################
+
+##############################
+##### c66      processor #####
+[linker_c6run.os_tisim_coffabi.processor_c66.ti_dsplib_c66_style]
+@att MAKE_LDLIBS += "-ldsplib_c66_coff.lib"
+[linker_c6run.os_tisim_coffabi.processor_c66.ti_dsplib_c674_style]
+@att MAKE_LDLIBS += "-ldsplib_c674_coff.lib"
+[linker_c6run.os_tisim_coffabi.processor_c66.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_coff.lib"
+[linker_c6run.os_tisim_coffabi.processor_c66.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_coff.lib"
+##############################
+
+##############################
+##### c67/c67+ processor #####
+[linker_c6run.os_tisim_coffabi.processor_c67.ti_dsplib_c67_style]
+@att MAKE_LDLIBS += "-ldsplib_c67_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c67.ti_fastmathlib_c67_style]
+@att MAKE_LDLIBS += "-lc67xfastMath.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c67plus.ti_dsplib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c67plus.ti_fastmathlib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-lc67xfastMath.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c67plus.ti_dsplib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67plus_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c67plus.ti_fastmathlib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-lc67pfastMath.lib"
+##############################
+
+
+##############################
+#####   c674 processor   #####
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_dsplib_c674_style]
+@att MAKE_LDLIBS += "-ldsplib_c674_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_fastmathlib_c674_style]
+@att MAKE_LDLIBS += "-lc674xfastMath.lib"
+
+#Below lines for C674x target will be re-organized in the future.
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_dsplib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c674_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_fastmathlib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-lc674xfastMath.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_dsplib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_fastmathlib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-lc67xfastMath.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_coff.lib"
+
+[linker_c6run.os_tisim_coffabi.processor_c674.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_coff.lib"
+##############################
+
+##### 2. eabi #####
+# From CGT v6.1.2, the linker has the capability to automatically choose the correct library
+# to match the target and model options of your object code.
+# Since eabi is supported from v7.2.x, no need to link rts libraries explicitly here.
+##############################
+##### c64/c64+ processor #####
+[linker_c6run.os_tisim_eabi.processor_c64.ti_dsplib_c64_style]
+@att MAKE_LDLIBS += "-ldsplib_c64_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c64plus.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c64plus.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_elf.lib"
+##############################
+
+
+##############################
+##### c66      processor #####
+[linker_c6run.os_tisim_eabi.processor_c66.ti_dsplib_c66_style]
+@att MAKE_LDLIBS += "-ldsplib_c66_elf.lib"
+[linker_c6run.os_tisim_eabi.processor_c66.ti_dsplib_c674_style]
+@att MAKE_LDLIBS += "-ldsplib_c674_elf.lib"
+[linker_c6run.os_tisim_eabi.processor_c66.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_elf.lib"
+[linker_c6run.os_tisim_eabi.processor_c66.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_elf.lib"
+##############################
+
+
+##############################
+##### c67/c67+ processor #####
+[linker_c6run.os_tisim_eabi.processor_c67.ti_dsplib_c67_style]
+@att MAKE_LDLIBS += "-ldsplib_c67_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c67plus.ti_dsplib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c67plus.ti_dsplib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67plus_elf.lib"
+##############################
+
+
+##############################
+#####   c674 processor   #####
+[linker_c6run.os_tisim_eabi.processor_c674.ti_dsplib_c674_style]
+@att MAKE_LDLIBS += "-ldsplib_c674_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_fastmathlib_c674_style]
+@att MAKE_LDLIBS += "-lc674xfastMath_elf.lib"
+
+#Below lines for C674x target will be re-organized in the future.
+[linker_c6run.os_tisim_eabi.processor_c674.ti_dsplib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c674_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_fastmathlib_c67_style.ti_plus_core]
+@att MAKE_LDLIBS += "-lc674xfastMath_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_dsplib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c67_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_fastmathlib_c67_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-lc67xfastMath_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_dsplib_c64_style.ti_non_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64_elf.lib"
+
+[linker_c6run.os_tisim_eabi.processor_c674.ti_dsplib_c64_style.ti_plus_core]
+@att MAKE_LDLIBS += "-ldsplib_c64plus_elf.lib"

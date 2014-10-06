@@ -1,0 +1,4 @@
+[archiver_ar]
+@att MAKE_AR='ar'
+@att MAKE_ARFLAGS+='-rc'
+@att MAKE_ARFLAGS_OUTPUT_FILE=''

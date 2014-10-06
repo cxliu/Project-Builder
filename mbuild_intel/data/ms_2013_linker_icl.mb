@@ -1,0 +1,36 @@
+[linker_icl.tool_msvs2013]
+@att VS2013_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[linker_icl.tool_msvs2013.mbuild_debug_symbols]
+@att VS2013_LINK_INCREMENTAL = true
+@att VS2013_OPTIMIZE_REFERENCES = keep
+@att VS2013_ENABLE_COMDAT_FOLDING = false
+
+[linker_icl.tool_msvs2013.mbuild_optimise]
+@att VS2013_LINK_INCREMENTAL = false
+@att VS2013_OPTIMIZE_REFERENCES = eliminate
+@att VS2013_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[linker_icl.tool_msvs2013.(config_type_console+config_type_dynamic_lib)]
+@att VS2013_SUBSYSTEM=console
+
+[linker_icl.tool_msvs2013.config_type_windowed]
+@att VS2013_SUBSYSTEM=windows
+
+[linker_icl.tool_msvs2013.config_type_static_lib]
+# No value (don't use linker)
+
+# Set up VS_TARGET_MACHINE
+[linker_icl.tool_msvs2013.processor_x86]
+@att VS2013_TARGET_MACHINE = x86
+
+[linker_icl.tool_msvs2013.processor_amd64]
+@att VS2013_TARGET_MACHINE = x64
+
+[linker_icl.tool_msvs2013]
+@att VS2013_LINK_SAFE_EXCEPTION_HANDLER = false
+
+[linker_icl.tool_msvs2013.processor_x86.vs2013_safe_exception]
+@att VS2013_LINK_SAFE_EXCEPTION_HANDLER = true

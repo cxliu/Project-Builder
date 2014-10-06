@@ -1,0 +1,464 @@
+These are some documents describing the thought process for MB-50. Probably reading them in order is best.
+MB-50 - ideas.txt
+MB-50 - evaluation.txt
+
+
+This issue is currently blocking M-Build from being generally usable across lots of projects. The problems we have at the moment are:
+
+1) We have a fixed set of configuration dimensions ('target', 'config' and 'flavour')
+2) .project files need to live in the same directory as their dependencies
+3) Each point of the configuration space needs to be explicitly defined, M-Build can only do the project/configuration pairing automatically
+4) Handling of multiple projects with different configurations is nearly unusable
+
+Lots of thought has gone into this, without any obvious solutions popping up. Looking at other projects to see how they handle this problem was unfruitful (they usually don't handle multiple projects particularly well to start with, so they haven't even reached the level of power needed to have these sorts of problems).
+
+The intention of this document is to then give lots of potential ways of solving the problem. This way, when one is chosen, we will know that it is better than at least (lots-1) other solutions. Hopefully the fleshing out of each idea helps with actually understanding the problem better.
+
+It is likely that when an idea is found to be unworkable, the explanation will stop, with a few questions which show why it won't work.
+
+Requirements:
+1) Each component can have its own set of configurations
+2) If a component can be built (i.e. it isn't a subcomponent which is only meant to be built as part of larger components), then it can own its own build files (so the Makefiles, Visual Studio projects, etc. live with it)
+
+Things that tend to be tricky to get right:
+1) Where does the build artifact live?
+2) What is the filename of the build artifact?
+3) What are the dependencies?
+4) What configuration of each dependency should we use?
+5) How do we build each dependency?
+6) How are we going to handle linking with things that don't use M-Build?
+
+Surprisingly, naming things tends to be one of the hardest parts of this, but it is important (as without a good way to do names, you can't easily get dependencies to work)
+
+Dimensions and build configurations:
+-----------------------------------
+When thinking about configurations, the model I use is points in a multidimensional space. The dimensions are things like "operating system", "processor", "project", "compiler". Every build artifact should be describable as a point in this space.
+
+The "range" of a dimension is the set of values that belong to it. For example, the range of the "operating system" dimension might be ["windows", "linux", "osx"].
+
+A "value" in a dimension is an item from the range (e.g. "windows"). I'd love to hear a better word for this, but I don't know what it should be.
+
+The "configuration space" is the product of all these dimensions (i.e. some sort of hyper-rectangular-prism). This may be narrowed down by various constraints. A build is said to be "valid" if those constraints are satisfied. The typical constraint is the "SHOULD_BUILD" attribute, which evaluates to 'false' if the build isn't possible (e.g. Linux builds from Visual Studio).
+
+When a project links with another, this is defined by two points in potentially different spaces. One for each project. Since each project can have its own configuration space, and its own set of valid builds within that space, there is no guarantee that determining the corresponding point(s) will be easy. The common approach used here is to match any dimensions with the same name, and allow extra dimensions to multiply the number of combinations. For example, if we have:
+
+ProjectA with dimensions "flavour" (debug/release) and "language" (english/danish)
+ProjectB with dimensions "flavour" (debug/release) and "backend" (float32/dsp24/risc16x32)
+
+When these get linked together we can have (2*2) * (2*3) = 24 configurations. So, we match together the flavour dimensions, giving us ((2*2) * (2*3)) / 2 = 12 configurations (e.g. debug/english/float32). This seems like a fairly correct way to deal with things.
+
+When there are holes in the configuration space (e.g. ProjectA doesn't support "debug" builds) then we have another problem - how do we link these two together? I think a workable solution is to just avoid doing these links. e.g.
+
+ProjectA has release/english and release/danish
+ProjectB has debug/float32, debug/dsp24, debug/risc16x32, release/float32, release/dsp24 and release_risc16x32
+
+We only create a release/english/float32, release/english/risc16x32, release/english/dsp24, release/danish/float32, release/danish/risc16x32 and release/danish/dsp24.
+
+The build files for ProjectB still knows how to build the debug versions, but the rules for linking with ProjectA (whether they live with ProjectA or ProjectB) skip anything that doesn't work.
+
+Previous attempts at allowing fallbacks to be specified don't scale very well. So this overall appraoch is likely to be used regardless of the solution chosen from below.
+
+External Dependencies
+-----------------------------------
+It is nice if everything sits nicely in our M-Build world, and we can control how everything is built. However, in the future it is quite likely that someone will be building a product, and one of the libraries will have its own build system, and be so complicated to figure out, that no one wants to M-Bulid-ify the library.
+
+The approach we will take for now is likely to just leave a hole in the design to allow for such things to be added, but not actually go about the details of adding them. They are difficult, because all of the operations that we want to be able to do (e.g. get the name of the thing they are building) have no general answer (maybe it builds 3 things? what if it can only build in one configuration at a time? what if it only works on windows?)
+
+
+Solution 0: What we have
+-----------------------------------
+There are special files called "*.project". These files give the name of a project, its dependencies (as project names) and some keywords.
+
+There are special files called "*.buildconfig". These files give a python list of BuildConfig objects, which have a 'target', a 'config' and a 'type' (called 'flavour' now). They also have a set of keywords which they define, and (optionally) a set of keywords which must already be defined for them to be used.
+
+Build scripts will take a project, and then for every valid build config (valid == has required keywords, and the attribute SHOULD_BUILD evaluates to true when all the keywords from the .project and the .buildconfig are taken together) create a rule for a particular build artifact.
+
+A build config can also specify fallback build configs. These are used when linking together two projects that have different sets of build configs. When this happens, there must be links in both directions between each build config used for the two projects.
+
+An external dependency could be handled by having a special type of .project file.
+
+-----------------------------------
+Solution 1
+
+There are special files called "*.seed". These files look like this:
+
+windows.seed:
+	Seed(
+		identifiers = {'os': 'windows'},
+		keywords = ['os_windows'],
+	)
+
+osx.seed:
+	Seed(
+		identifiers = {'os': 'osx'},
+		keywords = ['os_osx'],
+	)
+
+x86.seed:
+	Seed(
+		identifiers = {'processor': 'x86'},
+		keywords = ['processor_x86'],
+	)
+
+amd64.seed:
+	Seed(
+		identifiers = {'processor': 'amd64'},
+		keywords = ['processor_amd64'],
+	)
+
+arm5TE.seed:
+	Seed(
+		identifiers = {'processor': 'arm5TE',
+		               'os': 'rvbare'},
+		keywords = ['processor_arm5TE',
+		            'os_rvbare'],
+	)
+
+helloworld.seed:
+	Seed(
+		identifiers = {'project_name', 'helloworld'},
+		keywords = ['helloworld_objects']
+	)
+
+manifest somewhere:
+	[processor_amd64.os_windows.helloworld_objects SHOULD_BUILD='false']
+
+M-Build will collect all of these seeds, and find all combinations which give a value for every identifier key:
+
+default/windows/x86/helloworld
+default/windows/amd64/helloworld
+default/osx/x86/helloworld
+default/osx/amd64/helloworld
+default/arm5TE/helloworld
+
+(note how the 'arm5TE' seed covers both the os and processor slots)
+(also note that this may be an NP complete problem)
+
+The keywords for each combination are combined together. And the SHOULD_BUILD attribute is queried for each combination. If it evaluates to 'false', then the combination is removed. In this case, we disabled amd64 windows builds for the helloworld project:
+
+default/windows/x86/helloworld
+default/osx/x86/helloworld
+default/osx/amd64/helloworld
+default/arm5TE/helloworld
+
+From this list of seed combinations, M-Build will assign unique names to each combination, based on the identifiers. The names will be lists of strings:
+
+windows/x86/helloworld: ['windows', 'helloworld']
+osx/x86/helloworld:     ['osx', 'helloworld_x86']
+osx/amd64/helloworld:   ['osx', 'helloworld_amd64']
+arm5TE/helloworld:      ['arm5TE' , 'helloworld']
+
+The name lists are designed such that:
+- if A and B are names, and:
+	if A[0:i] == B[0:i], then
+		A[i] and B[i] will have identical dimensions used for forming the string
+- every build artifact has a unique name
+
+The name is not necessarily the file name of the thing being produced (e.g. the filename may have a '.exe' on the end).
+
+How do we decide how the name is split up?
+
+Shouldn't the location of the build artifact be encoded by the manifests?
+
+When multiple projects have different configurations, how does mbuild know which configurations apply to which projects?
+
+It is not obvious how to put external dependencies into this. 
+
+-----------------------------------
+Solution 2
+
+Each project is defined by a single .project file. This might look like this:
+
+helloworld.project:
+	Project(
+		name='helloworld',
+		dimensions=build_dimensions(['helloworld_language']),
+		keywords=['helloworld_objects'],
+	)
+
+Where build_dimensions() is a helper function in M-Build:
+
+somewhere_in_mbuild.py:
+	def build_dimensions(project_specific):
+		# paths look like:
+		# foo/windows_x86/foo_projectspecific_debug.exe
+		# foo/linux_x86/foo_projectspecific_debug
+		return [[project],
+		        ['os', 'processor'], 
+		        ['project'] + project_specific + ['flavour', Attribute('EXT')]]
+
+
+The 'dimensions' attribute decides which attributes to use for building something. It is interpreted as a path relative to the .project file (can we handle multiple build artifacts?... do we need to?).
+
+We then have a bunch of .seed files:
+
+english.seed:
+	Seed(
+		dimension='language',
+		name='english',
+		keywords=['helloworld_language_english'],
+	)
+
+danish.seed:
+	Seed(
+		dimension='helloworld_language',
+		name='danish',
+		keywords=['helloworld_language_danish'],
+	)
+
+windows.seed:
+	Seed(
+		dimension='os',
+		name='windows',
+		keywords=['os_windows'],
+	)
+
+x86.seed:
+	Seed(
+		dimension='processor',
+		name='x86',
+		keywords=['processor_x86'],
+	)
+
+Note that we could simplify these a whole lot:
+
+<foo>.seed:
+	Seed(
+		dimension=<bar>,
+		name=<foo>,
+		keywords=['<bar>_<foo>'],
+	)
+
+windows.seed:
+	Seed(dimension='os')
+
+
+We can then find the exact name of a configuration (get all the keywords from the project and seeds, check the SHOULD_BUILD attribute in the manifest files, then the path can be calculated)
+
+Dependencies can be handled like they are in solution 0, except for deciding which configurations link with each other.
+
+The complexity only comes in at the link step. In the past this has been difficult because compiling and linking were mushed together. This prevented us from doing some things (e.g link A_debug with B_debug as well as A_debug with B_release). Here we try to separate them a little. 
+
+Each project only compiles for the particular set of configurations it needs. 
+
+Linking is a separate thing. We take the complete set of dimensions for all of the dependencies involved, and find each usable combination of seeds. A .project file can set 'requires_link=True', which means that it will aggregate all of the dependencies below it. Every dimension from all of these dependencies is pulled out and combined together.
+
+-----------------------------------
+Solution 3
+
+As with solution 2, but no .seed files, just have a map type attribute:
+
+[default DIMENSIONS('processor')='x86']
+[default DIMENSIONS('os')='windows']
+[default DIMENSIONS('os')='linux']
+
+The .project file stays the same.
+
+Pro is we have one less type of special file.
+
+-----------------------------------
+Solution 4
+
+Build configurations follow a hierarchy. e.g.
+
+debug.seed:
+	Seed(
+		parent_dimension=None,
+		dimension='flavour',
+		value='debug',
+		keywords=['debug'],
+	)
+
+windows.seed:
+	Seed(
+		parent_dimension='flavour',
+		dimension='os',
+		value='windows',
+		keywords=['os_windows'],
+	)
+
+linux.seed:
+	Seed(
+		parent_dimension='flavour',
+		dimension='os',
+		value='linux',
+		keywords=['os_linux'],
+	)
+
+x86.seed:
+	Seed(
+		parent_dimension='os',
+		dimension='processor',
+		value='x86',
+		keywords=['processor_x86'],
+	)
+
+english.seed:
+	Seed(
+		parent_dimension='processor',
+		dimension='helloworld_language',
+		value='english',
+		keywords=['helloworld_language_english'],
+	)
+
+And a .project might look like this:
+
+helloworld.project:
+	Project(
+		name='helloworld',
+		dimensions='helloworld_language',
+		keywords=['helloworld_objects'],
+		depends=[]
+	)
+
+This still leaves us with the problem of creating filenames. Having the dimensions separated like that means there is no good place for saying how they combine together, which is necessary for doing executable naming.
+
+-----------------------------------
+Solution 5
+
+Here we try to push everything into manfiest files, so there are no .project files or .buildconfig files. This is a little bit difficult as it is the chicken and egg problem - we want to know what keywords to define for a particular build, but to query the manifest files we need to know the keywords that are defined.
+
+The approach is to start with the 'default' keyword, and use it to set an attribute which has keywords for other interesting things.
+
+# Keywords for projects
+[default PROJECT+='helloworld']
+
+# The hello world project has all the mbuild_dimensions
+# plus the 'helloworld_language' dimension
+[helloworld DIMENSION+='helloworld_language' NAME='helloworld']
+@add mbuild_dimensions
+
+[mbuild_dimensions DIMENSION+='os']
+[mbuild_dimensions DIMENSION+='processor']
+[mbuild_dimensions DIMENSION+='flavour']
+
+# Define two languages
+[helloworld_language RANGE+='english']
+[helloworld_language.english KEYWORD+='helloworld_english']
+[helloworld_language.english NAME+='en']
+[helloworld_language RANGE+='danish']
+[helloworld_language.danish KEYWORD+='helloworld_danish']
+[helloworld_language.danish NAME+='da']
+
+
+Now an m-build using script can do something like this for working out what to build:
+
+projects = get_attribute('PROJECT', ['default'])
+for p in projects:
+	dimensions = get_attribute('DIMENSION', ['default', p])
+	range = {}
+	for d in dimensions:
+		range[d] = get_attribute('RANGE', ['default', p, d])
+	
+	for configuration in all_combinations(range):
+		# configuration is now a map from dimension name (e.g. 'helloworld_language') to
+		# dimension value (e.g. 'english')
+		all_keywords = ['default']
+		for d, v in configuration:
+			all_keywords.append(get_attribute('KEYWORD', ['default', p, d, v]))
+	
+	name = get_attribute('NAME', all_keywords)
+	files = get_files(all_keywords)
+
+
+We can kind of handle dependencies in a similar way:
+
+[helloworld DEPENDS+='libfoo']
+
+[default PROJECT+='libfoo']
+...
+
+
+Although there is a NAME attribute, it is only suitable as a unique identifier, not as a path (path requires directory names), and in terms of being a unique identifier, it is probably going to rely on undefined behaviour (the order the dimensions are combined together probably won't be defined)
+
+Working out which configuration to link together is also tricky, but it should be able to be handled by the same method as solutions 2 and 3.
+
+
+-----------------------------------
+Solution 6
+
+This is another attempt to put more things into manifest files. Here, we avoid the naming issue by pushing it to the person writing the manifest files.
+
+[default]
+make_target(helloworld, os_linux, processor_x86, flavour_debug, helloworld_language_english):helloworld_en_d
+make_target(helloworld, os_linux, processor_x86, flavour_release, helloworld_language_english):helloworld_en
+
+[default]
+vs_target(helloworld, os_windows, processor_x86, flavour_debug, helloworld_language_english):debug/helloworld_en.exe
+vs_target(helloworld, os_windows, processor_x86, flavour_release, helloworld_language_english):release/helloworld_en.exe
+
+We can also use this to avoid the configuration linking issue:
+
+[default]
+make_target(helloworld, os_linux, processor_x86, flavour_debug, helloworld_language_english)+depends(../../libfoo/linux_x86/libfoo_d.a):helloworld_en_d
+make_target(helloworld, os_linux, processor_x86, flavour_release, helloworld_language_english)+depends(../../libfoo/linux_x86/libfoo.a):helloworld_en
+
+
+This approach is conceptually really simple, which is great. But it may end up being a fair bit of work maintaining each of these lines (maintaining .buildconfig files was an issue, and this just multiples that by the number of projects). If the required dimensions changes (e.g. we add compiler_gcc) then fixing this becomes a pain.
+
+-----------------------------------
+Solution 7
+
+This is building off solution 6, but we just add one new tag, so the style out output (vs project/makefile/etc) is also in the manifest stuff.
+
+[default]
+target(helloworld, build_make, compiler_gcc, os_linux, processor_x86, flavour_debug, helloworld_language_english):helloworld_en.exe
+
+This seems a bit more correct than the previous approach. The previous approach is just left to show how we got here.
+
+-----------------------------------
+Solution 8
+
+Introduce a new directive which will essentially expand to several lines from solution 7:
+
+[default]
+@target keyword(helloworld), dimensions(mbuild), dimensions(helloworld), fix_dimensions(os='linux', processor='x86'), name=helloworld.mbuild
+
+[default]
+@target keyword(helloworld), dimensions(mbuild), dimensions(helloworld), fix_dimensions(os='windows', processor='x86'), name=helloworld.mbuild)
+
+@dimension helloworld(helloworld_language): english, danish
+@name helloworld(): "helloworld_%(helloworld_language)s"
+
+
+[default]
+@dimension mbuild(os): linux, windows
+@dimension mbuild(processor): x86, arm5TE
+@dimemsion mbuild(build): make, visual_studio
+@dimension mbuild(compiler): gcc, msvc
+@dimension mbuild(flavour): debug, release
+
+@name mbuild(arg): "%(arg)s_%(flavour)s"
+
+Explanation:
+
+"@target" 
+	something can be built here
+"keyword(helloworld)"
+	the 'helloworld' keyword should be set when building it
+"dimensions(mbuild)"
+	use dimensions in dimension set 'mbuild'
+"dimensions(helloworld_language)"
+	also use the dimensions in the dimension set 'helloworld_language'
+"fix_dimensions(os='linux', processor='x86')"
+	only use dimensions where os is 'linux' and processor = 'x86'
+"name=helloworld.mbuild"
+	compose the helloworld @name function with the mbuild @name function to get the filename
+"@dimension helloworld(language): english, danish"
+	add a language dimension with range ["english", "danish"] to the "helloworld" dimension set
+"@name helloworld()"
+	define the helloworld naming function
+'"helloworld_%(helloworld_language)"s'
+	a naming function, which uses the dimension value for the helloworld_language dimension
+
+
+This particular example may not look like it has simplified the maintenance of the configurations, however that is just because this example only had 2 configurations.
+
+An issue that hasn't been solved is that of handling dependencies. 
+
+@target ... depends(dlb_intrinsics) ...
+
+or to depend while fixing a dimension of the dependency:
+
+@target ... depends(dlb_intrinsics:dlb_intrinsics_backend=generic_float32)
+

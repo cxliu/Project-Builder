@@ -1,0 +1,16 @@
+# Test for the section_tags implementation (MB-30).
+
+[a]
+no_arg_tag:foo.c
+
+[b]:one_arg_tag(a1) one_arg_tag2(a2)
+foo.c
+@import subdir/manifest.mb
+bar.c
+
+[c]
+two_arg_tag(p1,p2):foo.c
+
+[d]:two_arg_tag(p1,p2)
+no_arg_tag:foo.c
+bar.c

@@ -1,0 +1,5 @@
+[default]:internal
+@import data/manifest.mb
+
+[release]:internal
+release_notes.txt

@@ -1,0 +1,79 @@
+@doc dimension(os) = 'The operating system the final build product will be run on. The values provided by M-Build are deliberately vague. If you need to be more specific, then create new values for this dimension which describe exactly what version you are building for.'
+@doc keyword(os_windows) = "Microsoft Windows"
+@doc keyword(os_linux) = "Linux"
+@doc keyword(os_osx) = "Apple OS X"
+
+@doc keyword(config_type_console) = 'Build a console application'
+@doc keyword(config_type_static_lib) = 'Build a static library'
+@doc keyword(config_type_dynamic_lib) = 'Build a dynamic library'
+@doc keyword(config_type_windowed) = 'Build a windowed application'
+
+@doc attribute(EXT) = "The file extension of the final build product."
+
+[default]
+@att VALUES.os+='windows'
+@att VALUES.os+='linux'
+@att VALUES.os+='osx'
+
+# Correct values for most platforms
+[config_type_console+config_type_windowed]
+@att EXT=''
+
+
+[os_linux.config_type_dynamic_lib]
+@att EXT='.so'
+
+[os_linux.config_type_static_lib]
+@att EXT='.a'
+
+
+[os_osx.config_type_dynamic_lib]
+@att EXT='.so'
+
+[os_osx.config_type_static_lib]
+@att EXT='.a'
+
+
+[os_windows.config_type_console]
+@att EXT='.exe'
+@att DEFINE._CONSOLE=1
+@att VS2005_CONFIGURATION_TYPE=application
+@att VS2008_CONFIGURATION_TYPE=application
+@att VS2010_CONFIGURATION_TYPE=application
+@att VS2012_CONFIGURATION_TYPE=application
+@att VS2013_CONFIGURATION_TYPE=application
+
+[os_windows.config_type_windowed]
+@att EXT='.exe'
+@att DEFINE._WINDOWS=1
+@att VS2005_CONFIGURATION_TYPE=application
+@att VS2008_CONFIGURATION_TYPE=application
+@att VS2010_CONFIGURATION_TYPE=application
+@att VS2012_CONFIGURATION_TYPE=application
+@att VS2013_CONFIGURATION_TYPE=application
+
+[os_windows.config_type_dynamic_lib]
+@att EXT=.dll
+@att DEFINE._USRDLL=1
+@att DEFINE._WINDOWS=1
+@att VS2005_CONFIGURATION_TYPE=dynamic_library
+@att VS2008_CONFIGURATION_TYPE=dynamic_library
+@att VS2010_CONFIGURATION_TYPE=dynamic_library
+@att VS2012_CONFIGURATION_TYPE=dynamic_library
+@att VS2013_CONFIGURATION_TYPE=dynamic_library
+
+[os_windows.config_type_static_lib]
+@att EXT=.lib
+@att DEFINE._LIB=1
+@att VS2005_CONFIGURATION_TYPE=static_library
+@att VS2008_CONFIGURATION_TYPE=static_library
+@att VS2010_CONFIGURATION_TYPE=static_library
+@att VS2012_CONFIGURATION_TYPE=static_library
+@att VS2013_CONFIGURATION_TYPE=static_library
+
+[os_windows.processor_x86]
+@att DEFINE.WIN32=1
+
+[os_windows.processor_amd64]
+@att DEFINE.WIN32=1
+@att DEFINE.WIN64=1

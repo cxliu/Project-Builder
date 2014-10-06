@@ -1,0 +1,5 @@
+LIBRARY
+EXPORTS
+	foo
+	foo_asm
+	foo_cpp

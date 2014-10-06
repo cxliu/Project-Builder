@@ -1,0 +1,27 @@
+# Here we describe the file(s) that make up the frontend for this library.
+# Note that we add the "helloworld_api" keyword to ensure that the header
+# files will appear correctly in generated project files. We don't add
+# "helloworld_objects" here, because they may be compiled in a separate library
+# to the frontend.
+
+# We should document all of the keywords that are being used. Since this file
+# gives the bulk of the "implementation" for helloworld_frontend, the @doc
+# tag should go in here.
+@doc keyword(helloworld_frontend) = "Files required for the frontend to libhelloworld"
+
+[helloworld_frontend]
+# We use the convention that the toplevel directory (i.e. the directory that
+# M-Build (by default) looks for the root "manifest.mb" file) is in the include
+# path:
+@add mbuild_include_toplevel
+
+# We are intending on using the "helloworld API", so we should add the keyword
+# for it. This will do whatever is needed to use this API (e.g. adding include
+# paths, setting #defines, etc). This also has the effect of putting the API
+# header files into our Visual Studio project.
+@add helloworld_api
+
+# Just one file in the helloworld "frontend"
+main.c
+
+

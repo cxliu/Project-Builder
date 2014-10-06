@@ -1,0 +1,45 @@
+@doc keyword(mips_architecture_mips32r2) = "MIPS core support the MIPS32 instruction set."
+@doc keyword(mips_feature_dspr1) = "MIPS core supports the DSP Release 1 Application Specific Extension(ASE)."
+@doc keyword(mips_core_family_24ke) = "Supports MIPS32 24KE processor core family"
+@doc keyword(mips_processor_24kef) = "Supports MIPS32 24KEf processor core"
+@doc keyword(mips_processor_24kec) = "Supports MIPS32 24KEc processor core"
+@doc keyword(processor_24kef_el) = "Supports MIPS32 24KEf processor core configurated to little endian"
+@doc keyword(processor_24kef_eb) = "Supports MIPS32 24KEf processor core configurated to big endian"
+@doc keyword(processor_24kec_el) = "Supports MIPS32 24KEc processor core configurated to little endian"
+@doc keyword(processor_24kec_eb) = "Supports MIPS32 24KEc processor core configurated to big endian"
+
+[default]
+@att VALUES.processor += "24kef_el"
+@att VALUES.processor += "24kef_eb"
+@att VALUES.processor += "24kec_el"
+@att VALUES.processor += "24kec_eb"
+
+[processor_24kef_el]
+@add sys_little_endian
+@add mips_processor_24kef
+
+[processor_24kef_eb]
+@add sys_big_endian
+@add mips_processor_24kef
+
+[processor_24kec_el]
+@add sys_little_endian
+@add mips_processor_24kec
+
+[processor_24kec_eb]
+@add sys_big_endian
+@add mips_processor_24kec
+
+[mips_processor_24kef]
+@add mips_core_family_24ke
+@add mips_feature_hardfloat
+@add mips_feature_static_lib
+
+[mips_processor_24kec]
+@add mips_core_family_24ke
+@add mips_feature_softfloat
+@add mips_feature_static_lib
+
+[mips_core_family_24ke]
+@add mips_architecture_mips32r2
+@add mips_feature_dspr1

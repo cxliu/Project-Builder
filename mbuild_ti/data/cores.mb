@@ -1,0 +1,43 @@
+@doc keyword(ti_processor_c6x) = "TI's C6x DSP"
+@doc keyword(ti_processor_c64x) = "TI's C64x DSP (plain or plus)"
+@doc keyword(ti_processor_c67x) = "TI's C67x DSP (plain or plus)"
+@doc keyword(ti_processor_c674x) = "TI's C674x DSP"
+@doc keyword(ti_processor_c66x) = "TI's C66x DSP"
+@doc keyword(processor_c64) = "TI's plain C64 DSP"
+@doc keyword(processor_c64plus) = "TI's C64+ DSP"
+@doc keyword(processor_c66) = "TI's C66 DSP"
+@doc keyword(processor_c67) = "TI's plain C67 DSP"
+@doc keyword(processor_c67plus) = "TI's C67+ DSP"
+@doc keyword(processor_c674) = "TI's C674x DSP"
+
+[default]
+@att VALUES.processor += "c64"
+@att VALUES.processor += "c64plus"
+@att VALUES.processor += "c66"
+@att VALUES.processor += "c67"
+@att VALUES.processor += "c67plus"
+@att VALUES.processor += "c674"
+
+[processor_c64]
+@add ti_processor_c64x
+@add ti_processor_c6x
+
+[processor_c64plus]
+@add ti_processor_c64x
+@add ti_processor_c6x
+
+[processor_c66]
+@add ti_processor_c66x
+@add ti_processor_c6x
+
+[processor_c67]
+@add ti_processor_c67x
+@add ti_processor_c6x
+
+[processor_c67plus]
+@add ti_processor_c67x
+@add ti_processor_c6x
+
+[processor_c674]
+@add ti_processor_c674x
+@add ti_processor_c6x

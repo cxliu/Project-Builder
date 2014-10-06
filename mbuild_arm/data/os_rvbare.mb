@@ -1,0 +1,11 @@
+[os_rvbare.config_type_console]
+@att EXT='.axf'
+
+[os_rvbare.config_type_windowed]
+@att EXT='.axf'
+
+[os_rvbare.config_type_dynamic_lib]
+@att EXT=.so
+
+[os_rvbare.config_type_static_lib]
+@att EXT=.lib

@@ -1,0 +1,8 @@
+[default]
+@att VALUES.toolchain += "clang"
+
+[toolchain_clang]
+@add compiler_clang
+@add linker_clang
+@add assembler_clang
+@add archiver_clang

@@ -1,0 +1,9 @@
+[linker_androideabi_gnu_link]
+@att MAKE_LD = "arm-linux-androideabi-gcc"
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+[linker_androideabi_gnu_link.cpp_linker]
+@att MAKE_LD = "arm-linux-androideabi-g++"
+
+[syslib_math.linker_androideabi_gnu_link]
+@att MAKE_LDLIBS+=-lm

@@ -1,0 +1,3 @@
+@doc keyword(armcc_dynamic_lib_options) = "Add options to armcc for support generating dynamic library."
+[os_linux.config_type_dynamic_lib.compiler_rvct_armcc]
+@add armcc_dynamic_lib_options

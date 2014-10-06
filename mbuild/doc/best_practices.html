@@ -1,0 +1,372 @@
+<html>
+<head>
+<title>M-Build Best Practices</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>M-Build Best Practices</h1>
+<br/>
+<a name="introduction"><h2>Introduction</h2></a>
+
+<p>This is intended to be a description of the general vibe of M-Build, along with some specific guidelines to follow. M-Build was initially developed in Sydney for managing the builds of various projects using Audio Kernel. While it was in development, the best practices frequently changed as it was discovered that certain practices weren't helpful. It is possible that certain parts of this document will also turn out to be bad ideas and there will be revisions. If you think some of the recommendations fall into this category, then please file a bug against M-Build (JIRA key MB).</p>
+
+<p>There are 5 sections in this document:</p>
+<ol>
+<li><a href="#introduction">Introduction</a> (you just read it)</li>
+<li><a href="#spirit">The Spirit of M-Build</a> (general design philosophy, and what it tries to solve)</li>
+<li><a href="#guidelines">Guidelines</a> (specific rules that you should try to follow)</li>
+<li><a href="#naming_conventions">Some Keyword Naming Conventions</a></li>
+<li><a href="#example">Example Component Structure</a></li>
+</ol>
+
+<a name="spirit"><h2>The Spirit of M-Build</h2></a>
+
+<p>The driving concept behind M-Build is that the decisions we make about how to build something are generally made because of a few particular "things" in the project. For example, we might add "-lm" to the linker flags because we are linking a file that uses sqrt() with gcc. Rather than force this configuration to the very top level of the project, it should live near the configuration which says to use sqrt(). For this approach to be scalable, we also need a way to abstract out different actions. Adding the maths library under gcc is different when using the Visual Studio linker, but we don't want to be forced to express this difference every time we add a file that uses the maths library. To solve this, M-Build allows "things" to cause other "things" to be defined. With this mechanism, we can easily abstract out the idea of linking with the maths library.</p>
+
+<p>The syntax for files in M-Build is intended to be very simple. Determining what M-Build will do with the configuration files should also be possible to do without the aid of a computer. The syntax is also flexible enough to be able to be used for things other than building source code. Things like release scripts can be written which use M-Build to determine which files to release.</p>
+
+<p>M-Build was designed to handle multiple build configurations well. For example, linking projects with different sets of build configurations is traditionally painful or impossible with other tools. M-Build has an understanding of how the build configurations vary, and will make sensible decisions about which versions of which projects should be linked together.</p>
+
+<p>Finally, a common observation is that a build system which does nearly everything that is needed, but not everything turns out to be a pain if there is no way to override parts. But if a build system becomes full of hacks to override different parts, then it ends up being a nightmare to manage when the hacks start trying to override the same settings. M-Build tries to solve this by making it a normal operation to override things, with a well defined way to resolve conflicts.</p>
+
+
+<a name="guidelines"><h2>Guidelines</h2></a>
+<ol>
+<li>
+<h4>Common concepts should be abstracted</h4>
+
+<p>The keyword mechanism in M-Build is very lightweight and flexible. Anything that could possibly be reused, or optional in a particular build should have its own keyword (and potentially a separate keyword for the API).</p>
+	
+<p>Other concepts might be "support for a feature", "support for a particular sample rate", "support for a particular maximum channel count", "requires a C++ linker", "links with a multithreading enabled C runtime", etc.</p>
+</li>
+
+<li>
+<h4>The reason for any configuration should be obvious</h4>
+
+<p>Many build systems force all of the configuration to live in one particular location (e.g. you have one place where all of the "project level" compile options are). With M-Build, these options can be distributed around the filesystem so the manifest file which requests these options, is also the manifest file which includes files which require these options. For example, an "enable C++ exceptions" keyword would be @add-ed in any manifest which adds a .cpp file which requires it. Or the "link with the maths library" keyword would be @add-ed in any manifest file which adds a .c file which uses a function in it.</p>
+	
+<p>This puts the configuration data right near the "reason" for the configuration. So if someone updates a file that previously required the maths library, then they can adjust the manifest file there, and everything will continue to work correctly - if another file requires the maths library, then it will still be linked in, but if this was the only place that was using the maths library, then it will disappear from the link flags.</p>
+</li>
+
+<li>
+<h4>Avoid relying on the environment where possible</h4>
+
+<p>One of the guiding principles for M-Build is that all of the build configuration should be managed by M-Build and exist in manifest files. Sometimes doing it this way is impossible (e.g. the location of tools on a user's computer can't live in manifest files because manifest files are per-project, not per-user-project). However, most other bits of build metadata should live inside manifest files.</p>
+	
+<p>This would mean avoiding things like storing compiler flags in a text file, and using M-Build to feed that text file into a compiler.</p>
+	
+<p>This is also the reason that M-Build doesn't have any support for wildcards in manifest files - doing this means that the build metadata is dependent on the particular files you have on your computer, which may not even be tracked by perforce.</p>
+</li>
+
+<li>
+<h4>Make it easy to override things</h4>
+
+<p>Many things in M-Build are very easy to override, however things like compiler flags often end up being concatenations of all of the options from various different parts, so if one manifest file adds some unwanted compiler flags, it is difficult to remove those flags. If you are adding compiler flags (or similar), and they might not be wanted for everyone, then predicate them with a keyword which makes it possible to remove them (i.e. make sure it is possible to remove that keyword).</p>
+</li>
+
+<li>
+<h4>Don't say what you don't mean</h4>
+
+<p>This follows on from the previous point - but in a more general sense. There is no way to express negation in the section headings. So, if your project specifies no keywords, then theoretically nothing should happen, and then as you add keywords to it for the things that you want, you should get just those things and nothing more. If you find yourself wanting to say "use file X for everything except when building Y", then you should instead enumerate what "everything" is, and make all of those possibilities use file X.</p>
+	
+<p>e.g. Instead of:</p>
+	
+<pre>
+	# BAD
+	[!release_version] # Made up syntax to say "not release_version"
+	debug.c
+</pre>
+
+<p>Use this:</p>
+	
+<pre>
+	# GOOD
+	[debug_version+profiling_version]
+	debug.c
+	
+	# GOOD (usually better)
+	[debug_version]
+	@add debug_helper
+	
+	[profiling_version]
+	@add debug_helper
+	
+	[debug_helper]
+	debug.c
+</pre>
+</li>
+
+<li>
+<h4>Configuration size should roughly scale with complexity</h4>
+
+<p>If you have complicated build requirements, then it is likely that you will need more text in your manifest files to explain this. If you are finding that your manifest files are much longer than you would hope for (i.e. lots more than just listing the files that are needed), then this should be a result of your build complexity.</p>
+</li>
+
+<li>
+<h4>Do abstractions at the file level</h4>
+<p>M-Build can do a better job of managing platform specific code if it knows which is which. If your platform specific code is tucked away inside #ifdefs, then although M-Build can manage the list of preprocessor definitions, it will not be as powerful as if the platform specific code is in a standalone file. If platform specific code is in separate files, then M-Build will be able to understand that one file has a generic implementation, and another file has an equivalent version which can only be used on some platforms. Things like building configurations where generic code is used, even when optimised versions are available are much easier when this guideline is followed.</p>
+</li>
+
+<li>
+<h4>Follow the Code Sharing Policy</h4>
+
+<p>M-Build was designed to play nicely with the rules in the Code Sharing Policy, and will continue to focus on that particular use case.</p>
+</li>
+
+<li>
+<h4>Don't forget release scripts</h4>
+
+<p>Your manifest files may only be used for working out how to build your project, but in the future they may drive other tools, such as release scripts or dependency analysis, etc. Think of the manifest files as describing generic things about the files in your project, rather than just explaining how to build it.</p>
+	
+<p>In particular, think carefully when using the "@error" directive, as keywords which wouldn't be defined at the same time when building may be defined at the same time when copying files for a release.</p>
+</li>
+
+<li>
+<h4>Avoid use of @priority</h4>
+
+<p>This is a bit of a heavy handed tool which is likely to be removed in the future. If you come across a case where it seems necessary, then please file a bug against M-Build.</p>
+	
+<pre>
+	# BAD
+	@priority foo > bar
+	[foo]
+	foo/file.c
+	
+	[bar]
+	bar/file.c
+	
+	# GOOD
+	[foo.bar]
+	foo/file.c
+	
+	[bar]
+	bar/file.c
+</pre>
+</li>
+
+<li>
+<h4>Document your keywords</h4>
+
+<p>Any keyword that you use in your project should have a @doc command explaining what it represents. The @doc command should live in the manifest file that implements this thing (if there are multiple places, then there is a bit of a judgement call, but aim for the most important one).</p>
+	
+<pre>
+	# BAD
+	[foo]
+	foo.c
+	
+	# GOOD
+	@doc keyword(foo) = "Build with support for foo"
+	[foo]
+	foo.c
+</pre>
+</li>
+
+<li>
+<h4>Don't look up the directory tree</h4>
+
+<p>Inside your manifest files, you should rarely use a "..". Instead, have a higher level manifest file do what you were intending to do. This has the benefit of making it easier to reorganise your project.</p>
+</li>
+
+<li>
+<h4>Keywords should be lower case</h4>
+
+<p>Unless they are referring to something which is unrecognisable when written in lower case, then lower case is preferred for keywords.</p>
+</li>
+
+<li>
+<h4>Prefix keywords</h4>
+
+<p>All keywords sit in a global namespace. This was deemed acceptable as we are building C code, where there is also a global symbol namespace, and we have ways of managing that problem. The same approach should be taken in M-Build - project specific keywords should be prefixed with a prefix specific to that project (use the same prefix as in the API if possible).</p>
+</li>
+
+<li>
+<h4>Import sub-manifests under the "default" keyword</h4>
+
+<p>This is a case where there are two ways of doing something, and neither seems particularly better than the other, so one is being recommended, so things stay a bit consistent. If you have a manifest file where everything in it should be guarded by some keyword, then when @importing it, you might choose to guard the @import with that keyword. Instead, just guard the @import with "default".</p>
+	
+<pre>
+	# AVOID
+	manifest1.mb
+		[foo]
+		@import manifest2.mb
+	
+	manifest2.mb
+		[foo]
+		file.c
+	
+	# DO THIS INSTEAD
+	manifest1.mb
+		[default]
+		@import manifest2.mb
+	
+	manifest2.mb
+		[foo]
+		file.c
+</pre>
+
+<p>There a few minor conveniences to doing it this way (often it turns out that later you want to have things that aren't guarded by that keyword).</p>
+</li>
+
+<li>
+<h4>Name files with .mb extension</h4>
+
+<p>This is mainly so that windows users can associate a text editor with that extension.</p>
+</li>
+
+<li>
+<h4>Name files manifest.mb</h4>
+
+<p>Since there is rarely a need for more than one manifest file in a directory, we might as well just give them all one name.</p>
+</li>
+
+<li>
+<h4>About one manifest file per directory</h4>
+
+<p>You can reference files in subdirectories from a manifest. At one extreme, you would have a single manifest file at the root, with all paths relative to it. At the other extreme you have one manifest file in each directory. It tends to be easier to manage when we aim for the "lots of manifest files" extreme. Sometimes if there is a directory with just one file, then it is convenient to reference that one file from a few levels up, but typically it is good to have one manifest per directory.</p>
+</li>
+
+<li>
+<h4>File names in manifest files should use "/" as a directory separator</h4>
+
+<p>This will likely be enforced in the future.</p>
+</li>
+
+<li>
+<h4>Check M-Build outputs into Perforce</h4>
+
+<p>Although these are machine generated, it is convenient to check these in as it means that people without python installed can sync with your project and build it, and you are always clear when you have made changes that actually modify the output. M-Build should always generate exactly the same output for the same input, so these files should only change when they are actually required to change.</p>
+</li>
+</ol>
+
+<a name="naming_conventions"><h2>Some Keyword Naming Conventions</h2></a>
+
+<h4>project_&lt;name&gt;</h4>
+
+<p>Every project has a name, this should be lower case, and comes from the .project file. When doing things related to the project, the keyword "project_&lt;name&gt;" will be defined. This keyword should be used to specify project level configuration (e.g. static library or dynamic library, which build configurations to build). It should also "@add %lt;name&gt;_objects", which will be used to specify the files which are used to create the object files for the project.</p>
+
+<h4>&lt;name&gt;_objects</h4>
+
+<p>This keyword should be used to specify all of the files which turn into object files (i.e. .c files, .cpp files and .s files) to make the project, as well as any private header files. It should "@add" the keywords for any APIs it requires, handle any compiler or linker settings, and also "@add &lt;name_api&gt;".</p>
+
+<h4>&lt;name&gt;_api</h4>
+
+<p>This keyword should specify all of the public header files. If there are several levels of API (e.g. a testing API and a public API) then you can qualify this keyword with "&lt;name&gt;_&lt;qualifier&gt;_api" (e.g. "foo_testing_api"). If your header files reference other APIs (e.g. to bring definitions for other data types, then you should "@add" the keywords for those other APIs. If using your API requires compiler settings (e.g. setting an include path), then you should do that in this keyword, however it is recommended that you write code such that only the top level directory is required in your include path (so to get the "foo.h" header for the component "bar" (which follows the code sharing policy) you would say: #include "bar/include/foo.h").</p>
+
+<h4>&lt;name&gt;_...</h4>
+
+<p>Any smaller chunks of code which can sensibly be separated from the rest of your code (e.g. a testing frontend, files for supporting a particular optional feature, etc) should get their own keyword. You should prefix these keywords with your projects prefix to avoid name clashes.</p>
+
+<a name="example"><h2>Example Directory Structure</h2></a>
+
+<p>This is an example layout for a project using M-Build, following the code sharing policy:</p>
+
+<pre>
+subcomponent/
+	include/
+		subcomponent.h
+		manifest.mb                           (1)
+	src/
+		subcomponent.c
+		helper_function.c
+		target/
+			arm5TE/
+				helper_function.c
+		manifest.mb                           (2)
+	manifest.mb                               (3)
+mycomponent/
+	frontend/
+		test_harness.c
+		manifest.mb                           (4)
+	include/
+		mycomponent.h
+	make/
+		test_harness.project
+		mycomponent.project
+		(*)
+		manifest.mb                           (5)
+	src/
+		internal_header.h
+		mycomponent.c
+		manifest.mb                           (6)
+	manifest.mb                               (7)
+mbuild/
+	(**)
+manifest.mb                                   (8)
+
+(*) All of the Visual Studio projects and Makefiles will end up here
+(**) All of M-Build is here
+
+(1):
+	[subcomponent_api]
+	subcomponent.h
+
+(2):
+	[subcomponent_objects]
+	@add subcomponent_api
+	subcomponent.c
+	helper_function.c
+	
+	[subcomponent_objects.processor_arm5TE]
+	target/arm5TE/helper_function.c
+
+(3):
+	[default]
+	@import include/manifest.mb
+	@import src/manifest.mb
+
+(4):
+	[mycomponent_test_harness]
+	@add mycomponent_api
+	test_harness.c
+
+(5):
+	[default]
+	test_harness.project
+	mycomponent.project
+	
+	[project_test_harness]
+	@add mycomponent_test_harness
+	@add config_type_console
+	
+	[project_mycomponent]
+	@add mycomponent_objects
+	@add config_type_static_lib
+
+(6):
+	[mycomponent_objects]
+	@add mycomponent_api
+	@add subcomponent_api
+	internal_header.h
+	mycomponent.c
+
+(7):
+	[mycomponent_api]
+	include/mycomponent.h
+	
+	[default]
+	@import src/manifest.mb
+	@import frontend/manifest.mb
+	
+(8)
+	[default]
+	@att INCLUDE = p"."
+	@import subcomponent/manifest.mb
+	@import mycomponent/manifest.mb
+	@import mbuild/manifest.mb
+</pre>
+
+<p>Things to note here:</p>
+<ul>
+<li>manifest(6) has "@add subcomponent_api", this line might have been in manifest(7) if mycomponent.h referenced subcomponent.h.</li>
+
+<li>manifest(7) might be better if it instead imported a manifest file in the include directory, which then went on to list the header file. In this case, it is ok as there is just one file and it is simpler. If there ended up being lots of files here, then it would be better to create a new manifest file.</li>
+
+<li>manifest(8) sets an attribute (INCLUDE) under the "default" keyword. This is a rarity, as it is saying that the attribute should *always* be set this way, even if we aren't compiling. In this particular case it is ok, as the INCLUDE attribute should only be used when compiling. However, you should never have files listed under just a "default" keyword.</li>
+</ul>
+
+</body>
+</html>
+
+

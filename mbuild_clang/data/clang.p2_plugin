@@ -1,0 +1,43 @@
+# clang_support will be available for including in a project file after adding this section
+def get_symbols():
+	return {'clang_support': clang_support,
+	       }
+
+# Specify the operating systems which are valid for this plugin
+operating_systems = ['osx', 'ios']
+
+def toolchain_clang_exception(configuration, parent_answer, parent_function):
+	if not configuration['tool'] == 'make':
+		return False
+	
+	if not configuration['os'] in operating_systems:
+		return False
+	
+	if not configuration['flavour'] in ['debug', 'release']:
+		return False
+	
+	if configuration['os'] == 'osx':
+		if not configuration['processor'] in ['x86', 'amd64']:
+			return False
+	
+	if configuration['os'] == 'ios':
+		if not configuration['processor'] in ["armv7s", "arm64"]:
+			return False
+	
+	if not configuration['toolchain'] == 'clang':
+		return False
+		
+	# Do not generate arm64 on OS other than ios
+	if configuration['processor'] == 'arm64':
+		if configuration['os'] != 'ios':
+			return False
+	
+	return True
+
+# Creates a configuration which allows only combinations from the above function
+# If a project file includes clang_support, these combinations will be built
+
+require('mbuild_pretend')
+require('mbuild_standard')
+require('mbuild_exception')
+clang_support = mbuild_exception(mbuild_pretend('os', {'ios': 'osx'}, mbuild_standard), toolchain_clang_exception)

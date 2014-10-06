@@ -1,0 +1,2 @@
+[default]
+@att MBUILD_MAKE_SUPPORT.toolchain += 'csmips'

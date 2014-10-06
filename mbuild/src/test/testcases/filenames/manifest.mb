@@ -1,0 +1,19 @@
+[default]
+file name with spaces
+tag:tagged file name with spaces
+two tags:file name with multiple tags and spaces
+tag(with, argument):file name with parameterised tag and spaces
+file name with spaces and extension.txt
+tag:tagged file name with spaces and extension.txt
+two tags:file name with multiple tags and spaces and extension.txt
+tag(with, argument):file name with parameterised tag and spaces and extension.txt
+filename(with parentheses)
+filename(with parentheses, commas, etc)
+filename(with unbalanced parentheses
+file name(with space and parentheses)
+file name(with space, parentheses, commas, etc)
+file name(with space and unbalanced parentheses
+(file name in parentheses)
+.filename_starting_with_dot
+.filename starting with dot and with spaces
+

@@ -1,0 +1,29 @@
+M-BUILD Clang 1.0.2 RELEASE NOTES
+=============================
+Release date: 10th April, 2014
+
+General
+	- Fixed the issue that an extra white space is needed when specifying compiler options using attribute MAKE_LDFLAGS_OUTPUT_FILE, etc.
+
+M-BUILD Clang 1.0.1 RELEASE NOTES
+=============================
+Release date: 16th January, 2014
+
+Metadata Changes
+	- Added attribute MBUILD_MAKE_SUPPORT to improve performance of M-Build.
+
+M-BUILD Clang 1.0 RELEASE NOTES
+=============================
+Release date: 12th December, 2013
+
+M-Build Clang 1.0 is the first release of the M-Build Clang plugin. 
+
+This is intended to be a simple way to add Clang support to an M-Build using product. It will support platforms:
+	- osx_x86_clang
+	- osx_amd64_clang
+	- ios_armv7s_clang
+	- ios_armv64_clang
+
+Please see doc/readme.txt for information on usage.
+
+This plugin release is compatible with M-Build v1.4.x.

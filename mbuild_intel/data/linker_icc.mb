@@ -1,0 +1,11 @@
+# Tool name and its flags for the linker (for Intel Linux and Mac toolchain - toolchain_icc)
+[linker_icc]
+@att MAKE_LD = "icc"
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+[linker_icc.cpp_linker]
+@att MAKE_LD = "icpc"
+
+[linker_icc.config_type_dynamic_lib]
+@att MAKE_LDFLAGS += "-fPIC"
+@att MAKE_LDFLAGS += "-shared"

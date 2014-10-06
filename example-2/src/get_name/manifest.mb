@@ -1,0 +1,20 @@
+[get_name_objects]
+@add mbuild_include_toplevel
+@add get_name_api
+@add libfoo_api
+@add cpp_linker
+get_name.c
+get_name_raw.c
+
+@import target/manifest.mb
+
+[default]
+@att VALUES.get_name_case+='upper'
+@att VALUES.get_name_case+='lower'
+
+[get_name_case_upper]
+@att DEFINE.GET_NAME_TRANSFORM=r'toupper'
+
+[get_name_case_lower]
+@att DEFINE.GET_NAME_TRANSFORM=r'tolower'
+

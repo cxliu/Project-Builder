@@ -1,0 +1,23 @@
+@doc keyword(toolchain_icl) = 'Use the Intel toolchain for Windows'
+@doc keyword(toolchain_icc ) = 'Use the Intel toolchain for Linux and Mac'
+
+[default]
+@att VALUES.toolchain += 'icl'
+@att VALUES.toolchain += 'icc'
+
+# Intel toolchain for Windows
+[toolchain_icl]
+@add compiler_icl
+@add linker_icl
+@add archiver_icl
+@add assembler_icl
+@att VS2010_PLATFORM_TOOLSET = "Intel C++ Compiler XE 14.0"
+@att VS2012_PLATFORM_TOOLSET = "Intel C++ Compiler XE 14.0"
+@att VS2013_PLATFORM_TOOLSET = "Intel C++ Compiler XE 14.0"
+
+# Intel toolchain for Linux and Mac
+[toolchain_icc]
+@add compiler_icc
+@add linker_icc
+@add archiver_icc
+@add assembler_icc

@@ -1,0 +1,48 @@
+[default]
+gnu_toolchain.t3_plugin
+
+[toolchain_gnu]
+@add compiler_gcc
+@add linker_gcc
+@add assembler_gcc
+@add archiver_ar
+
+[toolchain_msvs2005+toolchain_msvs2008+toolchain_msvs2010+toolchain_msvs2012+toolchain_msvs2013]
+@add toolchain_msvs
+@add compiler_ms_cl
+@add linker_ms_link
+@add assembler_ms_ml
+@add archiver_ms_link
+
+[toolchain_msvs2005]
+@add compiler_ms_2005_cl
+@add linker_ms_2005_link
+@add assembler_ms_2005_ml
+@add archiver_ms_2005_link
+
+[toolchain_msvs2008]
+@add compiler_ms_2008_cl
+@add linker_ms_2008_link
+@add assembler_ms_2008_ml
+@add archiver_ms_2008_link
+
+[toolchain_msvs2010]
+@add compiler_ms_2010_cl
+@add linker_ms_2010_link
+@add assembler_ms_2010_ml
+@add archiver_ms_2010_link
+@att VS2010_PLATFORM_TOOLSET = "v100"
+
+[toolchain_msvs2012]
+@add compiler_ms_2012_cl
+@add linker_ms_2012_link
+@add assembler_ms_2012_ml
+@add archiver_ms_2012_link
+@att VS2012_PLATFORM_TOOLSET = "v110"
+
+[toolchain_msvs2013]
+@add compiler_ms_2013_cl
+@add linker_ms_2013_link
+@add assembler_ms_2013_ml
+@add archiver_ms_2013_link
+@att VS2013_PLATFORM_TOOLSET = "v120"

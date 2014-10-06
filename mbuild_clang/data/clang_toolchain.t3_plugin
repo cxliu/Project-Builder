@@ -1,0 +1,36 @@
+
+def get_symbols():
+    return {'makefn_toolchain_clang': makefn_toolchain_clang
+           }
+
+require('t3_gnulike_compile_c')
+require('t3_gnulike_compile_cpp')
+require('t3_gnulike_compile_asm')
+require('t3_gnulike_link')
+require('t3_gnulike_archive')
+require('t3_GnulikeToolchain')
+
+def makefn_toolchain_clang():
+    
+    compile_c_action = t3_gnulike_compile_c(['.c'], ['.o','.d'])
+    compile_m_action = t3_gnulike_compile_c(['.m'], ['.o','.d'])
+    compile_cpp_action = t3_gnulike_compile_cpp(['.cpp'], ['.o','.d'])
+    compile_asm_action = t3_gnulike_compile_asm(['.s'], ['.o'])
+    link_action = t3_gnulike_link(['.o','.lib','.a','.so'], [])
+    archive_action = t3_gnulike_archive(['.o','.lib','.a','.so'], [])
+    
+    # function and class names from the gnulike template
+    toolchain_class = t3_GnulikeToolchain
+    
+    # Toolchain definition consists of 3 types of objects
+    # Toolchain class: consists of actions
+    #      - Action class: e.g. 'Compile'  Each action consists of commands
+    #           - Command class e.g. 'gcc hello_world.c'
+
+    toolchain_name = 'clang'
+    dependency_extensions = ['.d']
+    action_defs = [compile_c_action, compile_m_action, compile_cpp_action, compile_asm_action, link_action, archive_action]
+
+    clang_toolchain = toolchain_class(toolchain_name, action_defs, dependency_extensions)
+
+    return clang_toolchain

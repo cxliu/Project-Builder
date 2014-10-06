@@ -1,0 +1,11 @@
+[default]
+project_c.project
+
+[project_project_c]
+file.c
+
+@add config_type_static_lib
+
+[default]
+@att VALUES.project_c_dimension += 'c0'
+@att VALUES.project_c_dimension += 'c1'

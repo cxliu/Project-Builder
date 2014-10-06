@@ -1,0 +1,134 @@
+@doc keyword(toolchain_dynamic_runtime) = 'Link against multithread dynamic version (DLL) of run-time library'
+@doc keyword(toolchain_static_runtime) = 'Link against multithread static version of run-time library'
+@doc keyword(intel_fpmode_fast) = 'Enables more aggressive optimizations on floating-point data (Specifying fast is the same as specifying fast=1)'
+@doc keyword(intel_fpmode_fast2) = 'This may produce faster and less accurate results than intel_fpmode_fast'
+@doc keyword(intel_fpmode_precise) = 'This option enables value-safe optimizations on floating-point data'
+@doc keyword(intel_fpmode_strict) = 'This option enables precise and except, disables contractions, and enables pragma stdc fenv_access'
+@doc keyword(intel_fpmode_source) = 'This option rounds intermediate results to source-defined precision and enables value-safe optimizations'
+@doc keyword(intel_fpmode_double) = 'This option rounds intermediate results to 53-bit (double) precision'
+@doc keyword(intel_fpmode_extended) = 'This option rounds intermediate results to 64-bit (extended) precision'
+@doc keyword(intel_fpmode_except) = 'Determines whether floating-point exception semantics are used'
+@doc keyword(use_strict_language) = 'This option emits an error for language constructs that are not compatible with either ANSI C or ANSI C++'
+
+# Tool name and its flags for the compiler (for Intel Windows toolchain - toolchain_icl)
+[compiler_icl.tool_make.action_compile]
+@att MAKE_TEMPLATE=p"compile_icl.t2"
+internal:compile_icl.t2
+
+[compiler_icl]
+@att MAKE_CC = "icl"
+@att MAKE_CFLAGS_OUTPUT_FILE = "/Fo"
+
+[compiler_icl]
+@att MAKE_CXX = "icpc"
+@att MAKE_CXXFLAGS_OUTPUT_FILE = "/Fo"
+
+# Turn off overly noisy warnings
+[compiler_icl]
+@att DEFINE._CRT_SECURE_NO_WARNINGS=1
+
+[compiler_icl]
+@att MAKE_CCDEP = "icl"
+@att MAKE_CCDEPFLAGS += "/QMM"
+@att MAKE_CCDEPFLAGS_TARGET = "/QMT"
+@att MAKE_CCDEPFLAGS_OUTPUT_FILE = "/QMF"
+
+[compiler_icl.mbuild_sensible_defaults]
+@att MAKE_CFLAGS += "/c"
+@att MAKE_CFLAGS += "/W3"
+@att MAKE_CFLAGS += "/nologo"
+@att MAKE_CFLAGS += "/Qstd=c99"
+@att MAKE_CXXFLAGS += "/c"
+@att MAKE_CXXFLAGS += "/W3"
+@att MAKE_CXXFLAGS += "/nologo"
+@att MAKE_CXXFLAGS += "/Qstd=c++0x"
+
+[compiler_icl.processor_x86.intel_atom]
+@att MAKE_CFLAGS += "/QxSSSE3_ATOM"
+@att MAKE_CXXFLAGS += "/QxSSSE3_ATOM"
+
+[compiler_icl.mbuild_debug_symbols]
+@att MAKE_CFLAGS += "/Od"
+@att MAKE_CFLAGS += "/Zi"
+@att MAKE_CXXFLAGS += "/Od"
+@att MAKE_CXXFLAGS += "/Zi"
+
+[compiler_icl.mbuild_optimise]
+@att MAKE_CFLAGS += "/O3"
+@att MAKE_CFALGS += "/Qunroll"
+@att MAKE_CFLAGS += "/Qansi-alias"
+@att MAKE_CXXFLAGS += "/O3"
+@att MAKE_CXXFLAGS += "/Qunroll"
+@att MAKE_CXXFLAGS += "/Qansi-alias"
+
+[compiler_icl.config_type_dynamic_lib.mbuild_release]
+@att MAKE_CFLAGS += "/LD"
+@att MAKE_CXXFLAGS += "/LD"
+
+[compiler_icl.config_type_dynamic_lib.mbuild_debug]
+@att MAKE_CFLAGS += "/LDd"
+@att MAKE_CXXFLAGS += "/LDd"
+
+# Disabling Language Extensions
+[compiler_icl.use_strict_language]
+@att MAKE_CFLAGS += "/Za"
+
+# Run-time library 
+[compiler_icl.toolchain_dynamic_runtime.mbuild_debug_symbols]
+@att MAKE_CFLAGS += "/MDd"
+@att MAKE_CXXFLAGS += "/MDd"
+
+[compiler_icl.toolchain_dynamic_runtime.mbuild_optimise]
+@att MAKE_CFLAGS += "/MD"
+@att MAKE_CXXFLAGS += "/MD"
+
+[compiler_icl.toolchain_static_runtime.mbuild_debug_symbols]
+@att MAKE_CFLAGS += "/MTd"
+@att MAKE_CXXFLAGS += "/MTd"
+
+[compiler_icl.toolchain_static_runtime.mbuild_optimise]
+@att MAKE_CFLAGS += "/MT"
+@att MAKE_CXXFLAGS += "/MT"
+
+# Floating-point modes
+# Refer to the this link for more information on semantics of floating-point calculations (http://software.intel.com/sites/products/documentation/hpc/composerxe/en-us/2011Update/cpp/lin/copts/common_options/option_fp_model.htm)
+[compiler_icl.intel_fpmode_fast]
+# This is set by default.
+@att MAKE_CFLAGS += "/fp:fast"
+@att MAKE_CXXFLAGS += "/fp:fast"
+
+[compiler_icl.intel_fpmode_fast2]
+@att MAKE_CFLAGS += "/fp:fast=2"
+@att MAKE_CXXFLAGS += "/fp:fast=2"
+
+[compiler_icl.intel_fpmode_precise]
+@att MAKE_CFLAGS += "/fp:precise"
+@att MAKE_CXXFLAGS += "/fp:precise"
+
+[compiler_icl.intel_fpmode_strict]
+@att MAKE_CFLAGS += "/fp:strict"
+@att MAKE_CXXFLAGS += "/fp:strict"
+
+[compiler_icl.intel_fpmode_source]
+@att MAKE_CFLAGS += "/fp:source"
+@att MAKE_CXXFLAGS += "/fp:source"
+
+[compiler_icl.intel_fpmode_double]
+@att MAKE_CFLAGS += "/fp:double"
+@att MAKE_CXXFLAGS += "/fp:double"
+
+[compiler_icl.intel_fpmode_extended]
+@att MAKE_CFLAGS += "/fp:extended"
+@att MAKE_CXXFLAGS += "/fp:extended"
+
+[compiler_icl.intel_fpmode_except]
+@att MAKE_CFLAGS += "/fp:except"
+@att MAKE_CXXFLAGS += "/fp:except"
+
+# Assembler defaults
+[assembler_icl]
+@att MAKE_AS = "icl"
+@att MAKE_ASFLAGS_OUTPUT_FILE = "/Fo"
+
+[assembler_icl.mbuild_sensible_defaults]
+@att MAKE_ASFLAGS += "/c"

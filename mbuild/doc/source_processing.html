@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>M-Build Source Processing</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>M-Build Source Processing</h1>
+</br>
+<h2>Introduction</h2>
+
+<p>This document explains how to do source-code processing (e.g., moving, stripping, and beautifying) using M-Build. A basic understanding of M-Build is assumed.</p>
+
+<h2>Manifest Definitions</h2>
+
+<p>Source processing is controlled by using tags in an M-Build manifest file, and invoked using the process_source module. A simple example:</p>
+
+<pre>
+	[a]
+	move_to(../../src/debug,a.debug) PLUGIN_STRIP:foo.c
+</pre>
+
+<p>The 'move_to' tag describes the pre-processing copy step for a given file (or, if used as a section tag, for a group of files). The first argument is the destination directory; the second argument is the keywords that trigger the move, and that are used to collect attributes for further processing. A given file can be copied to more than one location:</p>
+
+<pre>
+	[a]
+	move_to(../../src/debug,a.debug) \
+	move_to(../../src/release,a.release) \
+	PLUGIN_STRIP:foo.c
+</pre>
+
+<p>Each copy will be stripped using the DEFINE map for its given keywords.</p>
+
+<p>An optional third argument can be used to rename the file:</p>
+
+<pre>
+	[a]
+	move_to(../../src/debug,a.debug,bar.c) PLUGIN_STRIP:foo.c
+</pre>
+
+<h2>Invoking Source Processing</h2>
+
+<p>Once the manifest files are configured, the process_source module is used to perform the source processing. Here is an example:</p>
+
+<pre>
+	manifest = 'path/to/my_root_manifest.mb'
+	process_source.process(manifest=manifest, 
+	                       plugins=['strip'],       # Add other plugins as they become available
+	                       action_base='compile', 
+	                       verbose=False,           # Set to true for more verbose command line output
+	                       preview=False,           # Set to true for a 'trial run' that just writes a report
+	                       report_loc='my_desired_report_loc.txt')
+	   
+	makefile_root = os.path.join(os.path.dirname(manifest), 'product/make')
+	
+	# We create makefiles and vs_projects as usual, but we pass in process_source's path_transform
+	# so that our created build files refer to our moved/stripped code.
+	create_makefiles.create_makefiles(manifest=manifest, 
+	                                  makefile_root=makefile_root, 
+	                                  path_transform=process_source.path_transform)
+	create_vs_projects.create_vs_projects(manifest=manifest,
+	                                      vs_root=makefile_root,
+	                                      path_transform=process_source.path_transform)
+</pre>
+
+</body>
+</html>
+

@@ -1,0 +1,13 @@
+[default]
+project_a.project
+
+[project_project_a]
+@att DEFINE.PROJECT_A = 1
+@att INCLUDE += p"."
+file.c
+
+@add config_type_console
+
+[default]
+@att VALUES.project_a_dimension += 'a0'
+@att VALUES.project_a_dimension += 'a1'

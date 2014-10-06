@@ -1,0 +1,33 @@
+[default]
+# Pick up project file
+@import make/manifest.mb
+# Get defines and any files that don't get moved/stripped
+@import src/manifest.mb
+
+#
+# Debug flavour
+#
+
+# Set move location for common files
+[project_get_e.flavour_debug]:move_to(../../product/strip_example/get_e/debug/common) \
+PLUGIN_STRIP
+@import ../common/manifest.mb
+
+# Set move location for source files
+[project_get_e.flavour_debug]:move_to(../../product/strip_example/get_e/debug/src) \
+PLUGIN_STRIP
+@import src/strip_manifest.mb
+
+#
+# Release flavour
+#
+
+# Set move location for common files
+[project_get_e.flavour_release]:move_to(../../product/strip_example/get_e/release/common) \
+PLUGIN_STRIP
+@import ../common/manifest.mb
+
+# Set move location for source files
+[project_get_e.flavour_release]:move_to(../../product/strip_example/get_e/release/src) \
+PLUGIN_STRIP
+@import src/strip_manifest.mb

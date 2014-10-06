@@ -1,0 +1,6 @@
+[foo_objects.processor_x86.assembler_gcc.(config_type_static_lib+config_type_console)]
+exclusive(foo_asm.c):foo_asm_x86_gas.s
+
+[foo_objects.processor_x86.assembler_ms_ml.(config_type_static_lib+config_type_console)]
+exclusive(foo_asm.c):foo_asm_x86_masm.asm
+

@@ -1,0 +1,8 @@
+[release]
+driver.py
+__init__.py
+non_strict_element_tree.py
+solution.py
+vc_configuration.py
+vc_project.py
+visual_studio.py

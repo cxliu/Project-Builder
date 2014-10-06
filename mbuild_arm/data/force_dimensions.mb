@@ -1,0 +1,8 @@
+[default]
+@att MBUILD_MAKE_SUPPORT.toolchain += 'rvct'
+@att MBUILD_MAKE_SUPPORT.toolchain += 'rvct_cslibc'
+
+@att MBUILD_MSVS_SUPPORT.os += 'windows_rt'
+@att MBUILD_MSVS_SUPPORT.os += 'windows_phone'
+@att MBUILD_MSVS_SUPPORT.processor += 'armv7'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'wp8'

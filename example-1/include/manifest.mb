@@ -1,0 +1,12 @@
+# Having header files listed in manifests generally doesn't change how things
+# end up being compiled, since the compiler is only passed the source files.
+# However, by listing them this way, M-Build will be able to generate project
+# files for different IDEs which make it easier to edit and view them. This
+# also makes it possible to use M-Build for things like release scripts, as
+# we can track all of the files used in the project, not just those that are
+# necessary for compiling things.
+
+@doc keyword(helloworld_api) = "The API for libhelloworld"
+
+[helloworld_api]
+helloworld.h

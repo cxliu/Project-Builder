@@ -1,0 +1,12 @@
+def get_symbols():
+	return {'get_environment_variables' : get_environment_variables
+           }
+
+def get_environment_variables(makefile):
+	
+	environment_variable_name = "MAKE_REQUIRE_ENVIRONMENT_VARIABLES"
+	if environment_variable_name in makefile.attributes.keys():
+		makefile.environment_variables = makefile.attributes[environment_variable_name]
+	else:
+		return
+	

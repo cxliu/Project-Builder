@@ -1,0 +1,19 @@
+[default]
+android.p2_plugin
+androideabi_toolchain.t3_plugin
+@import os.mb
+@import cores.mb
+@import toolchains.mb
+@import force_dimensions.mb
+
+[compiler_androideabi_gnu_gcc]
+@import androideabi_gnu_gcc.mb
+
+[assembler_androideabi_gnu_as]
+@import androideabi_gnu_as.mb
+
+[linker_androideabi_gnu_link]
+@import androideabi_gnu_link.mb
+
+[archiver_androideabi_gnu_ar]
+@import androideabi_gnu_ar.mb

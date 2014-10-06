@@ -1,0 +1,7 @@
+[assembler_androideabi_gnu_as]
+@att MAKE_AS = 'arm-linux-androideabi-as'
+@att MAKE_ASFLAGS_OUTPUT_FILE = '-o'
+
+[assembler_androideabi_gnu_as.android_architecture_arm_v7_a]
+@att MAKE_ASFLAGS += '-march=armv7-a'
+

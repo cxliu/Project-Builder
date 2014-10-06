@@ -1,0 +1,64 @@
+# This is an example .project file. To use it, copy the uncommented parts
+# of the file to a file ending with .project (e.g. "example.project").
+#
+# The name of the project must match in the filename and the variable being
+# assigned.
+#
+# Every project name must be unique.
+#
+# This file is interpreted as a python file.
+#   actions: a dictionary of ActionSpec objects. There are two M-Build helper
+#            objects which can be used here, or for advanced users you can
+#            create your own in a .p2_plugin file.
+#
+#            mbuild_compile_and_link:
+#              Compile all the source files, then send the object files to a
+#              linker to produce an executable.
+#
+#            mbuild_compile_and_archive:
+#              Compile all the source files, then send the object files to an
+#              archiver to produce a static library.
+#
+#   depends: a list of strings, each string should be the name of another
+#            project which this project depends on. No paths are necessary.
+#
+#   build_configuration: a BuildConfiguration object which describes what
+#            configurations the project will be built in. M-Build provides
+#            some helper objects you can use:
+#            
+#            mbuild_standard:
+#              A debug and release build, for the platforms supported by
+#              mbuild (and more)
+#
+#            mbuild_extra(extra_dimension_list):
+#              e.g. mbuild_extra(['dlb_backend'])
+#              Like mbuild_standard, but add on any extra dimensions a
+#              project might need (in this example, the 'dlb_backend'
+#              dimension is added, which adds configurations for each
+#              Dolby Intrinsics backend).
+#
+#            mbuild_restrict(base_configuration, restriction):
+#              e.g. mbuild_restrict(mbuild_standard, {'os': ['linux', 'osx']})
+#              The first parameter is a BuildConfiguration object, the second
+#              is a dictionary mapping dimension names to allowed values. Only
+#              builds matching the dictionary will be used.
+#              
+#            mbuild_conditional(base_configuration, condition):
+#              e.g. mbuild_restrict(mbuild_standard, lambda x: x['processor'] != 'x86')
+#              This is like mbuild_restrict, except the second parameter is
+#              an arbitrary python function which takes a single argument
+#              and returns True or False. The argument is a dictionary mapping
+#              dimensions to values.
+#
+#            You can create your own BuildConfiguration objects, and place
+#            them in *.p2_plugin files, and they will be made available.
+#            See mbuild/data/plugins/mbuild.p2_plugin for the implementation
+#            of all of these BuildConfiguration objects.
+
+
+this_must_match_the_filename = ProjectSpec(
+	actions=mbuild_compile_and_link,
+	depends=[],
+	build_configuration=mbuild_standard
+)
+

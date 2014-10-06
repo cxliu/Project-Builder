@@ -1,0 +1,5 @@
+# Tool name and its flags for the archiver (for Intel Windows toolchain - toolchain_icl)
+[archiver_icl]
+@att MAKE_AR = "xilib"
+@att MAKE_ARFLAGS += "/nologo"
+@att MAKE_ARFLAGS_OUTPUT_FILE = "/out:"

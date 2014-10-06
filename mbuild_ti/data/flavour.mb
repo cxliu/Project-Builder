@@ -1,0 +1,16 @@
+@doc keyword(flavour_ti_simulate) = "Turn on optimiser, disable asserts and include debugging symbols"
+
+[flavour_ti_simulate]
+@add mbuild_ti_simulate
+
+[mbuild_ti_simulate]
+@add mbuild_sensible_defaults
+@add mbuild_debug_symbols
+@add mbuild_optimise
+@add mbuild_no_asserts
+
+[default]
+@att VALUES.flavour+='ti_simulate'
+
+[release.mbuild]
+@add flavour_ti_simulate

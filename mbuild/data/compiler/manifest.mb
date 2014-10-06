@@ -1,0 +1,45 @@
+@doc keyword(cpp_exceptions) = "Enable C++ exception handling."
+@doc keyword(cpp_exceptions_with_extern_c) = "extern C functions can throw C++ exceptions"
+
+@doc attribute(INCLUDE) = 'Paths to search for "" style #include lines'
+@doc attribute(DEFINE) = 'Extra preprocessor definitions'
+
+@doc keyword(enum_is_small) = "enum types are only as wide as is necessary to hold the members of the enum, if neither this or enum_is_int are set, then the behavior is undefined. You should aim to write code which does not require this keyword, since it may not be available for all compilers."
+@doc keyword(enum_is_int) = "enum types are always of type int, if neither this or enum_is_small are set, then the behavior is undefined. You should aim to write code which does not require this keyword, since it may not be available for all compilers."
+
+@doc keyword(signed_overflow_trap) = "Trap on overflow of signed integers"
+@doc keyword(signed_overflow_wrap) = "Wrap on overflow of signed integers. You should aim to write code which does not require this keyword, as it is exercising undefinied behavior in C, precludes various optimisations, and this behaviour may not be possible for all compilers."
+
+@doc keyword(warning_no_overlength_strings) = "Disable warning about overlength string literals (C90 requires that compilers support strings of length up to 509."
+
+[enum_is_small.enum_is_int]
+@error "Can't have both small and int behavior for enum sizing"
+
+[signed_overflow_trap.signed_overflow_wrap]
+@error "Can't have both wrapping and trapping behaviour for signed overflow"
+
+[mbuild_no_asserts]
+@att DEFINE.NDEBUG = "1"
+
+[default]
+@att MAKE_CFLAGS_OUTPUT_FILE="-o"
+@att MAKE_CXXFLAGS_OUTPUT_FILE="-o"
+@att MAKE_ASFLAGS_OUTPUT_FILE="-o"
+@att MAKE_CCDEP=''
+@att MAKE_CCDEPFLAGS_OUTPUT_FILE="-o"
+@att MAKE_CCDEPFLAGS_TARGET=''
+
+[never]
+@att MAKE_CCDEPFLAGS+=''
+
+[default]
+@import make/manifest.mb
+@import gcc_manifest.mb
+@import ms_2005_cl_manifest.mb
+@import ms_2008_cl_manifest.mb
+@import ms_2010_cl_manifest.mb
+@import ms_2012_cl_manifest.mb
+@import ms_2013_cl_manifest.mb
+
+[never]
+@att MAKE_ASFLAGS+=''

@@ -1,0 +1,7 @@
+# Test for the multiple_tags bug (MB-58).
+# The bug manifests itself by e.g. returning the file "Top Secret" in the query result for a release files query using the keyword 'foo'.
+
+[foo]
+internal:Doxyfile
+some_other_file.txt
+internal secret:"Top Secret"

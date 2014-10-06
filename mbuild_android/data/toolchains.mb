@@ -1,0 +1,9 @@
+[default]
+@att VALUES.toolchain += 'androideabi_gnu'
+
+[toolchain_androideabi_gnu]
+@add compiler_androideabi_gnu_gcc
+@add archiver_androideabi_gnu_ar
+@add linker_androideabi_gnu_link
+@add assembler_androideabi_gnu_as
+

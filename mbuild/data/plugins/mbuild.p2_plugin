@@ -1,0 +1,246 @@
+def get_symbols():
+	return {'mbuild_compile_and_link': compile_and_link,
+	        'mbuild_compile_and_archive': compile_and_archive,
+	        'mbuild_standard': standard,
+	        'mbuild_extra': extra,
+	        'mbuild_conditional': Conditional,
+	        'mbuild_restrict': Restrict,
+	        'mbuild_union': Union,
+	        'mbuild_exception': MBuildException,
+	        'mbuild_add_dimensions': AddDimensions,
+	        'mbuild_pretend': Pretend,
+	       }
+
+class Restrict(BuildConfiguration):
+	"""Only build configurations that match the given set of dimensions and
+	values - a lighter weight version of Conditional
+	"""
+	def __init__(self, base_configurations, match):
+		self._base_configurations = base_configurations
+		self._match = match
+	
+	def get_dimensions(self):
+		return self._base_configurations.get_dimensions()
+	
+	def is_valid(self, configuration):
+		for dim in self._match:
+			if not dim in configuration:
+				return False
+			
+			if isinstance(self._match[dim], str):
+				if not configuration[dim] == self._match[dim]:
+					return False
+			else:
+				if not configuration[dim] in self._match[dim]:
+					return False
+		
+		return self._base_configurations.is_valid(configuration)
+
+class Pretend(BuildConfiguration):
+	"""Takes a dimension name, a map, and a base BuildConfiguration
+	and modifies the "is_valid" function of the base configuration so
+	it is as if the dimension has had the map applied to it.
+	For example, if there is a BuildConfiguration that forces a dimension
+	'foo' to be 'bar', along with several other restrictions. We can
+	use Pretend('foo', {'zap': 'bar'}, base) to keep the other restrictions
+	while allowing the value "zap".
+	"""
+	def __init__(self, dimension_name, remap, base_configurations):
+		self._dimension_name = dimension_name
+		self._remap = remap
+		self._base_configurations = base_configurations
+	
+	def get_dimensions(self):
+		return self._base_configurations.get_dimensions()
+	
+	def is_valid(self, configuration):
+		if configuration[self._dimension_name] in self._remap:
+			# Need to pretend
+			remapped = dict(configuration)
+			remapped[self._dimension_name] = self._remap[remapped[self._dimension_name]]
+			return self._base_configurations.is_valid(remapped)
+		else:
+			return self._base_configurations.is_valid(configuration)
+		
+		remapped = dict(configuration)
+		value = remapped[self._dimension_name]
+		if value in self._remap:
+			value = self._remap[value]
+		remapped[self._dimension_name] = value
+		return self._base_configurations.is_valid(remapped)
+
+class Union(BuildConfiguration):
+	"""Takes multiple BuildConfiguration objects (which must have the same set 
+	of dimensions) and combines them together.
+	"""
+	def __init__(self, *build_configurations):
+		self._base_configurations = build_configurations
+		assert len(build_configurations) > 0, "Require at least one build configuration"
+		self._dimensions = build_configurations[0].get_dimensions()
+		for bc in build_configurations:
+			assert bc.get_dimensions() == self._dimensions, "Dimensions of configurations must match exactly (have %r and %r)" % (bc.get_dimensions, self._dimensions)
+	
+	def get_dimensions(self):
+		return self._dimensions
+	
+	def is_valid(self, configuration):
+		for bc in self._base_configurations:
+			if bc.is_valid(configuration):
+				return True
+		return False
+
+class Conditional(BuildConfiguration):
+	"""Only build configurations that satisfy an arbitrary python function
+	"""
+	def __init__(self, base_configurations, condition):
+		self._base_configurations = base_configurations
+		self._condition = condition
+	
+	def get_dimensions(self):
+		return self._base_configurations.get_dimensions()
+	
+	def is_valid(self, configuration):
+		return self._base_configurations.is_valid(configuration) and \
+		       self._condition(configuration)
+
+class MBuildException(BuildConfiguration):
+	"""This is like a Conditional, except we don't require that the base
+	configuration is satisfied. Instead, the value of the base configuration's
+	is_valid() method is handed on to our own is_valid() method, and the 
+	function itself is passed (so it can be queried with slightly different
+	parameters) so we can make exceptions to the base configuration's decision.
+	"""
+	def __init__(self, base_configurations, exception):
+		self._base_configurations = base_configurations
+		self._exception = exception
+	
+	def get_dimensions(self):
+		return self._base_configurations.get_dimensions()
+	
+	def is_valid(self, configuration):
+		parent = self._base_configurations.is_valid(configuration)
+		return self._exception(configuration, parent, self._base_configurations.is_valid)
+
+class AddDimensions(BuildConfiguration):
+	"""Take an existing BuildConfiguration and add some new dimensions to it
+	(without any restrictions).
+	"""
+	def __init__(self, base_configurations, extra_dimensions):
+		self._base_configurations = base_configurations
+		self._extra_dimensions = extra_dimensions
+	
+	def get_dimensions(self):
+		return self._base_configurations.get_dimensions() + self._extra_dimensions
+	
+	def is_valid(self, configuration):
+		return self._base_configurations.is_valid(configuration)
+
+def file_name(dimensions):
+	extras = [d for d in dimensions if not d in standard_dimensions]
+	name_list = [ProjectName(),
+	             Join('_', [Dimension('os')
+	                       ,Dimension('processor')
+	                       ,Replace('toolchain',
+	                               {'msvs2005':'msvs'
+	                               ,'msvs2008':'msvs'
+	                               ,'msvs2010':'msvs'
+	                               ,'msvs2012':'msvs'
+	                               ,'msvs2013':'msvs'})]),
+	             Join('', 
+	               [Join('_', [ProjectName()] + [Dimension(d) for d in extras] + [Dimension('flavour')]),
+	                Attribute('EXT')])]
+	return name_list
+
+def directory_name(dimensions):
+	# The Null filename is so we know what directory to put things in, but
+	# when we compile things, we don't produce a single file, so there is
+	# no one name to give them all.
+	name_list = [ProjectName(),
+	             Join('_', [Dimension('os')
+	                       ,Dimension('processor')
+	                       ,Replace('toolchain',
+	                               {'msvs2005':'msvs'
+	                               ,'msvs2008':'msvs'
+	                               ,'msvs2010':'msvs'
+	                               ,'msvs2012':'msvs'
+	                               ,'msvs2013':'msvs'})]),
+	             Null()]
+	return name_list
+
+def ordered_dimensions(dimensions):
+	# This is a list of dimensions in a fairly aesthetic order. We put all the
+	# standard mbuild dimensions excluding flavour first, then the project
+	# specific ones, then the flavour.
+	ret  = [d for d in standard_dimensions if d != 'flavour' and d in dimensions]
+	ret += sorted([d for d in dimensions if not d in standard_dimensions])
+	if 'flavour' in dimensions:
+		ret.append('flavour')
+	return ret
+
+def is_valid(config):
+	# Only use M-Build sanctioned toolchains
+	if not config['toolchain'] in ['gnu', 'msvs2005', 'msvs2008', 'msvs2010', 'msvs2012', 'msvs2013']:
+		return False
+	
+	# Only use M-Build sanctioned processors
+	if not config['processor'] in ['x86', 'amd64']:
+		return False
+	
+	# Only use M-Build sanction operating systems
+	if not config['os'] in ['windows', 'linux', 'osx']:
+		return False
+	
+	# Only use M-Build sanctioned tools
+	if not config['tool'] in ['make', 'msvs2005', 'msvs2008', 'msvs2010', 'msvs2012', 'msvs2013']:
+		return False
+	
+	# Only use M-Build sanctioned flavours
+	if not config['flavour'] in ['debug', 'release']:
+		return False
+	
+	# Visual Studio plays with Visual Studio only
+	if config['toolchain'] in ['msvs2005', 'msvs2008', 'msvs2010', 'msvs2012', 'msvs2013']:
+		if config['tool'] != config['toolchain']:
+			return False
+	if config['tool'] in ['msvs2005', 'msvs2008', 'msvs2010', 'msvs2012', 'msvs2013']:
+		if config['toolchain'] != config['tool']:
+			return False
+	
+	# Visual Studio only supports windows
+	if config['toolchain'] in ['msvs2005', 'msvs2008', 'msvs2010', 'msvs2012', 'msvs2013']:
+		if not config['os'] == 'windows':
+			return False
+	
+	# Windows and OSX support x86 and amd64
+	if config['os'] in ['windows', 'osx']:
+		if not config['processor'] in ['x86', 'amd64']:
+			return False
+	
+	# gcc only targets x86 and amd64
+	if config['toolchain'] == 'gnu':
+		if not config['processor'] in ['x86', 'amd64']:
+			return False
+	
+	return True
+
+
+standard_dimensions = ['os', 'processor', 'flavour', 'toolchain', 'tool']
+standard = BuildConfiguration(standard_dimensions, is_valid)
+
+def extra(dimensions):
+	return BuildConfiguration(standard_dimensions + dimensions, is_valid)
+
+compile_and_link = ProjectStyle(
+	        {'compile': ActionSpec(name_structure=directory_name),
+	         'link':    ActionSpec(name_structure=file_name),
+	         'use':     ActionSpec(name_structure=file_name)},
+	        ordered_dimensions)
+
+
+
+compile_and_archive = ProjectStyle(
+	        {'compile': ActionSpec(name_structure=directory_name),
+	         'archive': ActionSpec(name_structure=file_name),
+	         'use':     ActionSpec(name_structure=file_name)},
+	        ordered_dimensions)
+

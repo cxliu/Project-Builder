@@ -1,0 +1,113 @@
+@doc keyword(mbuild_fast_math) = "Enable floating point math fast and imprecise."
+@doc keyword(set_track_macro_expansion_0) = "Disable tracking locations of tokens across macro expansions. This option is available only for gcc 4.7 or higher."
+
+[assembler_gcc]
+@att MAKE_AS="$(CC)"
+
+[assembler_gcc]
+@att MAKE_ASFLAGS+=-c
+
+[compiler_gcc]
+@att MAKE_CC="$(CC)"
+
+[compiler_gcc]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS += "-Wall"
+@att MAKE_CFLAGS += "-Wextra"
+@att MAKE_CFLAGS += "-Wstrict-prototypes"
+@att MAKE_CFLAGS += "-Wmissing-prototypes"
+@att MAKE_CFLAGS += "-pedantic"
+@att MAKE_CFLAGS += "-std=gnu99"
+@att MAKE_CFLAGS += "-Wdeclaration-after-statement"
+@att MAKE_CFLAGS += "-Wvla"
+
+[compiler_gcc.processor_x86]
+@att MAKE_CFLAGS += "-msse2"
+
+[compiler_gcc]
+@att MAKE_CXX="$(CXX)"
+
+[compiler_gcc]
+@att MAKE_CXXFLAGS += "-c"
+@att MAKE_CXXFLAGS += "-Wall"
+
+[compiler_gcc.processor_x86]
+@att MAKE_CXXFLAGS += "-msse2"
+
+[compiler_gcc]
+@att MAKE_CCDEP="$(CC)"
+@att MAKE_CCDEPFLAGS += "-MM"
+@att MAKE_CCDEPFLAGS_TARGET="-MT"
+
+[compiler_gcc.processor_x86]
+@att MAKE_CCDEPFLAGS += "-msse2"
+
+[compiler_gcc.warning_no_overlength_strings.(os_linux+os_osx)]
+@att MAKE_CFLAGS+=-Wno-overlength-strings
+
+[compiler_gcc.mbuild_debug_symbols]
+@att MAKE_CFLAGS+="-g -ggdb3"
+@att MAKE_CXXFLAGS+="-g -ggdb3"
+
+[compiler_gcc.enum_is_int]
+# This is the default
+
+[compiler_gcc.enum_is_small]
+@att MAKE_CFLAGS+=-fshort-enums
+@att MAKE_CXXFLAGS+=-fshort-enums
+
+[compiler_gcc.signed_overflow_trap]
+@att MAKE_CFLAGS+=-ftrapv
+@att MAKE_CXXFLAGS+=-ftrapv
+
+[compiler_gcc.signed_overflow_wrap]
+@att MAKE_CFLAGS+=-fwrapv
+@att MAKE_CXXFLAGS+=-fwrapv
+
+[compiler_gcc.mbuild_no_optimise]
+@att MAKE_CFLAGS += -O0
+@att MAKE_CXXFLAGS += -O0
+
+[compiler_gcc.mbuild_optimise]
+@att MAKE_CFLAGS += -O3
+@att MAKE_CFLAGS += -funroll-loops
+@att MAKE_CFLAGS += -ftree-vectorize
+@att MAKE_CXXFLAGS += -O3
+@att MAKE_CXXFLAGS += -funroll-loops
+@att MAKE_CXXFLAGS += -ftree-vectorize
+
+[compiler_gcc.config_type_dynamic_lib]
+@att MAKE_CFLAGS+=-fPIC
+@att MAKE_CFLAGS+=-shared
+@att MAKE_CXXFLAGS+=-fPIC
+@att MAKE_CXXFLAGS+=-shared
+
+# if using a dynamic runtime library
+[compiler_gcc.toolchain_dynamic_runtime]
+@att MAKE_CFLAGS += -shared-libgcc
+
+# if using a static runtime library
+[compiler_gcc.toolchain_static_runtime]
+@att MAKE_CFLAGS += -static-libgcc
+
+[compiler_gcc.processor_x86]
+@att MAKE_CFLAGS += -m32
+@att MAKE_CXXFLAGS += -m32
+
+[compiler_gcc.processor_amd64]
+@att MAKE_CFLAGS += -m64
+@att MAKE_CXXFLAGS += -m64
+
+[compiler_gcc.mbuild_optimise.mbuild_fast_math]
+@att MAKE_CFLAGS += -ffast-math
+@att MAKE_CFLAGS += -fassociative-math
+@att MAKE_CFLAGS += -freciprocal-math
+@att MAKE_CFLAGS += -fno-trapping-math
+@att MAKE_CXXFLAGS += -ffast-math
+@att MAKE_CXXFLAGS += -fassociative-math
+@att MAKE_CXXFLAGS += -freciprocal-math
+@att MAKE_CXXFLAGS += -fno-trapping-math
+
+[compiler_gcc.mbuild_debug_symbols.set_track_macro_expansion_0]
+@att MAKE_CFLAGS += "-ftrack-macro-expansion=0"
+@att MAKE_CXXFLAGS += "-ftrack-macro-expansion=0"

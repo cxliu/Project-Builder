@@ -1,0 +1,16 @@
+[project_get_e]
+@add config_type_console
+@add strip_example
+get_e.c
+get_e.h
+main.c
+
+# Set custom move location (i.e., different file name) for special source files
+[project_get_e.flavour_debug]
+move_to(strip_example/get_e/debug/src,project_get_e.flavour_debug,get_flavour.c) \
+PLUGIN_STRIP:get_flavour_debug.c
+
+[project_get_e.flavour_release]
+move_to(strip_example/get_e/release/src,project_get_e.flavour_release,get_flavour.c) \
+PLUGIN_STRIP:get_flavour_release.c
+

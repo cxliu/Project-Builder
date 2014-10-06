@@ -1,0 +1,5 @@
+[default]
+@att INCLUDE+=p'.'
+
+[strip_example]
+strip_example.h

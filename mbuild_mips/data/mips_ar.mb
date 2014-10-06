@@ -1,0 +1,9 @@
+[archiver_mips_ar]
+@att MAKE_AR = 'mips-linux-gnu-ar'
+
+[os_bare.archiver_mips_ar]
+@att MAKE_AR = 'mips-sde-elf-ar'
+
+[archiver_mips_ar]
+@att MAKE_ARFLAGS_OUTPUT_FILE=' '
+@att MAKE_ARFLAGS += '-rc'

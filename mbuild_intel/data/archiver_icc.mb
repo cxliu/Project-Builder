@@ -1,0 +1,5 @@
+# Tool name and its flags for the archiver (for Intel Linux and Mac toolchain - toolchain_icc)
+[archiver_icc]
+@att MAKE_AR = "xiar"
+@att MAKE_ARFLAGS += "-rc"
+@att MAKE_ARFLAGS_OUTPUT_FILE = ""

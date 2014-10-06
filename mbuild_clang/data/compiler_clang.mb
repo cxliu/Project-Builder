@@ -1,0 +1,85 @@
+[compiler_clang.os_osx]
+@att MAKE_CC="xcrun clang"
+
+[compiler_clang.os_ios]
+@att MAKE_CC="xcrun -sdk iphoneos clang"
+
+[compiler_clang]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS += "-Wall"
+@att MAKE_CFLAGS += "-Wextra"
+@att MAKE_CFLAGS += "-Wstrict-prototypes"
+@att MAKE_CFLAGS += "-Wmissing-prototypes"
+@att MAKE_CFLAGS += "-pedantic"
+@att MAKE_CFLAGS += "-std=gnu99"
+@att MAKE_CFLAGS += "-Wno-overlength-strings"
+
+[compiler_clang.os_osx]
+@att MAKE_CXX="xcrun clang++"
+
+[compiler_clang.os_ios]
+@att MAKE_CXX="xcrun -sdk iphoneos clang++"
+
+[compiler_clang]
+@att MAKE_CXXFLAGS+=-c
+@att MAKE_CXXFLAGS+=-Wall
+
+[compiler_clang.os_osx]
+@att MAKE_CCDEP="xcrun clang"
+
+[compiler_clang.os_ios]
+@att MAKE_CCDEP="xcrun -sdk iphoneos clang"
+
+[compiler_clang]
+@att MAKE_CCDEPFLAGS+="-MM"
+@att MAKE_CCDEPFLAGS_TARGET="-MT"
+
+# Debug only flags
+[compiler_clang.mbuild_debug_symbols]
+@att MAKE_CFLAGS+="-g"
+@att MAKE_CXXFLAGS+="-g"
+
+[compiler_clang.mbuild_no_optimise]
+@att MAKE_CFLAGS+="-O0"
+@att MAKE_CXXFLAGS+="-O0"
+@att MAKE_CFLAGS+="-fcatch-undefined-behavior"
+@att MAKE_CXXFLAGS+="-fcatch-undefined-behavior"
+
+# Release only flags
+[compiler_clang.mbuild_optimise]
+@att MAKE_CFLAGS+="-O3"
+@att MAKE_CFLAGS += -funroll-loops
+@att MAKE_CXXFLAGS+="-O3"
+@att MAKE_CXXFLAGS += -funroll-loops
+
+[compiler_clang.mbuild_optimise.mbuild_fast_math]
+@att MAKE_CFLAGS += -ffast-math
+@att MAKE_CFLAGS += -fassociative-math
+@att MAKE_CFLAGS += -freciprocal-math
+@att MAKE_CFLAGS += -fno-trapping-math
+@att MAKE_CXXFLAGS += -ffast-math
+@att MAKE_CXXFLAGS += -fassociative-math
+@att MAKE_CXXFLAGS += -freciprocal-math
+@att MAKE_CXXFLAGS += -fno-trapping-math
+
+[compiler_clang.os_osx.processor_x86]
+@att MAKE_CFLAGS += "-arch i386"
+@att MAKE_CXXFLAGS += "-arch i386"
+
+[compiler_clang.os_osx.processor_amd64]
+@att MAKE_CFLAGS += "-arch x86_64"
+@att MAKE_CXXFLAGS += "-arch x86_64"
+
+[compiler_clang.os_ios.processor_armv7s]
+@att MAKE_CFLAGS += "-arch armv7 -arch armv7s"
+@att MAKE_CXXFLAGS += "-arch armv7 -arch armv7s"
+@att MAKE_CCDEP="xcrun -sdk iphoneos clang -arch armv7s"
+
+[compiler_clang.os_ios.processor_arm64]
+@att MAKE_CFLAGS += "-arch armv7 -arch armv7s -arch arm64"
+@att MAKE_CXXFLAGS += "-arch armv7 -arch armv7s -arch arm64"
+@att MAKE_CCDEP="xcrun -sdk iphoneos clang -arch arm64"
+
+[compiler_clang.(os_ios+os_osx)]
+@att MAKE_CFLAGS += "-fPIC"
+@att MAKE_CXXFLAGS += "-fPIC"

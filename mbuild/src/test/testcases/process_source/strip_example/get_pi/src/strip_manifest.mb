@@ -1,0 +1,16 @@
+[project_get_pi]
+@add config_type_console
+@add strip_example
+get_pi.c
+get_pi.h
+main.c
+
+# Set custom move location (i.e., different file name) for special source files
+[project_get_pi.flavour_debug]
+move_to(strip_example/get_pi/debug/src,project_get_pi.flavour_debug,get_flavour.c) \
+PLUGIN_STRIP:get_flavour_debug.c
+
+[project_get_pi.flavour_release]
+move_to(strip_example/get_pi/release/src,project_get_pi.flavour_release,get_flavour.c) \
+PLUGIN_STRIP:get_flavour_release.c
+

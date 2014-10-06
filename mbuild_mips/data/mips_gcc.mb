@@ -1,0 +1,79 @@
+[compiler_mips_gcc]
+@att MAKE_CC = "mips-linux-gnu-gcc"
+@att MAKE_CXX = "mips-linux-gnu-g++"
+
+[os_bare.compiler_mips_gcc]
+@att MAKE_CC = "mips-sde-elf-gcc"
+@att MAKE_CXX = "mips-sde-elf-g++"
+
+[compiler_mips_gcc]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS_OUTPUT_FILE = "-o"
+@att MAKE_CXXFLAGS += "-x c"
+@att MAKE_CXXFLAGS_OUTPUT_FILE = "-o"
+
+[compiler_mips_gcc]
+@att MAKE_CCDEP="mips-linux-gnu-gcc"
+@att MAKE_CCDEPFLAGS += "-MM"
+@att MAKE_CCDEPFLAGS_TARGET = "-MT"
+
+# Do not print out 'warning: always_inline function might not be inlinable'
+@att MAKE_CFLAGS += '-Wno-attributes'
+
+[sys_little_endian.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-EL"
+@att MAKE_CXXFLAGS += "-EL"
+
+[sys_big_endian.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-EB"
+@att MAKE_CXXFLAGS += "-EB"
+
+[mips_architecture_mips32r2.compiler_mips_gcc]
+@att MAKE_CFLAGS += '-mips32r2'
+@att MAKE_CXXFLAGS += '-mips32r2'
+
+# Set --cpu flag correctly
+[mips_processor_24kef.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-march=24kef"
+@att MAKE_CXXFLAGS += "-march=24kef"
+
+[mips_processor_24kec.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-march=24kec"
+@att MAKE_CXXFLAGS += "-march=24kec"
+
+[mips_feature_hardfloat.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-mhard-float"
+
+[mips_feature_softfloat.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-msoft-float"
+
+[mbuild_debug_symbols.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-g"
+@att MAKE_CXXFLAGS += "-g"
+
+[mbuild_optimise.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-O3"
+@att MAKE_CXXFLAGS += "-O3"
+
+[mbuild_no_optimise.compiler_mips_gcc]
+@att MAKE_CFLAGS += "-O0"
+@att MAKE_CXXFLAGS += "-O0"
+
+# Default use "-mdsp"
+# Option -mdspr2 is needed with some (older) version of MIPS compiler 
+# because they don't recognize accu1..accu3 although they are supported
+# by MIPS dsp ase r1 architecture. There is no need to specify -mdspr2 with
+# more recent versions of compilers/cross compilers (CodeSourcery 
+# version 4.5.1 is aware that accu1..accu3 are available in MIPS dsp ase r1). 
+# When we start using compiler that was installed on the board -mdspr2 was introduced. 
+# Preferred way is to use -mdsp (if compiler/cross compiler can compile the
+# code with it). Additional accumulators are used in FFT and some math 
+# functions, but not in low level intrinsics (that may have influence 
+# on performance).
+[mips_feature_dspr1.compiler_mips_gcc]
+@att MAKE_CFLAGS += '-mdsp'
+@att MAKE_CXXFLAGS += '-mdsp'
+
+[mips_feature_dspr2.compiler_mips_gcc]
+@att MAKE_CFLAGS += '-mdsp2'
+@att MAKE_CXXFLAGS += '-mdsp2'

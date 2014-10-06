@@ -1,0 +1,7 @@
+[default]
+project_b.project
+
+[project_project_b]
+file.c
+
+@add config_type_static_lib

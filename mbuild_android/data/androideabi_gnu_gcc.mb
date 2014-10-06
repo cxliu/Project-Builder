@@ -1,0 +1,67 @@
+[compiler_androideabi_gnu_gcc]
+@att MAKE_CC = "arm-linux-androideabi-gcc"
+@att MAKE_CXX = "arm-linux-androideabi-g++"
+@att DEFINE.ANDROID = '1'
+
+[compiler_androideabi_gnu_gcc]
+@att MAKE_CCDEP = "arm-linux-androideabi-gcc"
+@att MAKE_CCDEPFLAGS += "-MM"
+@att MAKE_CCDEPFLAGS_TARGET="-MT"
+
+[compiler_androideabi_gnu_gcc]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS += "-Wall"
+@att MAKE_CFLAGS += "-pedantic"
+@att MAKE_CFLAGS += "-std=gnu99"
+@att MAKE_CFLAGS += "-Wno-overlength-strings"
+@att MAKE_CXXFLAGS += "-c"
+@att MAKE_CXXFLAGS += "-Wall"
+
+[compiler_androideabi_gnu_gcc]
+@att MAKE_CFLAGS_OUTPUT_FILE = "-o"
+@att MAKE_CXXFLAGS_OUTPUT_FILE = "-o"
+
+[compiler_androideabi_gnu_gcc.android_architecture_arm_v7_a]
+@att MAKE_CFLAGS += "-march=armv7-a"
+@att MAKE_CXXFLAGS += "-march=armv7-a"
+@att MAKE_CCDEPFLAGS += "-march=armv7-a"
+
+[compiler_androideabi_gnu_gcc.android_arm_feature_vfp_soft]
+@att MAKE_CFLAGS += "-mfloat-abi=softfp"
+@att MAKE_CXXFLAGS += "-mfloat-abi=softfp"
+@att MAKE_CCDEPFLAGS += "-mfloat-abi=softfp"
+
+[compiler_androideabi_gnu_gcc.android_arm_feature_neon]
+@att MAKE_CFLAGS += "-mfpu=neon"
+@att MAKE_CXXFLAGS += "-mfpu=neon"
+@att MAKE_CCDEPFLAGS += "-mfpu=neon"
+
+[compiler_androideabi_gnu_gcc.android_arm_code_gen_thumb]
+@att MAKE_CFLAGS += "-mthumb"
+@att MAKE_CXXFLAGS += "-mthumb"
+@att MAKE_CCDEPFLAGS += "-mthumb"
+
+[compiler_androideabi_gnu_gcc.mbuild_debug_symbols]
+@att MAKE_CFLAGS+="-g"
+@att MAKE_CXXFLAGS+="-g"
+
+[compiler_androideabi_gnu_gcc.mbuild_no_optimise]
+@att MAKE_CFLAGS+="-O0"
+@att MAKE_CXXFLAGS+="-O0"
+
+[compiler_androideabi_gnu_gcc.mbuild_optimise]
+@att MAKE_CFLAGS+="-O3"
+@att MAKE_CFLAGS += -funroll-loops
+@att MAKE_CXXFLAGS+="-O3"
+@att MAKE_CXXFLAGS += -funroll-loops
+
+[compiler_androideabi_gnu_gcc.mbuild_optimise.mbuild_fast_math]
+@att MAKE_CFLAGS += -ffast-math
+@att MAKE_CFLAGS += -fassociative-math
+@att MAKE_CFLAGS += -freciprocal-math
+@att MAKE_CFLAGS += -fno-trapping-math
+@att MAKE_CXXFLAGS += -ffast-math
+@att MAKE_CXXFLAGS += -fassociative-math
+@att MAKE_CXXFLAGS += -freciprocal-math
+@att MAKE_CXXFLAGS += -fno-trapping-math
+

@@ -1,0 +1,19 @@
+[compiler_mips_gcc]
+@import mips_gcc.mb
+@import mips_as.mb
+
+[linker_mips_ld]
+@import mips_ld.mb
+
+[archiver_mips_ar]
+@import mips_ar.mb
+
+
+[default]
+mips.p2_plugin
+mips_toolchain.t3_plugin
+@import cores.mb
+@import toolchains.mb
+@import flavour.mb
+@import os.mb
+@import force_dimensions.mb

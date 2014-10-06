@@ -1,0 +1,5 @@
+[assembler_gcc.aarch64_linaro_gnu]
+@att MAKE_AS = "aarch64-linux-gnu-as"
+
+[assembler_gcc.aarch64_linaro_gnu.processor_arm64]
+@att MAKE_ASFLAGS += '-march=armv8-a'

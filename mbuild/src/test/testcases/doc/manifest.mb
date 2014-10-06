@@ -1,0 +1,22 @@
+@enum SLAPPHAPPY.so = "Sort Of"
+@enum SLAPPHAPPY.cm = "Casablanca Moon"
+@enum SLAPPHAPPY.ds = "Desperate Straights"
+@enum SLAPPHAPPY.cv = "Ça Va"
+
+@doc keyword(one_line)="The sixth sick sheik's sixth sheep's sick."
+@doc keyword(multi_line)="A leaf \
+falls."
+@doc keyword(raw) = r"Patience, Grasshopper."
+@doc keyword(escape)="Listen twice\, play once."
+@doc keyword(raw_multi_line)=r"Back to the
+beginning."
+
+@doc attribute(HIRSUTE)="1. hairy; shaggy. \
+2. <em>Botany, Zoology</em> covered with long, rather stiff hairs. \
+3. of, pertaining to, or characteristic of hair."
+@doc attribute(PHLEGMATIC)="1. not easily excited to action or display of emotion; apathetic; sluggish. \
+2. self-possessed, calm, or composed. \
+3. of the nature of or abounding in the humor <em>phlegm</em>."
+
+@doc tag(location)="Where it is."
+@doc tag(quantity)="How much of it there is."

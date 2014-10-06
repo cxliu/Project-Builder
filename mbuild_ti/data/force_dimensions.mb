@@ -1,0 +1,3 @@
+[default]
+@att MBUILD_MAKE_SUPPORT.toolchain += 'ccs'
+@att MBUILD_MAKE_SUPPORT.toolchain += 'c6run'

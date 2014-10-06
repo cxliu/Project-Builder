@@ -1,0 +1,9 @@
+[release]
+__init__.py
+
+[default]
+@import build/manifest.mb
+@import make/manifest.mb
+@import util/manifest.mb
+@import visual_studio/manifest.mb
+@import test/manifest.mb

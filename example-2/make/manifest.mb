@@ -1,0 +1,24 @@
+[default]
+get_name_static.project
+get_name_dynamic.project
+
+libfoo_static.project
+libfoo_dynamic.project
+
+[project_libfoo_static]
+@add config_type_static_lib
+@add foo_objects
+
+[project_libfoo_dynamic]
+@add config_type_dynamic_lib
+@add foo_objects
+
+[config_type_dynamic_lib.foo_objects.linker_ms_link]
+libfoo.def
+
+[project_get_name_static+project_get_name_dynamic]
+@add project_get_name
+@add config_type_console
+@add get_name_objects
+@add get_name_frontend
+

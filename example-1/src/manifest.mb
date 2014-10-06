@@ -1,0 +1,10 @@
+# Note that here we "@add helloworld_api", which is the API which we are 
+# implementing here. 
+
+@doc keyword(helloworld_objects) = "The source files which make up the helloworld library"
+
+[helloworld_objects]
+@add helloworld_api
+@att INCLUDE+=p"../include"
+helloworld.c
+

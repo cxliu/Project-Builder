@@ -1,0 +1,87 @@
+[a]
+a1
+
+[(a)]
+a2
+
+[(((((a)))))]
+a3
+
+[a.b]
+a_and_b1
+
+[(a).b]
+a_and_b2
+@add d
+
+[a.(b)]
+a_and_b3
+
+[(a).(b)]
+a_and_b4
+
+[((a).(b))]
+a_and_b5
+
+[a.b]
+@att ATTR = pippo
+a_and_b6
+
+[(a.b)]
+@att ATTR = pippo
+a_and_b7
+
+
+[a+b]
+a_or_b1
+
+[(a)+b]
+a_or_b2
+
+[a+(b)]
+a_or_b3
+
+[(a)+(b)]
+a_or_b4
+
+[((a)+(b))]
+a_or_b5
+
+[a+b]
+@att ATTR = pippo
+a_or_b6
+
+[(a+b)]
+@att ATTR = pippo
+a_or_b7
+
+[a.b.c]
+a_and_b_and_c1
+[(a.b).c]
+a_and_b_and_c2
+[a.(b.c)]
+a_and_b_and_c3
+
+[a+b+c]
+a_or_b_or_c1
+[(a+b)+c]
+a_or_b_or_c2
+[a+(b+c)]
+a_or_b_or_c3
+
+[a+b.c]
+a_or_b_and_c
+
+[a.b+c]
+a_and_b_or_c
+
+
+#
+# Test that '.' is tokenized
+# only as part of the keyword expression
+#
+[x.y]
+@att INCLUDE+=path
+move_file(../src):../sources/foo.c
+
+

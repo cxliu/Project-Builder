@@ -1,0 +1,4 @@
+@doc keyword(armv7s) = "ARM core for iOS, fat binary on this core supports both armv7 and armv7s."
+
+[default]
+@att VALUES.processor += "armv7s"

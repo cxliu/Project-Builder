@@ -1,0 +1,34 @@
+@doc attribute(VS2010_CONFIGURATION_TYPE) = 'The type of output this configuration generates (see <a href="http://msdn.microsoft.com/en-us/library/8x480de8%28VS.80%29.aspx">MSDN</a>)'
+@enum VS2010_CONFIGURATION_TYPE.makefile = "Make file"
+@enum VS2010_CONFIGURATION_TYPE.application = "Application"
+@enum VS2010_CONFIGURATION_TYPE.dynamic_library = "Dynamic Library"
+@enum VS2010_CONFIGURATION_TYPE.static_library = "Static Library"
+@enum VS2010_CONFIGURATION_TYPE.utility = "Utility"
+
+@doc attribute(VS2010_CHARACTER_SET) = 'Defines whether _UNICODE or _MBCS should be set. Also affects the linker entry point where appropriate. (see <a href="http://msdn.microsoft.com/en-us/library/8x480de8%28VS.80%29.aspx">MSDN</a>)'
+@enum VS2010_CHARACTER_SET.not_set = "Not set"
+@enum VS2010_CHARACTER_SET.unicode = "Unicode"
+@enum VS2010_CHARACTER_SET.multibyte = "Multibyte"
+
+@doc attribute(VS2010_WHOLE_PROGRAM_OPTIMIZATION) = 'Turns on whole program optimization in the compiler and linker (see <a href="http://msdn.microsoft.com/en-us/library/8x480de8%28VS.80%29.aspx">MSDN</a>)'
+@enum VS2010_WHOLE_PROGRAM_OPTIMIZATION.off = "Off"
+@enum VS2010_WHOLE_PROGRAM_OPTIMIZATION.link_time_code_gen = "Link Time Code Gen"
+
+
+[tool_msvs2010.flavour_release]
+@att VS2010_WHOLE_PROGRAM_OPTIMIZATION = link_time_code_gen
+
+
+# Visual Studio has the concept of platforms, which must be named
+[tool_msvs2010.os_windows.processor_x86]
+@att VS2010_PLATFORM_IDENTIFIER = 'Win32'
+
+[tool_msvs2010.os_windows.processor_amd64]
+@att VS2010_PLATFORM_IDENTIFIER = 'x64'
+
+
+[default]
+@att VS2010_CHARACTER_SET = unicode
+@att VS2010_WHOLE_PROGRAM_OPTIMIZATION = off
+@att VS2010_USE_STRICT_LANGUAGE = false
+

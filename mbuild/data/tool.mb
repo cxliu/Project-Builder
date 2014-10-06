@@ -1,0 +1,16 @@
+@doc dimension(tool) = 'The tool used to run the individual build steps'
+@doc keyword(tool_make) = "Use Make to run build steps"
+@doc keyword(tool_msvs2005) = "Use Microsoft Visual studio 2005 to run build steps"
+@doc keyword(tool_msvs2008) = "Use Microsoft Visual studio 2008 to run build steps"
+@doc keyword(tool_msvs2010) = "Use Microsoft Visual studio 2010 to run build steps"
+@doc keyword(tool_msvs2012) = "Use Microsoft Visual studio 2012 to run build steps"
+@doc keyword(tool_msvs2013) = "Use Microsoft Visual studio 2013 to run build steps"
+
+[default]
+@att VALUES.tool+='make'
+@att VALUES.tool+='msvs2005'
+@att VALUES.tool+='msvs2008'
+@att VALUES.tool+='msvs2010'
+@att VALUES.tool+='msvs2012'
+@att VALUES.tool+='msvs2013'
+

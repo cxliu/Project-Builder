@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "get_pi", "get_pi_2008.vcproj", "{C256C24B-BD42-38B6-B0CD-43E17BD18E29}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		roundingoff_debug|Win32 = roundingoff_debug|Win32
+		roundingoff_debug|Win32 = roundingoff_debug|Win32
+		roundingoff_release|Win32 = roundingoff_release|Win32
+		roundingoff_release|Win32 = roundingoff_release|Win32
+		roundingon_debug|Win32 = roundingon_debug|Win32
+		roundingon_debug|Win32 = roundingon_debug|Win32
+		roundingon_release|Win32 = roundingon_release|Win32
+		roundingon_release|Win32 = roundingon_release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_debug|Win32.ActiveCfg = roundingoff_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_debug|Win32.Build.0 = roundingoff_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_debug|Win32.ActiveCfg = roundingoff_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_debug|Win32.Build.0 = roundingoff_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_release|Win32.ActiveCfg = roundingoff_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_release|Win32.Build.0 = roundingoff_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_release|Win32.ActiveCfg = roundingoff_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingoff_release|Win32.Build.0 = roundingoff_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_debug|Win32.ActiveCfg = roundingon_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_debug|Win32.Build.0 = roundingon_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_debug|Win32.ActiveCfg = roundingon_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_debug|Win32.Build.0 = roundingon_debug|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_release|Win32.ActiveCfg = roundingon_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_release|Win32.Build.0 = roundingon_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_release|Win32.ActiveCfg = roundingon_release|Win32
+		{C256C24B-BD42-38B6-B0CD-43E17BD18E29}.roundingon_release|Win32.Build.0 = roundingon_release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

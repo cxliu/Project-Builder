@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfoo_dynamic", "libfoo_dynamic_2013.vcxproj", "{D37008A0-06F2-37D9-923E-2A1C9E816B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		add1_debug|x64 = add1_debug|x64
+		add1_release|x64 = add1_release|x64
+		add2_debug|x64 = add2_debug|x64
+		add2_release|x64 = add2_release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|x64.ActiveCfg = add1_debug|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|x64.Build.0 = add1_debug|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|x64.ActiveCfg = add1_release|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|x64.Build.0 = add1_release|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|x64.ActiveCfg = add2_debug|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|x64.Build.0 = add2_debug|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|x64.ActiveCfg = add2_release|x64
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|x64.Build.0 = add2_release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

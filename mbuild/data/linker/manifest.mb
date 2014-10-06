@@ -1,0 +1,10 @@
+@doc keyword(cpp_linker) = "Use a linker that is capable of linking C++ code"
+
+[default]
+@import make/manifest.mb
+@import gcc_manifest.mb
+@import ms_2005_link_manifest.mb
+@import ms_2008_link_manifest.mb
+@import ms_2010_link_manifest.mb
+@import ms_2012_link_manifest.mb
+@import ms_2013_link_manifest.mb

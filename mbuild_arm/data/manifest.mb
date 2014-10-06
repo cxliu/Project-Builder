@@ -1,0 +1,45 @@
+[compiler_rvct_armcc]
+@import rvct_armcc.mb
+@import rvct_armasm.mb
+
+[linker_rvct_armlink]
+@import rvct_armlink.mb
+
+[archiver_rvct_armar]
+@import rvct_armar.mb
+
+[toolchain_rvct_cslibc+toolchain_rvct]
+@import rvct_cslibc.mb
+
+[os_rvbare]
+@import os_rvbare.mb
+
+[os_qemu]
+@import os_qemu.mb
+
+[os_linux]
+@import os_linux.mb
+
+[os_linuxhf]
+@import os_linuxhf.mb
+
+[default]
+arm.p2_plugin
+rvct_toolchain.t3_plugin
+rvct_cslibc_toolchain.t3_plugin
+@import aarch64_linaro_gnu_ar.mb
+@import aarch64_linaro_gnu_as.mb
+@import aarch64_linaro_gnu_gcc.mb
+@import aarch64_linaro_gnu_link.mb
+@import cores.mb
+@import toolchains.mb
+@import flavour.mb
+@import os.mb
+@import system_lib.mb
+@import os_windows_rt.mb
+@import os_windows_phone.mb
+@import ms_2012_wp8.mb
+@import ms_2013_wp8.mb
+@import ms_2012_linker_wp8.mb
+@import ms_2013_linker_wp8.mb
+@import force_dimensions.mb

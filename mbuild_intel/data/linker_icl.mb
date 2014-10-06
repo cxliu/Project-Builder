@@ -1,0 +1,16 @@
+# Tool name and its flags for the linker (for Intel Windows toolchain - toolchain_icl)
+[linker_icl]
+@att MAKE_LD = "xilink"
+@att MAKE_LDFLAGS_OUTPUT_FILE = "/OUT:"
+
+[linker_icl.cpp_linker]
+@att MAKE_LD = "icpc"
+
+[linker_icl.mbuild_sensible_defaults]
+@att MAKE_LDFLAGS += "/nologo"
+
+[linker_icl.mbuild_debug_symbols.mbuild_sensible_defaults]
+@att MAKE_LDFLAGS += "/DEBUG"
+
+[linker_icl.config_type_dynamic_lib.mbuild_sensible_defaults]
+@att MAKE_LDFLAGS += "/DLL"

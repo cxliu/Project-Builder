@@ -1,0 +1,6 @@
+[os_linux]
+linux/get_name_raw.c
+
+[os_windows]
+windows/get_name_raw.c
+

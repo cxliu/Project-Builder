@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfoo_dynamic", "libfoo_dynamic_2008.vcproj", "{D37008A0-06F2-37D9-923E-2A1C9E816B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		add1_debug|Win32 = add1_debug|Win32
+		add1_release|Win32 = add1_release|Win32
+		add2_debug|Win32 = add2_debug|Win32
+		add2_release|Win32 = add2_release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|Win32.ActiveCfg = add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|Win32.Build.0 = add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|Win32.ActiveCfg = add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|Win32.Build.0 = add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|Win32.ActiveCfg = add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|Win32.Build.0 = add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|Win32.ActiveCfg = add2_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|Win32.Build.0 = add2_release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

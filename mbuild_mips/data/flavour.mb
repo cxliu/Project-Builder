@@ -1,0 +1,16 @@
+@doc keyword(flavour_mips_simulate) = "Turn on optimiser, disable asserts and include debugging symbols"
+
+[flavour_mips_simulate]
+@add mbuild_mips_simulate
+
+[mbuild_mips_simulate]
+@add mbuild_sensible_defaults
+@add mbuild_debug_symbols
+@add mbuild_optimise
+@add mbuild_no_asserts
+
+[default]
+@att VALUES.flavour+='mips_simulate'
+
+[release.mbuild]
+@add flavour_mips_simulate

@@ -1,0 +1,21 @@
+@doc attribute(VS2010_EXTRA_COMPILER_CONFIGURATIONS) = 'This is a map of extra compiler configurations of VS2010. Every name of configuration must be exactly same as the tag in VS2010 project files.'
+
+[compiler_icl.tool_msvs2010]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.RecognizeRestrictKeyword = "true"
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.EnableAnsiAliasing = "true"
+
+# Floating-point modes
+[compiler_icl.tool_msvs2010.intel_fpmode_fast]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointModel = "Fast"
+
+[compiler_icl.tool_msvs2010.intel_fpmode_fast2]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointModel = "Fast2"
+
+[compiler_icl.tool_msvs2010.intel_fpmode_precise]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointModel = "Precise"
+
+[compiler_icl.tool_msvs2010.intel_fpmode_strict]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointModel = "Strict"
+
+[compiler_icl.tool_msvs2010.intel_fpmode_except]
+@att VS2010_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointExceptions = "true"

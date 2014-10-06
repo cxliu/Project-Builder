@@ -1,0 +1,4 @@
+[archiver_rvct_armar]
+@att MAKE_AR = 'armar'
+@att MAKE_ARFLAGS+='-rc'
+@att MAKE_ARFLAGS_OUTPUT_FILE=' '

@@ -1,0 +1,12 @@
+@doc keyword(MAKE_REQUIRE_ENVIRONMENT_VARIABLES) = 'A list of environment variables which need to be set in order to use the makefile.'
+
+[default]
+@import visual_studio_2005_manifest.mb
+@import visual_studio_2008_manifest.mb
+@import visual_studio_2010_manifest.mb
+@import visual_studio_2012_manifest.mb
+@import visual_studio_2013_manifest.mb
+default_make_structure.t3_plugin
+
+[tool_msvs2005+tool_msvs2008+tool_msvs2010+tool_msvs2012+tool_msvs2013]
+@add tool_msvs

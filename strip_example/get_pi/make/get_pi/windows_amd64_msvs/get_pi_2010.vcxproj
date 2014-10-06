@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<ItemGroup Label="ProjectConfigurations">
+<ProjectConfiguration Include="roundingoff_debug|x64">
+<Configuration>roundingoff_debug</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingoff_debug|x64">
+<Configuration>roundingoff_debug</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingoff_release|x64">
+<Configuration>roundingoff_release</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingoff_release|x64">
+<Configuration>roundingoff_release</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingon_debug|x64">
+<Configuration>roundingon_debug</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingon_debug|x64">
+<Configuration>roundingon_debug</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingon_release|x64">
+<Configuration>roundingon_release</Configuration>
+<Platform>x64</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="roundingon_release|x64">
+<Configuration>roundingon_release</Configuration>
+<Platform>x64</Platform></ProjectConfiguration></ItemGroup>
+<PropertyGroup Label="Globals">
+<Keyword>Win32Proj</Keyword>
+<ProjectName>get_pi</ProjectName>
+<ProjectGuid>{C256C24B-BD42-38B6-B0CD-43E17BD18E29}</ProjectGuid>
+<RootNamespace>get_pi</RootNamespace></PropertyGroup>
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v100</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+<ImportGroup Label="ExtensionSettings" />
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<PropertyGroup Label="UserMacros" />
+<PropertyGroup>
+<_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">$(Configuration)\VS2010\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">$(SolutionDir)$(Configuration)\VS2010\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">false</LinkIncremental></PropertyGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>DEBUG=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>DEBUG=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>DEBUG=1;ROUND=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>DEBUG=1;ROUND=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;ROUND=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\common</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;ROUND=1;WIN32=1;WIN64=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX64</TargetMachine></Link></ItemDefinitionGroup>
+<ItemGroup>
+<ClCompile Include="..\..\..\src\get_flavour_debug.c">
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingoff_release|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingon_release|x64'">true</ExcludedFromBuild></ClCompile>
+<ClCompile Include="..\..\..\src\get_flavour_release.c">
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingoff_debug|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">true</ExcludedFromBuild>
+<ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='roundingon_debug|x64'">true</ExcludedFromBuild></ClCompile>
+<ClCompile Include="..\..\..\src\get_pi.c" />
+<ClCompile Include="..\..\..\src\main.c" /></ItemGroup>
+<ItemGroup>
+<ClInclude Include="..\..\..\..\common\strip_example.h" />
+<ClInclude Include="..\..\..\src\get_pi.h" /></ItemGroup>
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+<ImportGroup Label="ExtensionTargets" /></Project>

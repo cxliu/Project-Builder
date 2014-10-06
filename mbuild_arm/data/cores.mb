@@ -1,0 +1,189 @@
+@doc keyword(arm_feature_neon) = "ARM core supports NEON instructions."
+@doc keyword(arm_feature_vfp_soft) = "ARM core supports only software floating-point linkage."
+@doc keyword(arm_feature_vfp_v3_d16) = "ARM core supports VFPv3 instructions (with D16 register set)."
+@doc keyword(arm_feature_vfp_v3_d32) = "ARM core supports VFPv3 instructions (with D32 register set)."
+
+@doc keyword(processor_armv5te) = "An ARMv5TE archicecture processor."
+@doc keyword(processor_armv6) = "An ARMv6 architecture processor."
+@doc keyword(processor_armv7) = "An ARMv7 architecture processor."
+@doc keyword(processor_arm64) = "An Aarch64 architecture processor."
+
+@doc keyword(arm_processor_cortex_a8) = "Target processor is a Cortex-A8 core with VFP and without NEON."
+@doc keyword(arm_processor_cortex_a8_neon) = "Target processor is a Cortex-A8 core with VFP and NEON."
+@doc keyword(processor_cortex_a8) = "Cortex-A8 core without NEON instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a8_t2) = "Cortex-A8 core to run thumb-2 code, without NEON instructions."
+@doc keyword(processor_cortex_a8_neon) = "Cortex-A8 core with NEON instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a8_neon_t2) = "Cortex-A8 core to run thumb-2 code, with NEON instructions."
+
+@doc keyword(arm_processor_cortex_a9) = "Target processor is a Cortex-A9 core without NEON or VFP."
+@doc keyword(arm_processor_cortex_a9_vfp) = "Target processor is a Cortex-A9 core with VFP and without NEON."
+@doc keyword(arm_processor_cortex_a9_vfp_neon) = "Target processor is a Cortex-A9 core with VFP and NEON."
+@doc keyword(processor_cortex_a9) = "Cortex-A9 core without NEON or VFP instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a9_t2) = "Cortex-A9 core to run thumb-2 code, without NEON or VFP instructions."
+@doc keyword(processor_cortex_a9_vfp) = "Cortex-A9 core without NEON and with VFP instructions (with D16 register set). Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a9_vfp_t2) = "Cortex-A9 core to run thumb-2 code, without NEON and with VFP instructions (with D16 register set)."
+@doc keyword(processor_cortex_a9_vfp_neon) = "Cortex-A9 core with NEON and VFP instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a9_vfp_neon_t2) = "Cortex-A9 core to run thumb-2 code, with NEON and VFP instructions."
+
+@doc keyword(arm_processor_cortex_a15_vfp_neon) = "Target processor is a Cortex-A15 core with VFP and NEON."
+@doc keyword(processor_cortex_a15_vfp_neon) = "Cortex-A15 core with NEON and VFP instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a15_vfp_neon_t2) = "Cortex-A15 core to run thumb-2 code, with NEON and VFP instructions."
+
+@doc keyword(arm_processor_cortex_a7_vfp_neon) = "Target processor is a Cortex-A7 core with VFP and NEON."
+@doc keyword(processor_cortex_a7_vfp_neon) = "Cortex-A7 core with NEON and VFP instructions. Runs ARM and/or thumb-2 code."
+@doc keyword(processor_cortex_a7_vfp_neon_t2) = "Cortex-A7 core to run thumb-2 code, with NEON and VFP instructions."
+
+@doc keyword(arm_instruction_set_arm) = "ARM instruction sets."
+@doc keyword(arm_instruction_set_thumb2) = "Thumb-2 instruction sets."
+@doc keyword(arm_instruction_set_aarch64) = "Aarch64 ie. arm64 instruction set."
+
+# We don't bother saying what the "family" is (e.g. ARM9E, Cortex-A) as this
+# never seems particularly useful for generating code. The core or the
+# architecture, or the individual features seem much more useful.
+
+[default]
+@att VALUES.processor += "armv5te"
+@att VALUES.processor += "armv6"
+@att VALUES.processor += "armv7"
+@att VALUES.processor += "arm64"
+@att VALUES.processor += "cortex_a8"
+@att VALUES.processor += "cortex_a8_t2"
+@att VALUES.processor += "cortex_a8_neon"
+@att VALUES.processor += "cortex_a8_neon_t2"
+@att VALUES.processor += "cortex_a9"
+@att VALUES.processor += "cortex_a9_t2"
+@att VALUES.processor += "cortex_a9_vfp"
+@att VALUES.processor += "cortex_a9_vfp_t2"
+@att VALUES.processor += "cortex_a9_vfp_neon"
+@att VALUES.processor += "cortex_a9_vfp_neon_t2"
+@att VALUES.processor += "cortex_a15_vfp_neon"
+@att VALUES.processor += "cortex_a15_vfp_neon_t2"
+@att VALUES.processor += "cortex_a7_vfp_neon"
+@att VALUES.processor += "cortex_a7_vfp_neon_t2"
+
+[processor_armv5te]
+# Note that this is an entire architecture, not a core
+# There are several cores with this architecture:
+# ARM946E-S, ARM966E-S, ARM968E-S, ARM996HS, ARM1020E
+# ARM1022E, XScale, Bulverde, Monahans
+# However, they all seem to be very similar.
+
+[processor_armv6]
+# Note that this is an entire architecture, not a core
+
+# ########## Cortex-A8 ##########
+[processor_cortex_a8]
+@add arm_processor_cortex_a8
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a8_t2]
+@add arm_processor_cortex_a8
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+
+[arm_processor_cortex_a8]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v3_d16
+
+[processor_cortex_a8_neon]
+@add arm_processor_cortex_a8_neon
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a8_neon_t2]
+@add arm_processor_cortex_a8_neon
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+
+[arm_processor_cortex_a8_neon]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v3_d32
+@add arm_feature_neon
+# ###############################
+
+# ########## Cortex-A9 ##########
+[processor_cortex_a9]
+@add arm_processor_cortex_a9
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a9_t2]
+@add arm_processor_cortex_a9
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+
+[arm_processor_cortex_a9]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_soft
+
+[processor_cortex_a9_vfp]
+@add arm_processor_cortex_a9_vfp
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a9_vfp_t2]
+@add arm_processor_cortex_a9_vfp
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+
+[arm_processor_cortex_a9_vfp]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v3_d16
+
+[processor_cortex_a9_vfp_neon]
+@add arm_processor_cortex_a9_vfp_neon
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a9_vfp_neon_t2]
+@add arm_processor_cortex_a9_vfp_neon
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+
+[arm_processor_cortex_a9_vfp_neon]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v3_d32
+@add arm_feature_neon
+# ################################
+
+# ########## Cortex-A15 ##########
+[arm_processor_cortex_a15_vfp_neon]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v4_d32
+@add arm_feature_neon
+
+[processor_cortex_a15_vfp_neon]
+@add arm_processor_cortex_a15_vfp_neon
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a15_vfp_neon_t2]
+@add arm_processor_cortex_a15_vfp_neon
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+# ################################
+
+# ########## Cortex-A7 ###########
+[arm_processor_cortex_a7_vfp_neon]
+@add arm_architecture_arm_v7_a
+@add arm_feature_vfp_v4_d32
+@add arm_feature_neon
+
+[processor_cortex_a7_vfp_neon]
+@add arm_processor_cortex_a7_vfp_neon
+@add arm_instruction_set_arm
+@add arm_instruction_set_thumb2
+
+[processor_cortex_a7_vfp_neon_t2]
+@add arm_processor_cortex_a7_vfp_neon
+@add arm_instruction_set_thumb2
+@add rvct_code_gen_thumb
+# ################################
+
+# ########## ARM64 ###########
+[processor_arm64]
+@add arm_instruction_set_aarch64
+
+# ################################
+

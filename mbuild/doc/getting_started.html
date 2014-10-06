@@ -1,0 +1,202 @@
+<html>
+<head>
+<title>Getting Started With M-Build</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>Getting Started With M-Build</h1>
+<br/>
+<h2>Getting M-Build</h2>
+
+<p>M-Build can be found in Perforce at <code>//neptune/depot/licensing/mbuild/rel/v1.0/mbuild</code>. To use M-Build in your project, branch this directory to the same level as other components. For learning purposes, you may want to branch the examples as well (at the same level as the "mbuild" directory).</p>
+
+<p>It is best to have Python 2.7 installed, or alternatively you may use pypy (which will be roughly 50% faster). A python interpreter targetting 3.x will not work.</p>
+
+<h2>Working With An M-Build Project</h2>
+<p>In the standard workflow, M-Build products are checked into Perforce. To build such a project, you don't need to use M-Build at all&mdash;instead, just build from the appropriate makefile, Visual Studio solution, etc. This is also true if all your modifications are to existing source files.</p>
+
+<p>If you add source files, or need to add or change a compiler attribute, you will need to modify an M-Build manifest file. Typically, this will be named 'manifest.mb', and reside in the same directory as the source files it controls. It might read something like this:</p>
+
+<pre>
+	[myproj]
+	@att DEFINE.MYDEF1=1
+	foo.c
+	foo.h
+</pre>
+
+<p>Typically, you would add any new files and definitions below the existing ones, thus:</p>
+
+<pre>
+	[myproj]
+	@att DEFINE.MYDEF1=1
+	@att DEFINE.MYDEF2=1
+	foo.c
+	foo.h
+	bar.c
+	bar.h
+</pre>
+
+<p>After doing this, you would then run 'create_makefiles.py' and/or 'create_vs_projects.py' (both in <code>mbuild/frontend</code> in order to update the existing build files. You may need to check them out first.</p>
+
+<p>Once an M-Build project is established, the steps above will often be all you need. But for more complex cases, or to adapt a project to M-Build, you will need a greater understanding of the system. Please read on...</p> 
+
+<h2>M-Build Concepts</h2>
+
+<p>The central idea of M-Build is that it describes the attributes of a build complex&mdash;builds for all supported operating systems, processors, and other build dimensions&mdash;in an simple, abstracted way that lets the user concentrate on the architecture of the build rather than implementation-specific details.</p>
+
+<p>This architecture is captured in <a href="./manifest_files.html">manifest</a> and <a href="./project_files.html">project</a> files, which are used to generate build files (makefiles, Visual Studio project files, etc.) as needed. Project files describe build <a href="#actions">actions</a> (e.g. "mbuild_compile_and_link"), dependencies (e.g. on a library), and the build configurations (typically adding one or more <a href="#dimensions">dimensions</a> to the defaults). Manifest files describe file inclusion, attribute values and <a href="#tool_chains">tool chains</a> by means of <a href="#keywords">keywords</a>.</p>
+
+<p>Several scripts are provided to perform operations based on these specifications, most importantly <code>create_makefiles.py</code> and <code>create_vs_projects.py</code>. These scripts call the public <code>M2</code> and <code>P2</code> APIs, which embody the manifest and project information, respectively, and which can be called by custom scripts.</p>
+
+<a name="dimensions"><h3>Dimensions</h3></a>
+<p>A dimension in M-Build can be thought of as an axis which can take on several discrete values. The default build file generation scripts will generate a build target for every combination of dimension values (e.g. <code>[debug, windows, x86]</code>. M-Build's default dimensions and their values are:</p> 
+
+<table padding=2>
+<tr>
+<th>Dimension</th>
+<th>Default Values</th>
+<th>Definition file (in <code>mbuild/data</code>)</th>
+</tr>
+<tr>
+<td>flavour</td>
+<td>debug, release</td>
+<td>flavour.mb</td>
+</tr>
+<tr>
+<td>os</td>
+<td>windows, linux, osx, rvbare, tisim</td>
+<td>os.mb</td>
+</tr>
+<tr>
+<td>processor</td>
+<td>x86, amd64, arm11</td>
+<td>processor.mb</td>
+</tr>
+</table>
+
+<p>Users can create custom dimensions by using the <code>mbuild_extra</code> configuration in their project file:</p>
+
+<pre>
+get_name = ProjectSpec(
+	actions=mbuild_compile_and_link,
+	depends=['mylib'],
+	build_configuration=mbuild_extra(['get_name_case']),
+)
+</pre>
+
+<p>and adding dimension values to the VALUES attribute in a manifest file:</p>
+
+<pre>
+@att VALUES.get_name_case+='lower'
+@att VALUES.get_name_case+='upper'
+</pre>
+
+<a name="actions"><h3>Actions</h3></a>
+<table>
+<tr>
+<th>Action</th>
+<th>Effect</th>
+</tr>
+<tr>
+<td>mbuild_compile_and_link</td>
+<td>Compile and link, using the compiler and linker defined in the specified toolchain.</td>
+</tr>
+<tr>
+<td>mbuild_compile_and_archive</td>
+<td>Compile and archive, using the compiler and archiver defined in the specified toolchain.</td>
+</tr>
+</table>
+
+<a name="configurations"><h3>Build Configurations</h3></a>
+<table>
+<tr>
+<th>Configuration</th>
+<th>Effect</th>
+</tr>
+<tr>
+<td>mbuild_standard</td>
+<td>Use default dimenions.</td>
+</tr>
+<tr>
+<td>mbuild_extra</td>
+<td>Specify additional dimensions.</td>
+</tr>
+<td>mbuild_conditional</td>
+<td>Only build configurations that satisfy an arbitrary Python function.</td>
+</tr>
+<tr>
+<td>mbuild_restrict</td>
+<td>Only build configurations that match the given set of dimensions and values - a lighter weight version of mbuild_conditional.</td>
+</tr>
+</table>
+			
+<a name="keywords"><h3>Keywords</h3></a>
+<p>Keywords are used to determine file inclusion, and set attribute values, for different configurations. Configuration keywords are created by concatenating the dimension name and value with an underscore (e.g. 'flavour_debug' or 'get_name_upper'). Other keywords can be independently defined for inclusion.</p>
+
+<p>See <a href="./manifest_files.html">Manifest Files</a> for details on keyword use.</p>
+
+<a name="tool_chains"><h3>Tools and Tool Chains</h3></a>
+<p>In addition to file structure and attributes, the tools used to compile and link code are also abstracted in M-Build, so that the details of tool use can be maintained separately from the project definition. To create a new toolchain called 'mychain':</p>
+
+<ol>
+<li>Create the following files:
+<ul>
+<li>mbuild/data/archiver/mychainar_manifest.mb (<a href="../data/archiver/ar_manifest.mb">example</a>)</li>
+<li>mbuild/data/compiler/mychaincc_manifest.mb (<a href="../data/compiler/gcc_manifest.mb">example</a>)</li>
+<li>mbuild/data/linker/mychainlink_manifest.mb (<a href="../data/linker/gcc_manifest.mb">example</a>)</li>
+</ul>
+These files will contain all tool-specific information.
+
+<li>Add a keyword for your toolchain to <code>mbuild/data/toolchain/manifest.mb</code>, and include the manifests created in the previous step. The section should look like this:
+
+<pre>
+	[toolchain_mychain]
+	@add compiler_mychaincc
+	@add linker_mychainlink
+	@add assembler_mychainas
+	@add archiver_mychainar
+</pre> 
+</li>
+
+<li>Add your toolchain to <code>mbuild/data/toolchain.mb</code>:
+<pre>
+	@att VALUES.toolchain+='mychain'
+</pre>
+</li>
+</ol>
+
+<p>At this point your definitions are complete, and you can use the keyword 'toolchain_mychain' to specify builds using your new toolchain.</p>
+
+<h2>Setting Up M-Build For A New Project</h2>
+
+<ol>
+<li>Branch the mbuild directory (<code>//neptune/depot/licensing/mbuild/rel/v1.0/mbuild</code>) to your project. It should appear at the same level as other components.</li>
+
+<li>Create .project files:
+	<ul>
+	<li>A .project file is a high level description of a build artifact</li>
+	<li>An <a href="./Project.txt">example .project file</a> is in the <code>mbuild/doc</code> directory (<code>Project.txt</code>). Use this as a starting point.</li>
+	<li>You should place your .project file in your 'make' directory.</li>
+	</ul>
+</li>
+
+<li>Create manifest files:
+	<ul>
+	<li>See Manifest_Files.txt for a detailed explanation of the manifest file format.</li>
+	<li>There is a trivial example provided for a project in <code>example-1</code>. This project consists of a library part (<code>helloworld.c</code> and <code>helloworld.h</code>) and a frontend which calls the library (<code>main.c</code>). It can either be built as a separate library and frontend, or all together as one exectuable. For projects following the code sharing policy, this should be a useful starting point. The manifest files in <code>example-1</code> should all be commented to explain what is going on, so read them, starting from the root (i.e. one level above <code>example-1</code>).</li>
+	<li>The bare minimum requirements are:
+		<ul>
+		<li>The 'included' files when just the 'default' keyword is given must include your .project file.</li>
+		<li>When just the 'default' keyword is given, the <code>m-build/manifest.mb</code> must be imported</li>
+		</ul></li>
+	<li>More complex examples can be found in "example-2" and "strip_example".</li>
+	</ul></li>
+
+<li>Run 'create_vs_projects.py' and 'create_makefiles.py' in the 'mbuild/frontend' directory. This should create Visual Studio files and Makefiles for all of the projects and configurations. Neither of these programs require any arguments, provided your directory structure is as described in step 1.</li>
+</ol>
+
+</body>
+</html>
+

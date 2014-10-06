@@ -1,0 +1,43 @@
+def get_symbols():
+	return {'intel_support': intel_support,
+	       }
+
+toolchains = ['icl', 'icc']
+processors = ['x86', 'amd64']
+operating_systems = ['windows', 'linux', 'osx']
+flavours = ['debug', 'release']
+
+def toolchain_intel_exception(configuration, parent_answer, parent_function):
+	if not configuration['toolchain'] in toolchains:
+		return False
+	
+	if not configuration['processor'] in processors:
+		return False
+	
+	if not configuration['os'] in operating_systems:
+		return False
+
+	if not configuration['tool'] in ['make', 'msvs2010', 'msvs2012', 'msvs2013']:
+		return False
+	
+	if configuration['tool'] in ['msvs2010', 'msvs2012', 'msvs2013']:
+		if not configuration['os'] == 'windows':
+			return False
+	
+	if configuration['os'] == 'windows' and configuration['toolchain'] == 'icc':
+		return False
+	
+	if configuration['os'] == 'linux' and configuration['toolchain'] == 'icl':
+	 	return False
+	
+	if configuration['os'] == 'osx' and configuration['toolchain'] == 'icl':
+		return False
+	
+	if not configuration['flavour'] in flavours:
+		return False
+	
+	return True
+
+require('mbuild_standard')
+require('mbuild_exception')
+intel_support = mbuild_exception(mbuild_standard, toolchain_intel_exception)

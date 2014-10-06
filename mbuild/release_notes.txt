@@ -1,0 +1,340 @@
+M-BUILD 1.4.3 RELEASE NOTES
+===========================
+Release date: 10th April, 2014
+
+Visual Studio Project Generation
+	- Supported VS2013.
+		- The warning level of VS2013 is set to Level4 (/W4).
+		- All compiler warnings are enabled in VS2013 projects.
+	- Fixed the bug that IPP library will be included in library builds. IPP library would be linked only when generating executables.
+
+General
+	- Added exception handling when a depending .project file is missing in manifest. (MB-231)
+
+M-BUILD 1.4.2 RELEASE NOTES
+===========================
+Release date: 23rd January, 2014
+
+Makefile Generation
+	- Removed the gcc compiler option "-g" and "-fverbose-asm" options from optimized build flavour within keyword [compiler_gcc.mbuild_optimise].
+
+M-BUILD 1.4.1 RELEASE NOTES
+===========================
+Release date: 16th January, 2014
+
+Makefile Generation
+	- Fixed bug that M-Build crash when dumped too many Makefiles which are not updated successfully.
+
+Visual Studio Project Generation
+	- Removed redundant message "Find a cusom build file" when there are custom build files in VS projects
+	- Disabled additional Security Development Lifecycle Check (SDLCheck) for windows rt project.
+	- Fixed bug that output path of custom build file is wrong on linux since the relative path of project files in M-Build was always in windows format.
+
+Metadata Changes
+	- Added attributes MBUILD_MAKE_SUPPORT and MBUILD_MSVS_SUPPORT to improve performance of M-Build.
+
+M-BUILD 1.4.0 RELEASE NOTES
+===========================
+Release date: 11th December, 2013
+
+Makefile Generation
+	- Added attribute MAKE_REQUIRE_ENVIRONMENT_VARIABLES to enable user checking environment variables in Makefile. 
+        For example:
+          [linker_c6run_flags]
+          @att MAKE_REQUIRE_ENVIRONMENT_VARIABLES.TI_LINK_COMMAND_FILE = "The file is used to pass options, arguments and memory layout of your target platform to linker."
+        Then the string above which is error message would be showed when environment TI_LINK_COMMAND_FILE doesn't exist.
+	- Fixed bug that there is just stack trace when project file is not found. Display a readable error message instead.(MB-205, MB-208)
+	- Supported throwing interactive questions when files can't be written to, the tool will try again rather than just printing a warning and discarding the result if the answer is "yes". To disable this behavior, please pass "--skip-non-writeable" ("-s").
+	- Added "--list" ("-l") option to list all the project files.
+	- Enabled options "-p", "-r", "-b" refers to "--profile", "--restrict-projects" and "--binary-mode".
+
+Visual Studio Project Generation
+	- Supported VS2012. (MB-198)
+	- Enabled user could active specific version of msvs projects. (MB-169)
+		- Toolchain name "msvs" now include the version name of VS, it is replaced by "msvs2005", "msvs2008", "msvs2010" and "msvs2012".
+		- Tool name "msvs" now include the version name of VS, it is replaced by "msvs2005", "msvs2008", "msvs2010" and "msvs2012".
+		- Keywords "toolchain_msvs", "compiler_ms_cl", "linker_ms_link", "assembler_ms_ml" and "archiver_ms_link" are taken as deprecated.
+		- Keyword "tool_msvs" is not valid any more.
+		- Project files of all versions of VS are still located at their previous directories.
+	- Added resource files support for VS2010 and VS2012. (MB-188)
+	- Added attributes PlatformToolset, UseDebugLibraries, FunctionLevelLinking and IntrinsicFunctions for VS2010 and VS2012. (MB-171)
+	- Added attribute ImageHasSafeExceptionHandlers for VS2012.
+	- Fixed bug where EXT attribute is not used when generating visual studio projects. (MB-151)
+	- Fixed bug where C++ exceptions are not enabled correctly in VS2010, and add option /EHa(with SEH Exception) of C++ exceptions for VS2005 and VS2008. (MB-97)
+	- Fixed bug where create_vs_projects.py had an compatibility issue which made only python 2.6+ could execute it. (MB-206)
+	- Added extra compiler configurations plugin support for VS2010 and VS2012. User could insert extra compiler options by adding flags in attribute VS2010(VS2012)_EXTRA_COMPILER_CONFIGURATIONS. 
+          For example:
+            @att VS2010_EXTRA_COMPILER_CONFIGURATIONS.RecognizeRestrictKeyword = "true"
+            @att VS2012_EXTRA_COMPILER_CONFIGURATIONS.EnableAnsiAliasing = "true"
+          Notes that the extra configuration names such as "RecognizeRestrictKeyword" and "EnableAnsiAliasing" above must be exactly same as the tags in VS2010 and VS2012 project files.
+	- Supported throwing interactive questions when files can't be written to, the tool will try again rather than just printing a warning and discarding the result if the answer is "yes". To disable this behavior, please pass "--skip-non-writeable" ("-s").
+	- Added "--list" ("-l") option to list all the project files.
+	- Enabled options "-p", "-r", "-b" refers to "--profile", "--restrict-projects" and "--binary-mode".
+
+Metadata Changes
+	- Added keyword vs2012_safe_exception which enable the linker produce a table of the image's safe exception handlers for VS2012.
+	- Added keyword vs_cpp_exceptions_with_seh which enable asynchronous (structured) and synchronous (C++) exception handling for all versions of VS.
+	- Added keyword vs2010and2012_cpp_exceptions_with_extern_c which assume extern C functions do throw an C++ exception for VS2010 and VS2012.
+	- Added keyword mbuild_fast_math which enable floating point math fast and imprecise. This option permits optimizations which break the C standard (MB-172)
+	- Added keyword set_track_macro_expansion_0 which disable tracking locations of tokens across macro expansions. This option is available only for gcc v4.7.
+	- Fixed bug where makefile would ignore the "processor" dimension when creating Linux Makefiles. Flags "-m32" and "-m64" are passed to gcc for processor x86 and processor amd64. (MB-154)
+	- Added options "-Wextra", "-Wstrict-prototypes", "-Wmissing-prototypes", "-msse2", "-funroll-loops", "-ftree-vectorize", "-fverbose-asm" to gcc compiler.
+	- Keyword mbuild_fast_math will not add gcc compile option "-mfpmath=sse" but "-ffast-math", "-fassociative-math", "-freciprocal-math" and "-fno-trapping-math" instead.
+	- Keyword ipp_library is deprecated, it is replaced by keyword syslib_ipp.
+	- Added new tag vs_custom_build to customize build tools. This tag expect format: vs_custom_build(CUSTOM_BUILD_TOOL, OUTPUT_SUFFIX, COMPILE_OPTIONS):filename, in which:
+        CUSTOM_BUILD_TOOL: Name of custom build tools. For example, "armasm.exe" provided by MSVS.
+        OUTPUT_SUFFIX    : Suffix of output file(output path and file name is not allowed set by user). For example, ".o", ".obj".
+        COMPILE_OPTIONS  : Other compile options. This parameter is optional.
+    Notes that this "vs_custom_build" tag is only supported for MSVS project files generated by "create_vs_projects.py". Those files which build by custom build tool will be linked into output (*.lib or *.exe) of MSVS project automatically.
+        For example:
+          [foo.bar]
+          vs_custom_build("armasm.exe", ".obj", ""):file1.s
+    - Added keyword syslib_rt to link with the rt (realtime) library for clock functions.
+
+Test tools
+	- Separated old test_m2.py into multiply files:
+		- test_m2.py which test analysis of manifest files.
+		- test_p2.py which test dependencies, actions and configurations of projects.
+		- test_create_doc.py which test doc generation.
+		- test_create_makefiles.py which test Makefiles generation.
+		- test_create_vs_project.py which test VS projects generation.
+		- test_mbuild.py which test all listed above.
+	- Added testcases for VS2012 projects.
+
+Experimental Frontend: p4_branch.py
+	- Added support for renaming and moving files.
+
+General
+	- Fixed bug where tokeniser doesn't close manifest files. (MB-180)
+	- Removed source code for parsing deprecated keyword "@priority" and give instructions on how to fix attributes conflicts instead of only stack trace information.
+	- Fixed bug where pypy encountered memory shortage issue sometimes. (MB-211)
+
+Updating From 1.3.x to 1.4
+	- Due to the way that Visual Studio is now handled, projects may need to adjust the configurations they support (e.g. in *.p2_plugin files). 
+        For example:
+                def use_configuration(conf):        
+                    if not conf['toolchain'] in ['gnu', 'msvs']:
+                        return False                                
+                    return True
+
+                require('dlb_backends')
+                require('mbuild_conditional')
+                foo_configurations = mbuild_conditional(dlb_backends, use_configuration)
+
+        Would now be written as:
+                def use_configuration(conf):        
+                    if not conf['toolchain'] in ['gnu', 'msvs2005', 'msvs2008', 'msvs2010', 'msvs2012']:
+                        return False                                
+                    return True
+
+                require('dlb_backends')
+                require('mbuild_conditional')
+                foo_configurations = mbuild_conditional(dlb_backends, use_configuration)
+
+	- Changed Visual Studio attributes names which include the version number of the compiler they apply to. 
+        For example:
+                VS_LIBRARIES is now VS2005_LIBRARIES, VS2008_LIBRARIES, VS2010_LIBRARIES, VS2012_LIBRARIES. 
+
+        To easily find places where this needs to be updated, use the following command line to get a list of all the attributes:
+                query_manifests.py list-all-attributes default
+
+        If you see any attributes prefixed with 'VS_' then these need to be updated, use the following command line to get a list of the locations that need to be updated:
+                query_manifests.py attribute-setters VS_ATTRIBUTE_NAME
+
+	- Clear codes in manifest files which including IPP binary path and setting link libraries of IPP, since all of them are moved to mbuild/data/system_lib/manifest.mb.
+        For example, codes in manifest files as follows should be cleared:
+          [ipp_library.linker_gcc]
+          @att INCLUDE += '${IPPROOT}/include'
+          @att MAKE_LDLIBS += '-lippac_l -lipps_l -lippcore_l'
+
+          [ipp_lib_path.linker_gcc.(os_linux+os_windows).processor_x86]
+          @att MAKE_LDFLAGS += '-L${IPPROOT}/lib/ia32'
+          
+        Keywords "IPPROOT", "lippac_l", "lipps_l", "lippcore_l" would be helpful to locate those codes.
+
+M-BUILD 1.3.3 RELEASE NOTES
+===========================
+Release date: 12th February, 2013
+
+This maintenance release fixes some issues which appear in larger projects. Changes are expected to all Makefiles, and some Visual Studio 2010 files. The changes to the Makefiles mean that more temporary files will be left on the filesystem.
+
+There is also the introduction of another experimental frontend for performing a perforce branch operation based on M-Build metadata.
+
+Makefile Generation
+	- Files are no longer added to an archive multiple times. (MB-179)
+	- Intermediate files have names that are unique across multiple makefiles. (MB-174)
+
+Visual Studio Project Generation
+	- Library dependencies are not linked for a referenced project. (MB-178)
+
+Experimental Frontend: p4_branch.py
+	This frontend is designed to be a useful part of a release script. Example usage:
+	
+	$ ./p4_branch.py --perforce-workspace=my-workspace //depot/destination release,my_project
+	
+	This will find all files which are reachable from the keywords "release" and "my_project" and create a changelist branching them to "//depot/destination" (preserving the repository structure). The script will never submit a changelist.
+	
+	For more information, run with "--help".
+
+M-BUILD 1.3.2 RELEASE NOTES
+===========================
+Release date: 17th October, 2012
+
+This maintenance release fixes many minor bugs, improves performance and introduces two experimental frontends for building projects.
+
+Makefile Generation
+	- Removed some extraneous whitespace
+	- Archives have their rules generated correctly so intermediate .o files will be removed after make has finished
+	- Improved some error reporting
+	- Added a 'cleandeps' target to remove .d files
+	- The 'clean' target avoids cleaning dependent projects multiple times
+	- Makefiles produced are now deterministic, so you can expect Makefiles to be bit-identical with other makefiles produced from the same set of manifest files
+	- Fixed bug where generating makefiles in Windows always wanted to update them
+	- Performance improvements when running create_makefiles.py
+
+
+Visual Studio Project Generation
+	- Avoid changing behaviour when called from directories other than mbuild/frontend
+	- Fixed bug where passing '--restrict-projects' would fail with a python stack trace
+	- Changed algorithm for generating project GUIDs again to remove some invokation specific information
+	- Performance improvements
+
+Metadata Changes
+	- Removed some old references to ARMv5TE and ARM11 (these are now handled by the mbuild_arm plugin)
+
+Experimental Frontends
+	- create_build_info.py writes out a python file with information about a project, this file can be imported and used for things like ITAF integration or release scripts
+	- build.py is one example use of the output from create_build_info.py, which will invoke either "make" or Visual Studio (2005, 2008 or 2010) to build a particular configuration of a project generated by M-Build
+
+General
+	- Improved error reporting when plugins aren't found or can't be loaded
+	- Projects have their configurations restricted by all dependencies, not just immediate dependencies
+
+M-BUILD 1.3.1 RELEASE NOTES
+===========================
+Release date: 16th August, 2012
+
+This fixes issues with the mbuild_arm plugin and issues when compiling assembly files.
+
+M-BUILD 1.3 RELEASE NOTES
+=========================
+Release date: 25th July, 2012
+
+This is a release of M-Build with an overhaul of Makefile generation and several other minor updates, improvements and fixes. Users upgrading from previous versions of M-Build should expect to find that the Makefiles generated will be considerably different and Visual Studio projects generated will be slightly different.  Additionally the location of generated files has changed, detailed below.
+
+Makefile Generation -- Differences from previous Makfile Generation:
+    - Makefiles have been revamped in the interest of making them more readable and easier to modify after generation
+	- A new makefile plugin structure has been created in a more Python style than was previously used
+	- All existing plugins (ARM, TI, Intel) have been updated
+	- Performance should be identical or better than the previous version with both python and pypy executables
+	- In general the Makefiles will be much shorter and easier to read, but in the interest of making the Makefiles
+	  simpler, the features such as "Non-Verbose Mode" and Coloured output text have been removed
+	- Object files should be automatically removed if they are being archived into libraries, but both they and 
+	  dependency files ('.d' extension) will be found in the same directory as the source files, a future improvement
+	  will be to try to hide these files
+
+Documentation
+	- Documentation on generating M-Build plugins has been added to the 'doc' directory
+    
+Metadata Changes:
+    - Windows defines for amd64 added:
+          [os_windows.processor_amd64]
+          @att DEFINE.WIN32=1
+          @att DEFINE.WIN64=1
+	- VS_LINK_LIBRARY_DEPENDENCIES changed from True to False
+	- [sys_pthread]
+	  @att MAKE_LDFLAGS+=-pthread
+		  
+		  
+Generated File Locations:
+    - Previously files were generated in subdirectories with the structure:
+      operatingsystem_processor
+	  Now files will be generated in subdirectories with the structure:
+	  operatingsystem_processor_toolchain
+	  This allows multiple toolchains per OS
+
+M-BUILD 1.2 RELEASE NOTES
+=========================
+Release date: 18th May, 2012
+
+This is a release of M-Build with several minor updates, improvements and fixes. Users upgrading from M-Build 1.0 or M-Build 1.1 should expect to find that the Makefiles and Visual Studio projects generated will be slightly different, but it is not expected that the updated files will cause any problems.
+
+General Metadata:
+	- Support for archivers with non-posix syntax (e.g. TI archiver)
+	- Removal of TI toolchain support (this has been moved into the mbuild_ti plugin)
+	- Added an "mbuild_include_toplevel" keyword which can be used to request that the directory holding mbuild is put in the include path
+	- Miscellaneous cleanup
+
+GNU Toolchain Metadata:
+	- Use "$(CC)" instead of "gcc" to reference GNU C compiler. The default value of CC in GNU make is "gcc", so this change just makes it slightly easier for people to temporarily swap compilers
+	- Use "$(CXX)" instead of "g++" to reference GNU C++ compiler.
+	- Added "-Wdeclaration-after-statement" and "-Wvla" to default warnings (these are both C99 features which are allowed since we compile with "-std=gnu99" to get some useful features, but these particular features should still be avoided so we can always fall back to C90 code)
+	- Pass "-g -ggdb3" for debug symbols rather than just "-ggdb3". This helps some non-gcc compilers function correctly
+	- Use "-O3" instead of "-O2" for optimised builds
+	- Added keywords to allow a project to request either "-shared-libgcc" or "-static-libgcc" to be passed to gcc.
+	- Put libraries at the end of the linker command, rather than mixing them with the linker flags (prevents dependency issues for newer versions of gcc)
+	- Use "-rdynamic" instead of "--export-dynamic" for linker flag. "--export-dynamic" is deprecated and not available in newer versions of gcc.
+
+Make Metadata:
+	- Ensure that subprojects are always up to date
+
+Visual Studio Metadata:
+	- Added keywords for selecting which runtime library to use
+	- Explicitly default to allowing language extensions
+
+
+Documentation
+	- Updated "Getting Started" guide to recommend version of python interpreter
+	- Includes training power point presentations
+	- Updated "Support" document to be clearer on Visual Studio and Python support
+	- Added some useful utilities in the doc/extra directory - syntax highlighting file for vim and a wrapper around ack-grep for searching M-Build related files
+
+
+Makefile Generation
+	- Output to stdout is now summarised by default, use "--verbose" to get the full details
+	- Added a "--restrict-projects" option to enable regenerating files for just some projects
+	- The "--profile" option now works in pypy
+
+Visual Studio File Generation
+	- Output to stdout is now summarised by default, use "--verbose" to get the full details
+	- Added a "--restrict-projects" option to enable regenerating files for just some projects
+	- Added a "--binary-mode" option to force the use of CRLF line endings in environments where these files will be treated as binary files
+	- GUIDs are now generated deterministically, and do not require looking for existing projects
+	- Libaries are now delimited correctly in Visual Studio 2010 files
+	- Static libraries can now be included in projects by listing them in manifest files just like source files
+
+M-Build Core
+	- Minor speed optimisations
+	- Whitespace in filenames is only allowed at the start or end of a line if it is explicitly quoted
+	- Fixed infinite loop if end of file occurs inside a comment
+	- Added plugin manager to public python API
+
+M-BUILD 1.1 RELEASE NOTES
+=========================
+
+This is a release of M-Build primarily to improve performance, and remove ARM support. Performance was found to be lacking with larger, more complicated projects, and the ARM support which was available in the 1.0 release was found to be impractical due to the huge variety of ARM variants.
+
+There is now an mbuild_arm component which can be used to add ARM support to an M-Build using component.
+
+The testing for this release is not as thorough as for the 1.0 release due to limited resources, however the improvements should be relatively low risk.
+
+
+M-BUILD 1.0 RELEASE NOTES
+=========================
+M-Build 1.0 is the first public release of M-Build. The following features have been added in the transition from an AK-specific tool to a general-purpose build system:
+
+Visual Studio 2008/2010 support
+OR operator ('+') added to manifest syntax
+Plug-in architecture for project and template processing
+Plug-in architecture for source-code processing (moving and stripping currently supported)
+New attribute system supports scalar, list, and map data
+Support for C++ and assembly files
+Improved handling of complicated build configurations
+Automated documentation of metadata
+Tool for querying metadata
+Improved performance
+Improved documentation
+Improved examples
+
+Documentation for M-Build can be found at the M-Build home page:
+http://confluence.dolby.net/kb/display/consEng/M-Build

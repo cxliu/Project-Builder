@@ -1,0 +1,3 @@
+@doc attribute(MAKE_LD) = "The linker to use."
+@doc attribute(MAKE_LDFLAGS) = "A list of compiler flags to pass to the compiler MAKE_LD."
+@doc attribute(MAKE_LDFLAGS_OUTPUT_FILE) = "The spelling of the option to the linker which says what the name of the output is."

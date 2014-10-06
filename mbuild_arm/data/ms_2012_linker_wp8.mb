@@ -1,0 +1,29 @@
+[toolchain_wp8.tool_msvs2012]
+@att VS2012_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[toolchain_wp8.tool_msvs2012.mbuild_debug_symbols]
+@att VS2012_LINK_INCREMENTAL = true
+@att VS2012_OPTIMIZE_REFERENCES = keep
+@att VS2012_ENABLE_COMDAT_FOLDING = false
+
+[toolchain_wp8.tool_msvs2012.mbuild_optimise]
+@att VS2012_LINK_INCREMENTAL = false
+@att VS2012_OPTIMIZE_REFERENCES = eliminate
+@att VS2012_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[toolchain_wp8.tool_msvs2012.(config_type_console+config_type_dynamic_lib)]
+@att VS2012_SUBSYSTEM=console
+
+[toolchain_wp8.tool_msvs2012.config_type_windowed]
+@att VS2012_SUBSYSTEM=windows
+
+[toolchain_wp8.tool_msvs2012.config_type_static_lib]
+@att VS2012_SUBSYSTEM=console
+
+[toolchain_wp8.tool_msvs2012.processor_armv7]
+@att VS2012_TARGET_MACHINE = arm
+
+[toolchain_wp8.tool_msvs2012]
+@att VS2012_LINK_SAFE_EXCEPTION_HANDLER = false

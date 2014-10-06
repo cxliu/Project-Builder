@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<ItemGroup>
+<Filter Include="example-2">
+<UniqueIdentifier>{56b0fa29-7fb3-30c5-88f5-d7c92893a77c}</UniqueIdentifier></Filter>
+<Filter Include="example-2\include">
+<UniqueIdentifier>{d1543bbf-0186-39a6-b064-6dc1018e1896}</UniqueIdentifier></Filter>
+<Filter Include="example-2\make">
+<UniqueIdentifier>{600f2934-214e-3285-ab52-c8153db88371}</UniqueIdentifier></Filter>
+<Filter Include="example-2\src">
+<UniqueIdentifier>{cdf7d75b-deb6-3ad8-bf95-c8c89542261b}</UniqueIdentifier></Filter>
+<Filter Include="example-2\src\foo">
+<UniqueIdentifier>{1c678bb5-7d7a-3342-bc2f-9dc892cf241c}</UniqueIdentifier></Filter></ItemGroup>
+<ItemGroup>
+<ClCompile Include="..\..\..\src\foo\foo.c">
+<Filter>example-2\src\foo</Filter></ClCompile>
+<ClCompile Include="..\..\..\src\foo\foo_asm.c">
+<Filter>example-2\src\foo</Filter></ClCompile>
+<ClCompile Include="..\..\..\src\foo\foo_cpp.cpp">
+<Filter>example-2\src\foo</Filter></ClCompile></ItemGroup>
+<ItemGroup>
+<ClInclude Include="..\..\..\include\foo.h">
+<Filter>example-2\include</Filter></ClInclude>
+<ClInclude Include="..\..\libfoo.def">
+<Filter>example-2\make</Filter></ClInclude></ItemGroup>
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup /></Project>

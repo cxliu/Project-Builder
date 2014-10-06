@@ -1,0 +1,4 @@
+[archiver_ar6x]
+@att MAKE_AR = 'ar6x'
+@att MAKE_ARFLAGS+='-ru'
+@att MAKE_ARFLAGS_OUTPUT_FILE=' '

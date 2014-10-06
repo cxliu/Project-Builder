@@ -1,0 +1,97 @@
+STRIP_ACTIONS = set(['DEFINE', 'UNDEFINE', 'RETAIN'])
+
+def get_symbols():
+	return {'strip_process_file': process_file,
+	        'strip_get_spec': get_spec,
+			'strip_clean_up': clean_up,
+	       }
+	
+def get_spec(manifest, keywords):
+	return {}
+
+def get_boolean_attribute(att):
+	return att and (att != '0') and (att.lower() != 'false')
+	
+def process_file(m2, manifest, f, strip_loc, in_plugin_keys, keywords, verbose, preview):
+	import re
+	import shutil
+	import os
+	import subprocess
+	import uuid
+
+	plugin_keys = in_plugin_keys + ['default']
+	
+	if 'PLUGIN_STRIP' in [s[0] for s in f.get_tags()]:
+	
+		strip_info_key = 'PLUGIN_STRIP_INFO'
+		strip_info = manifest.get_attribute(plugin_keys, strip_info_key, m2.LocalPath())
+		assert strip_info is not None, "Strip info not defined for %s with keywords %s" % (strip_info_key, plugin_keys)
+		assert strip_info.has_key('TOOL'), "No strip tool defined with keywords %s" % plugin_keys
+		assert strip_info.has_key('TOOLLOC'), "Tool location not specified for keywords %s" % plugin_keys
+		tool = strip_info['TOOL']
+		assert tool == 'killif' or tool == 'cppp', "Unknown strip tool %s for keywords %s" % (tool,
+		                                                                                      plugin_keys)
+									 
+		define = manifest.get_attribute(plugin_keys, 'DEFINE', m2.LocalPath())
+		list_file_name = ''.join(['mbuild_', str(uuid.uuid4()), '.lst'])
+		
+		if strip_info.has_key('ACTION'):	
+			actions = strip_info['ACTION']
+		else:
+			actions = {}
+			
+		spec = {}
+		list_file_dir = os.path.join(manifest.get_attribute(keywords, 'CODE_ROOT', m2.LocalPath()), 'temp')
+		if not os.path.isdir(list_file_dir):
+			os.makedirs(list_file_dir)
+		list_file_loc = os.path.join(list_file_dir, list_file_name)
+		tool_loc = strip_info['TOOLLOC']
+		tool = strip_info['TOOL']
+		tool_call = []
+		if tool == 'killif':
+			tool_call.append(tool_loc)
+			if strip_info.has_key('KEEP_BLANKS') and get_boolean_attribute(strip_info['KEEP_BLANKS']):
+				tool_call.append('-nb')
+			if strip_info.has_key('COMMENTS') and not get_boolean_attribute(strip_info['COMMENTS']):
+				tool_call.append('-nc')
+			if strip_info.has_key('REFORMAT_CONDITIONALS') and not get_boolean_attribute(strip_info['REFORMAT_CONDITIONALS']):
+				tool_call.append('-nr')
+			if strip_info.has_key('SOURCE_TYPE'):
+				if strip_info['SOURCE_TYPE'] == 'C':
+					tool_call.append('-fc')
+				elif strip_info['SOURCE_TYPE'] == '56xxx':
+					tool_call.append('-fm')
+				else:
+					raise Exception("Strip plugin: Unknown source type %s" % strip_info['SOURCE_TYPE'])
+		elif tool == 'cppp':
+			tool_call.append(['perl', tool_loc])
+		list_file = open(list_file_loc, 'w')
+		settings = {}
+		for key, val in define.items():
+			settings[key] = 'DEFINE'
+		for key, val in actions.items():
+			settings[key] = val.upper()
+			assert settings[key] in STRIP_ACTIONS, "Unknown action for %s: %s" % (key, settings[key])
+			#if settings[key] == 'RETAIN':
+			#	assert key in define, "ERROR: attempted to retain undefined value %s with keywords %s (defines: %s)." % (key, plugin_keys, define)
+		if not preview:
+			for key, val in sorted(settings.items()):
+				list_file.write(''.join([key, ' ', val, '\n']))
+			list_file.close()
+			
+			assert os.path.normpath(f.get_filename()) != os.path.normpath(strip_loc), "Attempted to strip original file %s" % strip_loc
+			if verbose:
+				print "Stripping %s with %s using %s" % (os.path.abspath(strip_loc), 
+														 os.path.abspath(tool_loc),                  
+														 os.path.abspath(list_file_loc))
+			tool_call += ['-l' + list_file_loc, strip_loc]
+			ret_val = subprocess.call(tool_call)
+			if ret_val:
+				assert False, "Stripping file %s failed: %s returned value %d" % (tool_loc, strip_loc, ret_val)
+			os.remove(list_file_loc)
+		report = 'Stripped file %s with settings:\n' % strip_loc
+		report += '\n'.join([': '.join([key, val]) for key, val in sorted(settings.items())])
+		return report
+
+def clean_up(spec):
+	pass

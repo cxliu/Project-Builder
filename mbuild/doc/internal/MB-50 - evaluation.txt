@@ -1,0 +1,44 @@
+These are some documents describing the thought process for MB-50. Probably reading them in order is best.
+MB-50 - ideas.txt
+MB-50 - evaluation.txt
+
+
+Inspiration tree:
+
+            +--3
+            |
+   +--1--2--+
+   |        |
+0--+        +--4
+   |
+   +--5
+   |
+   +--6--7--8
+
+Relationship is showing what was derived from what. Usually, things that derive from others are strictly better (so leaves are likely the best), though 7 and 8 branch are basically different degrees of syntactic sugar (which could be good or bad).
+
+Rejected solutions:
+	0: .buildconfig files don't scale
+	1: names and dependencies aren't handled well
+	2: just like 3, but has an extra file format we have to deal with
+	4: no obvious way to solve naming problem
+	6: just like 7, but has build tool specific things un-necessarily
+
+
+Potentially usable solutions:
+	3: .project file says what dimensions to use, and how they end up in the path. Dimensions are encoded in manifest files using attributes.
+	5: All configuration in manifest files using attributes which get keywords stored in them.
+	7/8: All configuration in manifest files, the build artifact is given, with tags that describe how to build it
+
+The approach used in 5 is clever, but I suspect that it is fighting against the m2 syntax, rather than being helped by it. The use of m2 syntax doesn't seem to make it easier to use, and adding a project is potentially *more* difficult, because the constructs used are so different to when writing 'normal' m2 files.
+
+The 7/8 approach feels like a bit of a balancing act:
+	* We can solve all of the naming/dependency problems by forcing every individual thing that
+	   can be built to have an explicit name and dependency list.
+	* This just multiplies the existing .buildconfig problem by the number of projects
+	* We can introduce syntax to avoid repetition
+	* The new syntax might as well live outside of m2, and just be a separate file
+
+The 3 approach is not terrible. It currently combines dimensions with path name, which appears nice, but I think is bad in the long run (e.g. adding the ".exe" on the name of an executable). It looks like that sort of issue can be worked around. It might mean that we need to have some extensible way of putting python functions into this namespace. 
+
+

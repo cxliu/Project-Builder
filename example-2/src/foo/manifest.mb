@@ -1,0 +1,20 @@
+[foo_objects]
+@add mbuild_include_toplevel
+@add foo_api
+foo.c
+foo_asm.c
+foo_cpp.cpp
+
+[default]
+@import target/x86/manifest.mb
+
+
+[default]
+@att VALUES.libfooadd += "add1"
+@att VALUES.libfooadd += "add2"
+
+[libfooadd_add1]
+@att DEFINE.ADD_THIS = "1"
+
+[libfooadd_add2]
+@att DEFINE.ADD_THIS = "2"

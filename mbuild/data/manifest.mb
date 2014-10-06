@@ -1,0 +1,16 @@
+[default]
+@import archiver/manifest.mb
+@import compiler/manifest.mb
+@import linker/manifest.mb
+@import plugins/manifest.mb
+@import system_lib/manifest.mb
+@import tool/manifest.mb
+@import toolchain/manifest.mb
+
+@import flavour.mb
+@import mbuild.mb
+@import os.mb
+@import processor.mb
+@import toolchain.mb
+@import tool.mb
+@import force_dimensions.mb

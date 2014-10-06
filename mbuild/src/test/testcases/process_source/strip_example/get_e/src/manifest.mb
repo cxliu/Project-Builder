@@ -1,0 +1,31 @@
+[default]
+@att VALUES.round+='roundingon'
+@att VALUES.round+='roundingoff'
+
+[project_get_e]
+@att PLUGIN_STRIP_INFO.TOOL=killif
+@att PLUGIN_STRIP_INFO.TOOLLOC=p'../../tools/killif.exe'
+
+[project_get_e.round_roundingon]
+@att DEFINE.ROUND=1
+
+[project_get_e.flavour_debug]
+@att DEFINE.DEBUG=1
+
+[project_get_e.flavour_release]
+@att PLUGIN_STRIP_INFO.ACTION.DEBUG=undefine
+
+[project_get_e.os_osx]
+@att DEFINE.OSX=1
+
+[project_get_e.os_linux]
+@att PLUGIN_STRIP_INFO.ACTION.OSX=undefine
+
+[project_get_e.processor_x86]
+@att PLUGIN_STRIP_INFO.ACTION.ARM=undefine
+
+[project_get_e.processor_amd64]
+@att PLUGIN_STRIP_INFO.ACTION.ARM=undefine
+
+[project_get_e.processor_arm5TE]
+@att DEFINE.ARM=1

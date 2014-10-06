@@ -1,0 +1,66 @@
+[toolchain_wp8.tool_msvs2012]
+@att VS2012_COMPILE_AS = default
+@att VS2012_WARNING_LEVEL = max
+@att VS2012_CPP_EXCEPTIONS = disabled
+
+[toolchain_wp8.tool_msvs2012.mbuild_debug_symbols]
+@att VS2012_OPTIMIZATION = disabled
+@att VS2012_MINIMAL_REBUILD = true
+@att VS2012_RUNTIME_CHECKS = both
+@att VS2012_RUNTIME_LIBRARY = threaded_debug_dll
+@att VS2012_BUFFER_SECURITY_CHECK = true
+@att VS2012_DEBUG_INFO_FORMAT = prog_db
+@att VS2012_GENERATE_DEBUG_INFO = true
+@att VS2012_FUNCTION_LEVEL_LINK = false
+@att VS2012_INTRINSIC_FUNCTIONS = false
+
+[toolchain_wp8.tool_msvs2012.mbuild_optimise]
+@att VS2012_OPTIMIZATION = max_speed
+@att VS2012_MINIMAL_REBUILD = false
+@att VS2012_RUNTIME_CHECKS = default
+@att VS2012_RUNTIME_LIBRARY = threaded
+@att VS2012_BUFFER_SECURITY_CHECK = false
+@att VS2012_DEBUG_INFO_FORMAT = disabled
+@att VS2012_GENERATE_DEBUG_INFO = false
+@att VS2012_FUNCTION_LEVEL_LINK = true
+@att VS2012_INTRINSIC_FUNCTIONS = true
+
+[toolchain_wp8.tool_msvs2012.mbuild_optimise.mbuild_fast_math]
+@att VS2012_EXTRA_COMPILER_CONFIGURATIONS.FloatingPointModel = "Fast"
+
+# Turn off overly noisy warnings
+[toolchain_wp8.tool_msvs2012]
+@att DEFINE._CRT_SECURE_NO_WARNINGS = 1
+@att DEFINE._CRT_SECURE_NO_DEPRECATE = 1
+@att VS2012_DISABLE_SPECIFIC_WARNINGS += ""
+
+[toolchain_wp8.tool_msvs2012.cpp_exceptions]
+@att VS2012_CPP_EXCEPTIONS = enabled
+
+[toolchain_wp8.tool_msvs2012.vs_cpp_exceptions_with_seh]
+@att VS2012_CPP_EXCEPTIONS = enabled_seh
+
+[toolchain_wp8.tool_msvs2012.vs2010and2012_cpp_exceptions_with_extern_c]
+@att VS2012_CPP_EXCEPTIONS = enabled_extern_c
+
+# if using a static runtime library
+[toolchain_wp8.tool_msvs2012.toolchain_static_runtime.mbuild_debug_symbols]
+@att VS2012_RUNTIME_LIBRARY = threaded_debug
+
+[toolchain_wp8.tool_msvs2012.toolchain_static_runtime.mbuild_optimise]
+@att VS2012_RUNTIME_LIBRARY = threaded
+ 
+# if using a dynamic runtime library
+[toolchain_wp8.tool_msvs2012.toolchain_dynamic_runtime.mbuild_debug_symbols]
+@att VS2012_RUNTIME_LIBRARY = threaded_debug_dll
+
+[toolchain_wp8.tool_msvs2012.toolchain_dynamic_runtime.mbuild_optimise]
+@att VS2012_RUNTIME_LIBRARY = threaded_dll
+
+[toolchain_wp8.os_windows_phone.processor_armv7]
+@att VS2012_PLATFORM_IDENTIFIER = 'ARM'
+
+[toolchain_wp8.os_windows_phone.processor_armv7]
+@att VS2012_EXTRA_GLOBAL_PROPERTYGROUP.DefaultLanguage = "en-US"
+@att VS2012_EXTRA_GLOBAL_PROPERTYGROUP.MinimumVisualStudioVersion = "11.0"
+@att VS2012_EXTRA_COMPILER_CONFIGURATIONS.AdditionalUsingDirectories = "$(WindowsSDK_MetadataPath);$(AdditionalUsingDirectories)"

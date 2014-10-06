@@ -1,0 +1,123 @@
+@doc keyword(vs_cpp_exceptions_with_seh) = "Enable asynchronous (structured) and synchronous (C++) exception handling"
+
+@doc attribute(VS2005_OPTIMIZATION) = 'Optimization level (see <a href="http://msdn.microsoft.com/en-US/library/k1ack8f1%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_OPTIMIZATION.disabled = "No optimization"
+@enum VS2005_OPTIMIZATION.min_size = "Minimum size"
+@enum VS2005_OPTIMIZATION.max_speed = "Maximum speed"
+@enum VS2005_OPTIMIZATION.full = "Fully optimized"
+
+@doc attribute(VS2005_COMPILE_AS) = 'Language to compile as (see <a href="http://msdn.microsoft.com/en-US/library/032xwy55%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_COMPILE_AS.default = "Default (based on file extension)"
+@enum VS2005_COMPILE_AS.c = "C"
+@enum VS2005_COMPILE_AS.cplusplus = "C++"
+
+@doc attribute(VS2005_WARNING_LEVEL) = 'Warning level (see <a href="http://msdn.microsoft.com/en-US/library/thxezb7y%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_WARNING_LEVEL.off = "Off"
+@enum VS2005_WARNING_LEVEL.min = "Minimum"
+@enum VS2005_WARNING_LEVEL.lite = "Lite"
+@enum VS2005_WARNING_LEVEL.standard = "Standard"
+@enum VS2005_WARNING_LEVEL.max = "Maximum"
+
+@doc attribute(VS2005_CPP_EXCEPTIONS) = 'Enable C++ exception handling (see <a href="http://msdn.microsoft.com/en-US/library/d42ws1f6%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_CPP_EXCEPTIONS.disabled = "Disabled"
+@enum VS2005_CPP_EXCEPTIONS.enabled = "Enabled"
+@enum VS2005_CPP_EXCEPTIONS.enabled_seh = "Enabled_SEH"
+
+@doc attribute(VS2005_RUNTIME_CHECKS) = 'Enable run-time error checks (see <a href="http://msdn.microsoft.com/en-US/library/8wtf2dfz%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_RUNTIME_CHECKS.default = "Default"
+@enum VS2005_RUNTIME_CHECKS.stack_frames = "Stack frames only"
+@enum VS2005_RUNTIME_CHECKS.uninitialized_variables = "Uninitialized variables only"
+@enum VS2005_RUNTIME_CHECKS.both = "Stack frames and uninitialized variables"
+
+@doc attribute(VS2005_RUNTIME_LIBRARY) = 'Select version of run-time library to use (see <a href="http://msdn.microsoft.com/en-US/library/2kzt1wy3%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_RUNTIME_LIBRARY.threaded = "Threaded"
+@enum VS2005_RUNTIME_LIBRARY.threaded_debug = "Threaded Debug"
+@enum VS2005_RUNTIME_LIBRARY.threaded_dll = "Threaded DLL"
+@enum VS2005_RUNTIME_LIBRARY.threaded_debug_dll = "Threaded Debug DLL"
+
+@doc attribute(VS2005_DEBUG_INFO_FORMAT) = 'Select type of debugging information created for your program (see <a href="http://msdn.microsoft.com/en-US/library/958x11bc%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_DEBUG_INFO_FORMAT.disabled = "Disabled"
+@enum VS2005_DEBUG_INFO_FORMAT.c7 = "C7"
+@enum VS2005_DEBUG_INFO_FORMAT.prog_db = "Prog DB"
+@enum VS2005_DEBUG_INFO_FORMAT.prog_db_edit_cont = "Prog DB Edit Cont"
+
+@doc attribute(VS2005_MINIMAL_REBUILD) = 'Enables minimal rebuild (see <a href="http://msdn.microsoft.com/en-US/library/kfz8ad09%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_MINIMAL_REBUILD.false = "Off"
+@enum VS2005_MINIMAL_REBUILD.true = "On"
+
+@doc attribute(VS2005_BUFFER_SECURITY_CHECK) = 'Detects some buffer overruns that overwrite the return address (see <a href="http://msdn.microsoft.com/en-US/library/8dbf701c%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_BUFFER_SECURITY_CHECK.false = "Off"
+@enum VS2005_BUFFER_SECURITY_CHECK.true = "On"
+
+@doc attribute(VS2005_USE_PRECOMPILED_HEADER) = 'Use precompiled headers (see <a href="http://msdn.microsoft.com/en-US/library/b4w02hte%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_USE_PRECOMPILED_HEADER.false = "Off"
+@enum VS2005_USE_PRECOMPILED_HEADER.true = "On"
+
+@doc attribute(VS2005_USE_STRICT_LANGUAGE) = 'Flag language constructs not compatible with either ANSI C++ or ANSI C as errors (see <a href="http://msdn.microsoft.com/en-us/library/0k0w269d%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2005_USE_STRICT_LANGUAGE.false = "Off"
+@enum VS2005_USE_STRICT_LANGUAGE.true = "On"
+
+@doc attribute(VS2005_DETECT_64BIT_PROBLEMS) = 'Detect 64-bit portability problems on types that are also marked with the __w64 keyword (see <a href="http://msdn.microsoft.com/en-US/library/yt4xw8fh%28v=VS.80%29.aspx">MSDN</a>)'
+@enum VS2005_DETECT_64BIT_PROBLEMS.false = "Off"
+@enum VS2005_DETECT_64BIT_PROBLEMS.true = "On"
+
+[compiler_ms_2005_cl]
+@att VS2005_COMPILE_AS = default
+@att VS2005_WARNING_LEVEL = max
+@att VS2005_CPP_EXCEPTIONS = disabled
+@att VS2005_USE_PRECOMPILED_HEADER = false
+@att VS2005_DETECT_64BIT_PROBLEMS = false
+
+[compiler_ms_2005_cl.mbuild_debug_symbols]
+@att VS2005_OPTIMIZATION = disabled
+@att VS2005_MINIMAL_REBUILD = true
+@att VS2005_RUNTIME_CHECKS = both
+@att VS2005_RUNTIME_LIBRARY = threaded_debug_dll
+@att VS2005_BUFFER_SECURITY_CHECK = true
+@att VS2005_DEBUG_INFO_FORMAT = prog_db_edit_cont
+@att VS2005_GENERATE_DEBUG_INFO = true
+
+[compiler_ms_2005_cl.mbuild_debug_symbols.processor_amd64]
+# Edit and continue is not supported for amd64 builds
+@att VS2005_DEBUG_INFO_FORMAT = prog_db
+@att VS2005_MINIMAL_REBUILD = false
+
+[compiler_ms_2005_cl.mbuild_optimise]
+@att VS2005_OPTIMIZATION = max_speed
+@att VS2005_MINIMAL_REBUILD = false
+@att VS2005_RUNTIME_CHECKS = default
+@att VS2005_RUNTIME_LIBRARY = threaded
+@att VS2005_BUFFER_SECURITY_CHECK = false
+@att VS2005_DEBUG_INFO_FORMAT = disabled
+@att VS2005_GENERATE_DEBUG_INFO = false
+
+# Turn off overly noisy warnings
+[compiler_ms_2005_cl]
+@att DEFINE._CRT_SECURE_NO_WARNINGS = 1
+@att DEFINE._CRT_SECURE_NO_DEPRECATE = 1
+@att VS2005_DISABLE_SPECIFIC_WARNINGS += ""
+
+[compiler_ms_2005_cl.cpp_exceptions]
+@att VS2005_CPP_EXCEPTIONS = enabled
+
+[compiler_ms_2005_cl.vs_cpp_exceptions_with_seh]
+@att VS2005_CPP_EXCEPTIONS = enabled_seh
+
+# if using a static runtime library
+[compiler_ms_2005_cl.toolchain_static_runtime.mbuild_debug_symbols]
+@att VS2005_RUNTIME_LIBRARY = threaded_debug
+
+[compiler_ms_2005_cl.toolchain_static_runtime.mbuild_optimise]
+@att VS2005_RUNTIME_LIBRARY = threaded
+ 
+# if using a dynamic runtime library
+[compiler_ms_2005_cl.toolchain_dynamic_runtime.mbuild_debug_symbols]
+@att VS2005_RUNTIME_LIBRARY = threaded_debug_dll
+
+[compiler_ms_2005_cl.toolchain_dynamic_runtime.mbuild_optimise]
+@att VS2005_RUNTIME_LIBRARY = threaded_dll
+
+# This is used to set the type of attributes that may never have their values set.
+[never]
+@att VS2005_LIBRARY_DIRECTORIES+=''
+@att VS2005_IGNORE_DEFAULT_LIBRARY_NAMES+=''

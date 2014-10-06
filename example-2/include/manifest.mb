@@ -1,0 +1,5 @@
+[get_name_api]
+get_name.h
+
+[foo_api]
+foo.h

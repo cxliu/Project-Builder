@@ -1,0 +1,33 @@
+def get_symbols():
+	return {'ti_support': ti_support,
+	       }
+
+toolchains = ['ccs', 'c6run']
+cores = ['c64', 'c64plus', 'c67', 'c66', 'c67plus', 'c674']
+operating_systems = ['tisim_coffabi', 'tisim_eabi']
+flavours = ['ti_simulate', 'release', 'debug', 'dlb_profile']
+
+def toolchain_ccs_exception(configuration, parent_answer, parent_function):
+	if not configuration['tool'] == 'make':
+		return False
+	
+	if not configuration['toolchain'] in toolchains:
+		return False
+	
+	if not configuration['processor'] in cores:
+		return False
+	
+	if not configuration['os'] in operating_systems:
+		return False
+
+	if not configuration['flavour'] in flavours:
+		return False 
+	
+	return True
+
+
+require('mbuild_pretend')
+require('mbuild_standard')
+require('mbuild_exception')
+ti_support = mbuild_exception(mbuild_pretend('os', {'tisim_coffabi': 'linux', 'tisim_eabi': 'linux'}, mbuild_standard), toolchain_ccs_exception)
+

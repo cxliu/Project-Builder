@@ -1,0 +1,245 @@
+<html>
+<head>
+<title>M-Build Manifest Files</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>M-Build Manifest Files</h1>
+<br/>
+<h2>Introduction</h2>
+
+<p>Most build metadata is tracked using manifest files. By convention, these are called 'manifest.mb', but this is just a convention.</p>
+
+<p>The manifest files are parsed by the core of M-Build, and ued by various higher level scripts to generate project files for different toolchains. The manifest files should attempt to describe the purpose of files, and how they are to be used in projects rather than describing how to build a project.</p>
+
+<p>The manifest files track two things:</p>
+<ol>
+<li>Attribute values</li>
+<li>Sets of files</li>
+</ol>
+
+<p>Every function which queries this metadata takes a set of keywords as input. The keywords are used to specify exactly which configuration of which project is being talked about. A keyword is a string, and should probably look like a C identifier (e.g. no spaces).</p>
+
+<p>Conceptually, you can think of each keyword as being a boolean value. A set of keywords is then setting those keywords to 'true', and leaving the rest 'false'.</p>
+
+<h2>Basics</h2>
+
+<p>Most of a manifest file is then written in this form:</p>
+
+<pre>
+	[keyword1.keyword2]
+	@att ATTRIBUTE=value
+	@add keyword3
+	file1.c
+	# Tagging a specific file
+	a_tag(param1,param2):file2.c
+	
+	# Tagging all files in a section
+	[keyword4]:another_tag
+	@att LIST_ATTRIBUTE+=a
+	@att MAP_ATTRIBUTE.KEY=value
+	file3.h
+	file3.c
+	
+	@import subdirectory/manifest.mb
+</pre>
+
+<p>The text inside square brackets is called a section header, and contains the requirements of a section, where '.' means 'and' and '+' means 'or'. The contents of a section (everything following the section header until the next section header or end of file) are only processed if the requirements are met. The section contents is a list of filenames one per line, but any line beginning with an '@' have special meaning. An '@add' is used to define more keywords. An '@import' is used to read the contents of another manifest file. An '@att' is used to define an attribute (or extend its definition).</p>
+
+<p>So the above file makes these assertions:</p>
+
+<ul>
+<li>If keyword1 and keyword2 are defined, then:
+	<ul>
+	<li>give ATTRIBUTE the value 'value'.</li>
+	<li>keyword 'keyword3' is also defined.</li>
+	<li>files 'file1.c' and 'file2.c' are used.</li>
+	<li>'file2.c' is tagged with 'a_tag', which tag has parameters 'param1' and 'param2'.</li>
+	</ul>
+<li>If keyword4 is defined, then:
+	<ul>
+	<li>LIST_ATTRIBUTE has 'a' appended to it (or is set to ['a'] if not previously defined).</li>
+	<li>MAP_ATTRIBUTE['KEY'] is set to 'value'.</li>
+	<li>files 'file3.h' and 'file3.c' are used.</li>
+	<li>Both 'file3.h' and 'file3.c' are tagged with 'another_tag' (which has no parameters).</li>
+	<li>use the contents of 'subdirectory/manifest.mb'.</li>
+	</ul>
+</ul>
+
+<h2>File Conflicts</h2>
+
+<p>Generally, only one file of a particular basename will be used. For example:</p>
+
+<pre>
+	[keyword1]
+	one/foo.c
+	
+	[keyword1.keyword2]
+	two/foo.c
+</pre>
+
+<p>If both 'keyword1' and 'keyword2' are defined, then this causes a conflict rather than including both files (this makes many build backend a bit simpler, because they can then put all of the object files into one directory in a straightforward way without them clashing). The build system then needs some way of deciding which file to use. It aims to use the most "specific" file. This is done based on the expression guarding each file. In this case, the "keyword1.keyword2" expression is deemed to be more "specific", so the file "two/foo.c" will be used instead of "one/foo.c".</p>
+
+<p>If M-Build can't decide on which expression is more specific, it will raise an error. You should then modify one of the expressions so that M-Build can see that it is more specific than the other (by adding the conditions of the other expression to it). There is also a directive called "@priority" which can be used, but it is a bit of a sledgehammer and will hopefully be deprecated in the future, so avoid its use.</p>
+
+<p>In some circumstances, it may be necessary to have both foo.c files in a project. In this case, you can modify the behaviour of M-Build so it considers them as different files by using the 'exclusive' tag:</p>
+
+<pre>
+	[keyword1]
+	exclusive(one/foo.c):one/foo.c
+	
+	[keyword2]
+	exclusive(two/foo.c):two/foo.c
+</pre>
+
+<p>Note that for .c files, this will currently break most of the projects generated, as they will put all object files into one directory. However, for header files, this sort of construction might be useful.</p>
+
+<p>In the previous examples, there was an implicit "exclusive(foo.c):" attached to these lines. What we are doing here is modifying the identifier used for deciding which files have the same name. We can also use this to ensure that two files with different names don't get included. This is useful if you have an assembly version of a file:</p>
+
+<pre>
+	[keyword1]
+	one/foo.c
+	
+	[keyword2]
+	exclusive(foo.s):two/foo.s
+</pre>
+
+<h2>Attribute Types</h2>
+
+<p>Attributes come in three types: scalar, list, and map. Which type is used depends on the assignment operator:</p>
+
+<pre>
+	# Scalar; FOO is set to 'bar'
+	@att FOO=bar
+	
+	# List; 'bar' is appended to list in FOO (which may be empty)
+	@att FOO+=bar
+	
+	# Map of scalars; MAP['FOO'] is set to 'bar'
+	@att MAP.FOO=bar
+	
+	# Map of lists
+	@att MAP.FOO+=bar
+	
+	# Multi-level map
+	@att MAP.SUBMAP.FOO=bar
+</pre>
+	
+<p>Assignment to existing attributes must match in type.</p>
+
+<p>Attribute names are all uppercase by convention, but this is not enforced.</p>
+
+
+<h2>Attribute Values</h2>
+
+<p>Attribute values are either strings or paths, the difference being that paths will be expanded at build time. Strings can be specified in several different ways:</p>
+
+<pre>
+	# Unquoted, valid when no spaces in string
+	@att FOO=bar
+	
+	# Quoted, will be parsed with escape characters
+	# In this case, there will be a newline between 'bar' and 'baz'
+	# Single or double quotes can be used.
+	@att FOO='bar\nbaz'
+	
+	# 'Raw' string, will be parsed exactly as typed
+	# In this case, there will be a backslash and an 'n' between 'bar' and 'baz'
+	@att FOO=r'bar\nbaz'
+</pre>
+
+<p>Paths are specified by the prefix p, with the path in quotes:</p>
+
+<pre>
+	# Use POSIX (front) slashes
+	@att FOO=p"../../include"
+</pre>
+
+<h2>Enums</h2>
+
+<p>Enums can be used to constrain attribute values.</p>
+
+<pre>
+	# Strings assigned to the enum will be automatically used in documentation,
+	# but have no effect on the attribute itself
+	@enum ELEMENT.hydrogen = "atomic number 1"
+	@enum ELEMENT.helium = "atomic number 2"
+	@enum LANGUAGE.eng = "English"
+	@enum LANGUAGE.fr = "French"
+	@enum WAVEFORM.sine = "sine wave"
+	@enum WAVEFORM.saw = "sawtooth wave"
+	
+	# Enum values can be used in all types of attributes
+	[a]
+	@att ELEMENT = hydrogen
+	@att LANGUAGE += eng
+	@att WAVEFORM.a = sine
+	
+	# Error!
+	[b]
+	@att ELEMENT = foobar
+</pre>
+
+<h2>Attribute Conflicts</h2>
+
+<p>It is also possible to have multiple places where an attribute is set. Conflict handling on attributes is different, depending on the attribute type.</p>
+
+<pre>
+	[keyword1]
+	@att ATTR=one
+	
+	[keyword2]
+	@att ATTR=two
+</pre>
+
+<p>If we assume that both 'keyword1' and 'keyword2' are defined, then we have two different values for 'ATTR' being set. When an attribute value is queried, M-Build collects all of the different values being given to the attribute, and the information needed to know how to resolve them. The resolution depends on the type of the attribute, and the relative priorities of the assignments:</p>
+
+<ul>
+<li>List attributes (and list values of map attributes):
+	<ul>
+	<li>Values are concatenated such that higher priority assignments always occur before lower priority assignments. Note that the priority ordering is a partial order, so it is possible that there will be no highest priority assignment. Any order given is respected, but they do not require a total order.</li>
+	</ul></li>
+
+<li>Scalar attributes:
+	<ul>
+	<li>Only the highest priority assignment is used. An error is thrown if there is no highest priority assignment.</li>
+	</ul></li>
+</ul>
+
+<p>Priorities are determined the same way as with files.</p>
+
+
+<h2>Error Messages</h2>
+
+<p>If you have two keywords which are mutually exclusive, it is sometimes helpful to enforce this. The @error directive will do this:</p>
+
+<pre>
+	[foo.bar]
+	@error "Both foo and bar can't be defined"
+</pre>
+
+<p>Remember that manifest files are often used for things other than just creating Makefiles or Visual Studio projects, for example a release script might be using them. Your error should generally be guarded by the action that is taking place as well as the keywords, so more typical would be:</p>
+
+<pre>
+	[foo.bar.action_compile]
+	@error "Both foo and bar can't be compiled together"
+</pre>
+
+<h2>Custom Build Tools For MSVS 2010/2012</h2>
+
+<p>If you want to customize build tools for some files, you should make sure the custom build tools are available in MSVS 2010/2012. Then add "vs_custom_build" tag to those files:</p>
+
+<pre>
+[foo.bar]
+vs_custom_build(CUSTOM_BUILD_TOOL, OUTPUT_SUFFIX, COMPILE_OPTIONS):file1.s
+vs_custom_build(CUSTOM_BUILD_TOOL, OUTPUT_SUFFIX, COMPILE_OPTIONS):file2.asm
+</pre>
+
+<p>CUSTOM_BUILD_TOOL: Name of custom build tools. For example, "armasm.exe" provided by MSVS.</p>
+<p>OUTPUT_SUFFIX: Suffix of output file(output path and file name is not allowed set by user). For example, ".o", ".obj"</p>
+<p>COMPILE_OPTIONS(optional): Other compile options.</p>
+<p>Notes that this "vs_custom_build" tag is only supported for MSVS project files generated by "create_vs_projects.py". Those files which build by custom build tool will be linked into output (*.lib or *.exe) of MSVS project automatically.</p>
+</body>
+</html>

@@ -1,0 +1,29 @@
+def get_symbols():
+	return {'android_support': android_support,
+	       }
+
+require('arm_support')
+supported_processor = ["cortex_a9", "cortex_a9_t2", "cortex_a9_vfp", 
+                       "cortex_a9_vfp_t2", "cortex_a9_vfp_neon", "cortex_a9_vfp_neon_t2"]
+
+def toolchain_androideabi_is_valid(configuration, parent_answer, parent_function):
+	if not configuration['os'] == 'android':
+		return False
+	
+	if not configuration['tool'] == 'make':
+		return False
+	
+	if not configuration['toolchain'] == 'androideabi_gnu':
+		return False
+	
+	if not configuration['processor'] in supported_processor:
+		return False
+	
+	if not configuration['flavour'] in ['release', 'debug']:
+		return False
+	
+	return True
+
+require('mbuild_standard')
+require('mbuild_exception')
+android_support = mbuild_exception(mbuild_standard, toolchain_androideabi_is_valid)

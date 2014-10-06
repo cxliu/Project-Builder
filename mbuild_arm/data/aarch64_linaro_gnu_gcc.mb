@@ -1,0 +1,14 @@
+[compiler_gcc.aarch64_linaro_gnu]
+@att MAKE_CC = "aarch64-linux-gnu-gcc"
+@att MAKE_CXX = "aarch64-linux-gnu-gcc"
+
+[compiler_gcc.aarch64_linaro_gnu]
+@att MAKE_CCDEP = "aarch64-linux-gnu-gcc"
+
+[compiler_gcc.aarch64_linaro_gnu.processor_arm64]
+@att MAKE_CFLAGS += "-march=armv8-a"
+@att MAKE_CXXFLAGS += "-march=armv8-a"
+@att MAKE_CCDEPFLAGS += "-march=armv8-a"
+
+
+

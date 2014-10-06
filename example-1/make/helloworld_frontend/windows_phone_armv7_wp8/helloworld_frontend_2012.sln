@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloworld_frontend", "helloworld_frontend_2012.vcxproj", "{24FBE29D-A596-3C8C-8167-B01C8B681FE4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E} = {07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhelloworld", "..\..\libhelloworld\windows_phone_armv7_wp8\libhelloworld_2012.vcxproj", "{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|ARM = debug|ARM
+		release|ARM = release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.debug|ARM.ActiveCfg = debug|ARM
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.debug|ARM.Build.0 = debug|ARM
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.debug|ARM.ActiveCfg = debug|ARM
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.debug|ARM.Build.0 = debug|ARM
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.release|ARM.ActiveCfg = release|ARM
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.release|ARM.Build.0 = release|ARM
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.release|ARM.ActiveCfg = release|ARM
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.release|ARM.Build.0 = release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

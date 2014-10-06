@@ -1,0 +1,6 @@
+get_pi = ProjectSpec(
+	actions=mbuild_compile_and_link,
+	depends=[],
+	build_configuration=mbuild_extra(['round']),
+)
+

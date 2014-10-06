@@ -1,0 +1,37 @@
+@enum ELEMENT.hydrogen = "atomic number 1"
+@enum ELEMENT.helium = "atomic number 2"
+@enum LANGUAGE.eng = "English"
+@enum LANGUAGE.fr = "French"
+@enum WAVEFORM.sine = "sine wave"
+@enum WAVEFORM.saw = "sawtooth wave"
+
+[a]
+@att mystring = a
+@att mypath = p"./b"
+@att mylist += c
+@att mylist += d
+@att mymap.x = g
+@att mymap.y = h
+@att mypathmap.a = p"./a"
+@att mypathmap.b = p"./b"
+@att mypathlist += p"./a"
+@att mypathlist += p"./b"
+@att mylistmap.x += j
+@att mydifficultlist += r'xyz'
+@att mydifficultlist += r'\(xyz\)'
+@att mydifficultmap.a = r'xyz'
+@att mydifficultmap.b = r'\(xyz\)'
+@att ELEMENT = hydrogen
+@att LANGUAGE += eng
+@att LANGUAGE += fr
+@att WAVEFORM.a = saw
+@att WAVEFORM.b = sine
+
+[a.b]
+@att mylist += e
+@att mystring = q
+@att mymap.z = i
+@att mylistmap.x += k
+
+[a.c]
+@att ELEMENT = helium

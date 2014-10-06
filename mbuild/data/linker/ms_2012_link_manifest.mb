@@ -1,0 +1,72 @@
+@doc keyword(vs2012_safe_exception) = "Enable the linker produce a table of the image's safe exception handlers."
+
+@doc attribute(VS2012_TARGET_MACHINE) = 'Target platform (see <a href="http://msdn.microsoft.com/en-us/library/5wy54dk2%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_TARGET_MACHINE.x86 = "x86 Machine"
+@enum VS2012_TARGET_MACHINE.x64 = "AMD64 Machine"
+@enum VS2012_TARGET_MACHINE.arm = "ARM Machine"
+
+@doc attribute(VS2012_ENABLE_COMDAT_FOLDING) = 'Fold together symbols with identical values (see <a href="http://msdn.microsoft.com/en-us/library/bxwfs976%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_ENABLE_COMDAT_FOLDING.false = "Off"
+@enum VS2012_ENABLE_COMDAT_FOLDING.true = "On"
+
+@doc attribute(VS2012_OPTIMIZE_REFERENCES) = 'Remove functions/data that are never referenced (see <a href="http://msdn.microsoft.com/en-us/library/bxwfs976%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_OPTIMIZE_REFERENCES.keep = "Keep Unreferenced"
+@enum VS2012_OPTIMIZE_REFERENCES.eliminate = "Eliminate Unreferenced"
+
+@doc attribute(VS2012_SUBSYSTEM) = 'The environment for the executable (see <a href="http://msdn.microsoft.com/en-us/library/fcc1zstk(v=VS.80).aspx">MSDN</a>)'
+@enum VS2012_SUBSYSTEM.console = "Console"
+@enum VS2012_SUBSYSTEM.windows = "Windows"
+@enum VS2012_SUBSYSTEM.native = "Native"
+
+@doc attribute(VS2012_LINK_INCREMENTAL) = 'Enable incremental linking (see <a href="http://msdn.microsoft.com/en-us/library/4khtbfyf%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_LINK_INCREMENTAL.false = "Off"
+@enum VS2012_LINK_INCREMENTAL.true = "On"
+
+@doc attribute(VS2012_LINK_LIBRARY_DEPENDENCIES) = 'Link in .lib files produced by dependent projects (see <a href="http://msdn.microsoft.com/en-us/library/024awkd1%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_LINK_LIBRARY_DEPENDENCIES.false = "Off"
+@enum VS2012_LINK_LIBRARY_DEPENDENCIES.true = "On"
+
+@doc attribute(VS2012_LINK_SAFE_EXCEPTION_HANDLER) = 'Enable produce a table of the image safe exception handlers (see <a href="http://msdn.microsoft.com/en-us/library/9a89h429%28v=vs.80%29.aspx">MSDN</a>)'
+@enum VS2012_LINK_SAFE_EXCEPTION_HANDLER.false = "false"
+@enum VS2012_LINK_SAFE_EXCEPTION_HANDLER.true = "true"
+
+@doc keyword(linker_ms_2012_link) = 'The linker supplied by Microsoft Visual Studio 2012(link.exe).'
+[linker_ms_2012_link]
+@att VS2012_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[linker_ms_2012_link.mbuild_debug_symbols]
+@att VS2012_LINK_INCREMENTAL = true
+@att VS2012_OPTIMIZE_REFERENCES = keep
+@att VS2012_ENABLE_COMDAT_FOLDING = false
+
+[linker_ms_2012_link.mbuild_optimise]
+@att VS2012_LINK_INCREMENTAL = false
+@att VS2012_OPTIMIZE_REFERENCES = eliminate
+@att VS2012_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[linker_ms_2012_link.(config_type_console+config_type_dynamic_lib)]
+@att VS2012_SUBSYSTEM=console
+
+[linker_ms_2012_link.config_type_windowed]
+@att VS2012_SUBSYSTEM=windows
+
+[linker_ms_2012_link.config_type_static_lib]
+# No value (don't use linker)
+
+# Set up VS_TARGET_MACHINE
+[linker_ms_2012_link.processor_x86]
+@att VS2012_TARGET_MACHINE = x86
+
+[linker_ms_2012_link.processor_amd64]
+@att VS2012_TARGET_MACHINE = x64
+
+[linker_ms_2012_link.processor_armv7]
+@att VS2012_TARGET_MACHINE = arm
+
+[linker_ms_2012_link]
+@att VS2012_LINK_SAFE_EXCEPTION_HANDLER = false
+
+[linker_ms_2012_link.processor_x86.vs2012_safe_exception]
+@att VS2012_LINK_SAFE_EXCEPTION_HANDLER = true

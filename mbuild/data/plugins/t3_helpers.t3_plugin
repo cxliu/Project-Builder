@@ -1,0 +1,87 @@
+
+def get_symbols():
+    return {'t3_join_list': join_list,
+            't3_join_map': join_map,
+            't3_get_var_from_project': get_var_from_project,
+            't3_get_file_list': get_file_list
+           }
+
+def join_list(list_, key, prefix):
+    return ' '.join(["%s%s" % (prefix, val) for val in list_])
+        
+def join_map(map_, key, prefix):
+    formatted = []
+    for k in sorted(map_.keys()):
+        v = map_[k]
+        formatted.append('%s%s=%s' % (prefix, k, v))
+    
+    return ' '.join(formatted)
+
+def escape_fix(raw_string):
+    
+    #escape_hack = lambda a: a.replace('"', r'\"').replace("'", r"\'")
+    #escaped_string = escape_hack(raw_string)
+    escaped_string = raw_string
+    #escaped_string = escaped_string.replace('$','$$')
+    
+    chars_needing_quotes = ["\\", "'", '&', '(', ')', ';', '|', '>', '<', '"', ' ']
+    quotes_needed = False
+    for bad_char in chars_needing_quotes:
+        if bad_char in escaped_string:
+            quotes_needed = True
+
+    escaped_string = escaped_string.replace('$','$$')
+    if (quotes_needed == True):
+        if "'" in escaped_string: # single quote makes everything painful in sh
+            escaped_string = escaped_string.replace('\\','\\\\') # replacing \ with \\
+            escaped_string = escaped_string.replace("'","\\'")
+            escaped_string = escaped_string.replace('"','\\"')
+            escaped_string = escaped_string.replace('$$','\\$$')
+            escaped_string = escaped_string.replace('`','\\`')
+            escaped_string = '"' + escaped_string + '"'        
+        else:    
+            escaped_string = "'" + escaped_string + "'"
+        
+    return escaped_string
+
+
+def get_var_from_project(makefile, name, prefix, escape_this):
+    
+    if name in makefile.attributes.keys():
+        raw_value = makefile.attributes[name]
+    else:
+        raw_value = None
+    
+    if isinstance(raw_value, list):
+        escaped_values = []
+        for item in raw_value:
+            if escape_this:
+                escaped_values.append(escape_fix(item))
+            else:    
+                escaped_values.append(item)
+        value = join_list(escaped_values, name, prefix)
+    elif isinstance(raw_value, dict):
+        escaped_values = {}
+        for name in raw_value:
+            if escape_this:
+                escaped_values[name] = escape_fix(raw_value[name])
+            else:
+                escaped_values[name] = raw_value[name]
+        value = join_map(escaped_values, name, prefix)
+    elif raw_value is None:
+        raise T3PluginError("Can't find value for attribute %r" % name)
+    else:
+    	assert isinstance(raw_value, str), "Expected attribute to be a string"
+        value = prefix + raw_value
+        
+    return value
+
+def get_file_list(makefile, filter_):
+    assert(makefile.fquery != None)
+    file_list = makefile.fquery.get_file_pattern(filter_)
+    io_files = []
+    for str_file in file_list:
+        io_files.append(makefile.io_file(str_file)) 
+    return io_files
+
+

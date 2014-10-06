@@ -1,0 +1,36 @@
+M-BUILD Android 1.0.3 RELEASE NOTES
+=============================
+Release date: 10th April, 2014
+
+General
+	- Added rules to generate dependency files. (MB-228)
+
+M-BUILD Android 1.0.2 RELEASE NOTES
+=============================
+Release date: 16th January, 2014
+
+Metadata Changes
+	- Added attribute MBUILD_MAKE_SUPPORT to improve performance of M-Build.
+
+M-BUILD Android 1.0.1 RELEASE NOTES
+=============================
+Release date: 8th January, 2014
+
+Metadata Changes
+	- Fixed arm-linux-androideabi-as using wrong MAKE_ASFLAGS_OUTPUT_FILE attribute (Modified from "o" to "-o").
+	
+Documents:
+	- Updated doc/readme.txt to describe how to setup toolchain arm-linux-androideabi.
+
+
+M-BUILD Android 1.0 RELEASE NOTES
+=============================
+Release date: 12th December, 2013
+
+M-Build Android 1.0 is the first release of the M-Build Android plugin. 
+
+This is intended to be a simple way to add Android support to an M-Build using product. It will support Cortex-A9 with toolchain "androideabi_gnu".
+
+Please see doc/readme.txt for information on usage.
+
+This plugin release is compatible with M-Build v1.4.x.

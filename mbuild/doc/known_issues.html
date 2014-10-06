@@ -1,0 +1,27 @@
+<html>
+<head>
+<title>Known Issues In M-Build</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>Known Issues In M-Build</h1>
+</br>
+<h2>M-Build Core</h2>
+
+<p>MB-46: There is no way to set compile flags per file. In the future, this will be possible through the tag syntax.</p>
+
+<h2>ARM</h2>
+
+<p>MB-92: Linker fails with error when building dynamic libraries on ARM.</p>
+
+<h2>Visual Studio</h2>
+<p>MB-89: Visual Studio 2010 has a known issue with batch building. See <a href="http://connect.microsoft.com/VisualStudio/feedback/details/556158/batch-build-links-to-wrong-referenced-projects">Batch Build links to wrong referenced projects</a> for more details. This bug will be triggered if you do a batch rebuild of some of the projects in example-2. It is possible that in a future release of M-Build, the workaround given in the above URL will be used; however, it is not clear if it will be suitable yet.</p>
+
+<h2>Makefiles</h2>
+
+<p>MB-5: The language used for specifying the makefile templates is not great for extensibility. If you need to make changes to the generated Makefiles, you may be a little bit stuck depending on how significant the changes are.</p>
+
+</body>
+</html>

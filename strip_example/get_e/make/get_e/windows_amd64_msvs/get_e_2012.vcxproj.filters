@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<ItemGroup>
+<Filter Include="strip_example">
+<UniqueIdentifier>{a9610b1f-80a8-30d6-9f1b-9151a600bc62}</UniqueIdentifier></Filter>
+<Filter Include="strip_example\common">
+<UniqueIdentifier>{bee75680-81cf-3d69-a9f5-883922301f8b}</UniqueIdentifier></Filter>
+<Filter Include="strip_example\common\doc">
+<UniqueIdentifier>{a38ab8c4-e6c5-327a-8f4c-426bbbe0a7de}</UniqueIdentifier></Filter>
+<Filter Include="strip_example\get_e">
+<UniqueIdentifier>{97cb72a4-aeb9-3823-a4c0-d9c0ba850b66}</UniqueIdentifier></Filter>
+<Filter Include="strip_example\get_e\src">
+<UniqueIdentifier>{aa7ed2dc-655c-36b8-826f-ab850e76ce81}</UniqueIdentifier></Filter></ItemGroup>
+<ItemGroup>
+<ClCompile Include="..\..\..\src\get_e.c">
+<Filter>strip_example\get_e\src</Filter></ClCompile>
+<ClCompile Include="..\..\..\src\get_flavour_debug.c">
+<Filter>strip_example\get_e\src</Filter></ClCompile>
+<ClCompile Include="..\..\..\src\get_flavour_release.c">
+<Filter>strip_example\get_e\src</Filter></ClCompile>
+<ClCompile Include="..\..\..\src\main.c">
+<Filter>strip_example\get_e\src</Filter></ClCompile></ItemGroup>
+<ItemGroup>
+<ClInclude Include="..\..\..\..\common\strip_example.h">
+<Filter>strip_example\common</Filter></ClInclude>
+<ClInclude Include="..\..\..\src\get_e.h">
+<Filter>strip_example\get_e\src</Filter></ClInclude></ItemGroup>
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup /></Project>

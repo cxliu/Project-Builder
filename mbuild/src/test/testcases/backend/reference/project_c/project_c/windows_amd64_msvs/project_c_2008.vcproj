@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject Keyword="Win32Proj" Name="project_c" ProjectGUID="{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}" ProjectType="Visual C++" RootNamespace="project_c" Version="9.00">
+<Platforms>
+<Platform Name="x64" /></Platforms>
+<ToolFiles />
+<Configurations>
+<Configuration CharacterSet="1" ConfigurationType="4" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="c0_debug|x64" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="0">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="" BasicRuntimeChecks="3" BufferSecurityCheck="1" CompileAs="0" DebugInformationFormat="3" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="0" Name="VCCLCompilerTool" Optimization="0" PreprocessorDefinitions="WIN32=1;WIN64=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1;_LIB=1" RuntimeLibrary="3" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" IgnoreDefaultLibraryNames="" LinkLibraryDependencies="0" Name="VCLibrarianTool" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration>
+<Configuration CharacterSet="1" ConfigurationType="4" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="c0_release|x64" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="1">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="" BasicRuntimeChecks="0" BufferSecurityCheck="0" CompileAs="0" DebugInformationFormat="0" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="0" Name="VCCLCompilerTool" Optimization="2" PreprocessorDefinitions="NDEBUG=1;WIN32=1;WIN64=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1;_LIB=1" RuntimeLibrary="0" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" IgnoreDefaultLibraryNames="" LinkLibraryDependencies="0" Name="VCLibrarianTool" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration>
+<Configuration CharacterSet="1" ConfigurationType="4" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="c1_debug|x64" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="0">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="" BasicRuntimeChecks="3" BufferSecurityCheck="1" CompileAs="0" DebugInformationFormat="3" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="0" Name="VCCLCompilerTool" Optimization="0" PreprocessorDefinitions="WIN32=1;WIN64=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1;_LIB=1" RuntimeLibrary="3" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" IgnoreDefaultLibraryNames="" LinkLibraryDependencies="0" Name="VCLibrarianTool" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration>
+<Configuration CharacterSet="1" ConfigurationType="4" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="c1_release|x64" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="1">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="" BasicRuntimeChecks="0" BufferSecurityCheck="0" CompileAs="0" DebugInformationFormat="0" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="0" Name="VCCLCompilerTool" Optimization="2" PreprocessorDefinitions="NDEBUG=1;WIN32=1;WIN64=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1;_LIB=1" RuntimeLibrary="0" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" IgnoreDefaultLibraryNames="" LinkLibraryDependencies="0" Name="VCLibrarianTool" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration></Configurations>
+<References />
+<Files>
+<Filter Name="mbuild">
+<Filter Name="src">
+<Filter Name="test">
+<Filter Name="testcases">
+<Filter Name="backend">
+<Filter Name="input">
+<Filter Name="project_c">
+<File RelativePath="..\..\..\..\input\project_c\file.c" /></Filter></Filter></Filter></Filter></Filter></Filter></Filter></Files>
+<Globals /></VisualStudioProject>

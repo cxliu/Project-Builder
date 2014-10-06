@@ -1,0 +1,6 @@
+[default]
+@att VALUES.os+='qemu'
+@att VALUES.os+='rvbare'
+@att VALUES.os+='linuxhf'
+@att VALUES.os+='windows_rt'
+@att VALUES.os+='windows_phone'

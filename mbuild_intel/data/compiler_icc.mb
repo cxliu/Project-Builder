@@ -1,0 +1,130 @@
+@doc keyword(intel_toolchain_dynamic_runtime) = 'Causes Intel-provided libraries to be linked in dynamically'
+@doc keyword(intel_toolchain_static_runtime) = 'Causes Intel-provided libraries to be linked in statically,with the exception of libguide,which is linked in dynamically'
+
+# Tool name and its flags for the compiler (for Intel Linux and Mac toolchain - toolchain_icc)
+[compiler_icc]
+@att MAKE_CC = "icc"
+
+[compiler_icc.mbuild_sensible_defaults]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS += "-w3"
+@att MAKE_CFLAGS += "-std=c99"
+@att MAKE_CFLAGS += "-wd2415,981,1572"
+# Icc whinges about static definitions that are never used: makes dlb_const.h noisy. Turn remark 2415 off.
+# Icc whinges about operands evaluated in unspecified order, which is almost certainly OK. Turn remark 981 off.
+# Icc whinges about floating point comparison for equality, which is sensible but unhelpful.  Turn remark 1572 off.
+
+[compiler_icc]
+@att MAKE_CXX= "icpc"
+
+[compiler_icc.mbuild_sensible_defaults]
+@att MAKE_CXXFLAGS += "-c"
+@att MAKE_CXXFLAGS += "-w3"
+@att MAKE_CXXFLAGS += "-std=c++0x"
+@att MAKE_CXXFLAGS += "-wd2415,981,1572"
+
+[compiler_icc]
+@att MAKE_CCDEP = "icc"
+@att MAKE_CCDEPFLAGS += "-MM"
+@att MAKE_CCDEPFLAGS_TARGET = "-MT"
+
+[compiler_icc.processor_x86.intel_atom]
+@att MAKE_CFLAGS += "-xSSSE3_ATOM"
+@att MAKE_CXXFLAGS += "-xSSSE3_ATOM"
+
+[compiler_icc.mbuild_debug_symbols]
+@att MAKE_CFLAGS += "-g"
+@att MAKE_CXXFLAGS += "-g"
+
+[compiler_icc.enum_is_int]
+# This is the default
+
+[compiler_icc.enum_is_small]
+@att MAKE_CFLAGS += "-fshort-enums"
+@att MAKE_CXXFLAGS += "-fshort-enums"
+
+[compiler_icc.mbuild_no_optimise]
+@att MAKE_CFLAGS += "-O0"
+@att MAKE_CXXFLAGS += "-O0"
+
+[compiler_icc.mbuild_optimise]
+@add intel_fpmode_fast2
+@att MAKE_CFLAGS += "-O3"
+@att MAKE_CFLAGS += "-funroll-loops"
+@att MAKE_CFLAGS += "-ansi-alias -Wstrict-aliasing" 
+@att MAKE_CXXFLAGS += "-O3"
+@att MAKE_CXXFLAGS += "-funroll-loops"
+@att MAKE_CXXFLAGS += "-ansi-alias -Wstrict-aliasing" 
+
+[compiler_icc.config_type_dynamic_lib.os_linux]
+@att MAKE_CFLAGS += "-fPIC"
+@att MAKE_CXXFLAGS += "-fPIC"
+@att MAKE_CFLAGS += "-shared"  
+@att MAKE_CXXFLAGS += "-shared"
+
+# Linking with GNU libgcc library at run-time
+[compiler_icc.toolchain_dynamic_runtime.os_linux]
+@att MAKE_CFLAGS += "-shared-libgcc"			# Links the GNU libgcc library dynamically
+@att MAKE_CXXFLAGS += "-shared-libgcc"
+
+[compiler_icc.toolchain_static_runtime.os_linux]
+@att MAKE_CFLAGS += "-static-libgcc"			# Links the GNU libgcc library statically
+@att MAKE_CXXFLAGS += "-static-libgcc"
+
+# Linking with Intel provided libraries at run-time
+# Refer to this link for more details (http://software.intel.com/sites/products/documentation/hpc/composerxe/en-us/2011Update/cpp/lin/copts/common_options/option_i_dynamic.htm)
+[compiler_icc.intel_toolchain_dynamic_runtime]
+@att MAKE_CFLAGS += "-shared-intel"
+@att MAKE_CXXFLAGS += "-shared-intel"
+
+# Refer to this link for more details (http://software.intel.com/sites/products/documentation/hpc/composerxe/en-us/2011Update/cpp/lin/copts/common_options/option_i_static.htm)
+[compiler_icc.intel_toolchain_static_runtime]
+@att MAKE_CFLAGS += "-static-intel"
+@att MAKE_CXXFLAGS += "-static-intel"
+
+# Floating-point modes
+# Refer to the this link for more information on semantics of floating-point calculations (http://software.intel.com/sites/products/documentation/hpc/composerxe/en-us/2011Update/cpp/lin/copts/common_options/option_fp_model.htm)
+[compiler_icc.intel_fpmode_fast]
+@att MAKE_CFLAGS += "-fp-model fast"
+@att MAKE_CXXFLAGS += "-fp-model fast"
+
+[compiler_icc.intel_fpmode_fast2]
+@att MAKE_CFLAGS += "-fp-model fast=2"
+@att MAKE_CXXFLAGS += "-fp-model fast=2"
+
+[compiler_icc.intel_fpmode_precise]
+@att MAKE_CFLAGS += "-fp-model precise"
+@att MAKE_CXXFLAGS += "-fp-model precise"
+
+[compiler_icc.intel_fpmode_strict]
+@att MAKE_CFLAGS += "-fp-model strict"
+@att MAKE_CXXFLAGS += "-fp-model strict"
+
+[compiler_icc.intel_fpmode_source]
+@att MAKE_CFLAGS += "-fp-model source"
+@att MAKE_CXXFLAGS += "-fp-model source"
+
+[compiler_icc.intel_fpmode_double]
+@att MAKE_CFLAGS += "-fp-model double"
+@att MAKE_CXXFLAGS += "-fp-model double"
+
+[compiler_icc.intel_fpmode_extended]
+@att MAKE_CFLAGS += "-fp-model extended"
+@att MAKE_CXXFLAGS += "-fp-model extended"
+
+[compiler_icc.intel_fpmode_except]
+@att MAKE_CFLAGS += "-fp-model except"
+@att MAKE_CXXFLAGS += "-fp-model except"
+
+# Assembler defaults
+[assembler_icc]
+@att MAKE_AS = "icc"
+
+[assembler_icc.mbuild_sensible_defaults]
+@att MAKE_ASFLAGS += "-c"
+
+# "-isystem/usr/include" could remove build error "expression preceding parentheses of apparent call must have (pointer-to-) function type", which caused by icc not understanding the Clang idiom __has_feature(modules).
+[compiler_icc.os_osx]
+@att MAKE_CCDEPFLAGS += "-isystem/usr/include"
+@att MAKE_CFLAGS += "-isystem/usr/include"
+@att MAKE_CXXFLAGS += "-isystem/usr/include"

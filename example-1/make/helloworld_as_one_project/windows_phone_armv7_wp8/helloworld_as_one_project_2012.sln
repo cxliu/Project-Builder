@@ -1,0 +1,19 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloworld_as_one_project", "helloworld_as_one_project_2012.vcxproj", "{970471FA-691B-3F37-937F-7ED2F9AF7C3C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|ARM = debug|ARM
+		release|ARM = release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{970471FA-691B-3F37-937F-7ED2F9AF7C3C}.debug|ARM.ActiveCfg = debug|ARM
+		{970471FA-691B-3F37-937F-7ED2F9AF7C3C}.debug|ARM.Build.0 = debug|ARM
+		{970471FA-691B-3F37-937F-7ED2F9AF7C3C}.release|ARM.ActiveCfg = release|ARM
+		{970471FA-691B-3F37-937F-7ED2F9AF7C3C}.release|ARM.Build.0 = release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

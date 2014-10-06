@@ -1,0 +1,24 @@
+<html>
+<head>
+<title>The History of M-Build</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>The History of M-Build</h1>
+<br/>
+<p>M-Build was initially developed in Sydney for making it easier to deal with the fiddly nature of the makefiles we had for a specific product which used AK. Every build configuration had a slightly different set of include paths, and a slightly different set of files to use. The feeling was that if we could specify a "generic" build, and then for all of the different configurations, just give a "diff", then we could easily add new files by adding them to the generic build, and we could easily add new configurations (since they are just diff, they start out empty). Some effort was spent looking at existing solutions, however they were found to be a bit lacking in certain key areas (typically management of large numbers of build configurations, but also things like managing common source files).</p>
+
+<p>The very first implementation was written in GNU Make itself. It had a parser of manifest files which used "$(shell cat ...)" in order to read the manifest files, and from there it would parse the entire file, purely using the GNU Make syntax. This lived in a Makefile which was included into the project specific makefiles, and they would then call out to this makefile to get the list of files or compiler flags.</p>
+
+<p>It didn't take too long before this was found to be too slow, and too convenient. The slowness was annoying, and caused by GNU Make being abused to do parsing of text files. The convenience was making us think that it would be good to also generate the Visual Studio projects, which were then being maintained by hand. So a new implementation of the manifest parser was written in Python, along with a mechanism for creating makefiles and Visual Studio projects. This implementation mostly just remained stable, and more and more projects started using AK, so it kept on being used.</p>
+
+<p>Before long, the speed was again an issue. Fortunately, the speed issues were all in the core, and the entire parser and conflict resolution mechanism could be rewritten without having to throw away the backends for creating Makefiles and Visual Studio projects. This rewrite brought the speed back to an acceptable level.</p>
+
+<p>It was around this time that LESF was looking into a replacement build system. This build system (which had no name) ended up being chosen as something which, with a bit of modification might end up being useful. The build system was then called M-Build, with the 'M' not standing for anything in particular, but possibly being taken from "manifest". From here, it was removing any AK specific parts, adding support for things that were needed by teams outside of Sydney, and improving the usability.</p>
+
+</body>
+</html>
+
+

@@ -1,0 +1,7 @@
+[release]
+test_m2.py
+test_p2.py
+test_create_doc.py
+test_create_makefiles.py
+test_create_vs_project.py
+test_mbuild.py

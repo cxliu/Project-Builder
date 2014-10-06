@@ -1,0 +1,58 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "get_name_dynamic", "get_name_dynamic_2012.vcxproj", "{1115865A-67D8-387D-9BC2-4739A7392883}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93} = {D37008A0-06F2-37D9-923E-2A1C9E816B93}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfoo_dynamic", "..\..\libfoo_dynamic\windows_x86_msvs\libfoo_dynamic_2012.vcxproj", "{D37008A0-06F2-37D9-923E-2A1C9E816B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		lower_add1_debug|Win32 = lower_add1_debug|Win32
+		lower_add1_release|Win32 = lower_add1_release|Win32
+		lower_add2_debug|Win32 = lower_add2_debug|Win32
+		lower_add2_release|Win32 = lower_add2_release|Win32
+		upper_add1_debug|Win32 = upper_add1_debug|Win32
+		upper_add1_release|Win32 = upper_add1_release|Win32
+		upper_add2_debug|Win32 = upper_add2_debug|Win32
+		upper_add2_release|Win32 = upper_add2_release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_debug|Win32.ActiveCfg = lower_add1_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_debug|Win32.Build.0 = lower_add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_debug|Win32.ActiveCfg = add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_debug|Win32.Build.0 = add1_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_release|Win32.ActiveCfg = lower_add1_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_release|Win32.Build.0 = lower_add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_release|Win32.ActiveCfg = add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_release|Win32.Build.0 = add1_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_debug|Win32.ActiveCfg = lower_add2_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_debug|Win32.Build.0 = lower_add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_debug|Win32.ActiveCfg = add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_debug|Win32.Build.0 = add2_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_release|Win32.ActiveCfg = lower_add2_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_release|Win32.Build.0 = lower_add2_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_release|Win32.ActiveCfg = add2_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_release|Win32.Build.0 = add2_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_debug|Win32.ActiveCfg = upper_add1_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_debug|Win32.Build.0 = upper_add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_debug|Win32.ActiveCfg = add1_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_debug|Win32.Build.0 = add1_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_release|Win32.ActiveCfg = upper_add1_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_release|Win32.Build.0 = upper_add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_release|Win32.ActiveCfg = add1_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_release|Win32.Build.0 = add1_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_debug|Win32.ActiveCfg = upper_add2_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_debug|Win32.Build.0 = upper_add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_debug|Win32.ActiveCfg = add2_debug|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_debug|Win32.Build.0 = add2_debug|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_release|Win32.ActiveCfg = upper_add2_release|Win32
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_release|Win32.Build.0 = upper_add2_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_release|Win32.ActiveCfg = add2_release|Win32
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_release|Win32.Build.0 = add2_release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

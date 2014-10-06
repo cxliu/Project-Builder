@@ -1,0 +1,13 @@
+@enum CANT_DECIDE.false = "False"
+@enum CANT_DECIDE.true = "True"
+
+[a]
+@att CANT_DECIDE = false
+@att CANT_DECIDE = true
+
+[b]
+@att WHICH_ONE = "this one"
+@att WHICH_ONE = "that one"
+
+
+

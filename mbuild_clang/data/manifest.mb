@@ -1,0 +1,11 @@
+[default]
+clang.p2_plugin
+clang_toolchain.t3_plugin
+@import cores.mb
+@import toolchains.mb
+@import os.mb
+@import archiver_clang.mb
+@import compiler_clang.mb
+@import assember_clang.mb
+@import linker_clang.mb
+@import force_dimensions.mb

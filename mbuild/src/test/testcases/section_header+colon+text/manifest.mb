@@ -1,0 +1,8 @@
+# Test for the section_header+colon+text bug (MB-57).
+# The bug manifests itself by e.g. not returning file B when a file query for keyword 'bar' is done.
+
+[foo]:text
+A
+
+[bar]
+B

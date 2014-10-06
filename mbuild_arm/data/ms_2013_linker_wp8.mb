@@ -1,0 +1,29 @@
+[toolchain_wp8.tool_msvs2013]
+@att VS2013_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[toolchain_wp8.tool_msvs2013.mbuild_debug_symbols]
+@att VS2013_LINK_INCREMENTAL = true
+@att VS2013_OPTIMIZE_REFERENCES = keep
+@att VS2013_ENABLE_COMDAT_FOLDING = false
+
+[toolchain_wp8.tool_msvs2013.mbuild_optimise]
+@att VS2013_LINK_INCREMENTAL = false
+@att VS2013_OPTIMIZE_REFERENCES = eliminate
+@att VS2013_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[toolchain_wp8.tool_msvs2013.(config_type_console+config_type_dynamic_lib)]
+@att VS2013_SUBSYSTEM=console
+
+[toolchain_wp8.tool_msvs2013.config_type_windowed]
+@att VS2013_SUBSYSTEM=windows
+
+[toolchain_wp8.tool_msvs2013.config_type_static_lib]
+@att VS2013_SUBSYSTEM=console
+
+[toolchain_wp8.tool_msvs2013.processor_armv7]
+@att VS2013_TARGET_MACHINE = arm
+
+[toolchain_wp8.tool_msvs2013]
+@att VS2013_LINK_SAFE_EXCEPTION_HANDLER = false

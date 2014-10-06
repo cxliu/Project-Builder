@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "project_c", "project_c_2013.vcxproj", "{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		c0_debug|Win32 = c0_debug|Win32
+		c0_release|Win32 = c0_release|Win32
+		c1_debug|Win32 = c1_debug|Win32
+		c1_release|Win32 = c1_release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c0_debug|Win32.ActiveCfg = c0_debug|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c0_debug|Win32.Build.0 = c0_debug|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c0_release|Win32.ActiveCfg = c0_release|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c0_release|Win32.Build.0 = c0_release|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c1_debug|Win32.ActiveCfg = c1_debug|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c1_debug|Win32.Build.0 = c1_debug|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c1_release|Win32.ActiveCfg = c1_release|Win32
+		{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}.c1_release|Win32.Build.0 = c1_release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

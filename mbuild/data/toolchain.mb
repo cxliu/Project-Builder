@@ -1,0 +1,15 @@
+@doc dimension(toolchain) = "The set of tools to use for compiling, linking, archiving etc"
+@doc keyword(toolchain_gnu) = "Use the installed GNU toolchain"
+@doc keyword(toolchain_msvs2005) = "Use the Microsoft Visual Studio 2005 toolchain"
+@doc keyword(toolchain_msvs2008) = "Use the Microsoft Visual Studio 2008 toolchain"
+@doc keyword(toolchain_msvs2010) = "Use the Microsoft Visual Studio 2010 toolchain"
+@doc keyword(toolchain_msvs2012) = "Use the Microsoft Visual Studio 2012 toolchain"
+@doc keyword(toolchain_msvs2013) = "Use the Microsoft Visual Studio 2013 toolchain"
+
+[default]
+@att VALUES.toolchain+='gnu'
+@att VALUES.toolchain+='msvs2005'
+@att VALUES.toolchain+='msvs2008'
+@att VALUES.toolchain+='msvs2010'
+@att VALUES.toolchain+='msvs2012'
+@att VALUES.toolchain+='msvs2013'

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<ItemGroup>
+<Filter Include="mbuild">
+<UniqueIdentifier>{fee29d9c-a45b-32be-b915-41c1f0ee5023}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src">
+<UniqueIdentifier>{64f62033-1672-3a10-ac8d-c85e55c148f9}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src\test">
+<UniqueIdentifier>{447e92c5-9ca8-383d-9467-f00be1b6a921}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src\test\testcases">
+<UniqueIdentifier>{e538388a-5687-3c87-8dac-fcf1b62b56ae}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src\test\testcases\backend">
+<UniqueIdentifier>{aad4c590-1ffe-34bd-843f-4d9540359961}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src\test\testcases\backend\input">
+<UniqueIdentifier>{adf876d1-f50e-3ff4-98f0-4992e4e979e7}</UniqueIdentifier></Filter>
+<Filter Include="mbuild\src\test\testcases\backend\input\project_c">
+<UniqueIdentifier>{f77a1ea5-0906-3a0d-8d69-7081f33df3f0}</UniqueIdentifier></Filter></ItemGroup>
+<ItemGroup>
+<ClCompile Include="..\..\..\..\input\project_c\file.c">
+<Filter>mbuild\src\test\testcases\backend\input\project_c</Filter></ClCompile></ItemGroup>
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup /></Project>

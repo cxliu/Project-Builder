@@ -1,0 +1,24 @@
+[default]
+@att VALUES.toolchain += 'rvct'
+@att VALUES.toolchain += 'rvct_cslibc'
+@att VALUES.toolchain += 'wp8'
+
+[toolchain_rvct+toolchain_rvct_cslibc]
+@add compiler_rvct_armcc
+@add linker_rvct_armlink
+@add assembler_rvct_armasm
+@add archiver_rvct_armar
+@add arm_thumb_interworking_support
+
+[toolchain_wp8]
+@att VS2012_PLATFORM_TOOLSET = "v110_wp80"
+# Currently VS2013 is using Windows Phone SDK 8.0, same as VS2012. Will change if 8.1 is released and need to be supported.
+@att VS2013_PLATFORM_TOOLSET = "v110_wp80"
+
+@add compiler_ms_cl
+@add linker_ms_link
+@add assembler_ms_ml
+@add archiver_ms_link
+
+[toolchain_gnu.processor_arm64]
+@add aarch64_linaro_gnu

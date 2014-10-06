@@ -1,0 +1,6 @@
+project_b = ProjectSpec(
+	actions=mbuild_compile_and_archive,
+	depends=['project_c'],
+	build_configuration=mbuild_standard,
+)
+

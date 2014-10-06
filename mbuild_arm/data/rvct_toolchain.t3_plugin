@@ -1,0 +1,132 @@
+
+def get_symbols():
+	return {'makefn_toolchain_rvct': makefn_toolchain_rvct,
+           }
+
+require('t3_GnulikeActionTypes')
+require('t3_GnulikeActionCommand')
+require('t3_GnulikeAction')
+require('t3_gnulike_compile_asm')
+require('t3_gnulike_link')
+require('t3_gnulike_archive')
+require('t3_GnulikeToolchain')
+
+def rvct_compile_c(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = t3_GnulikeActionTypes()
+    
+	#      - Action class: e.g. 'Compile'  Each action consists of commands
+	#           - Command class e.g. 'gcc hello_world.c'
+
+
+	# names for these maps are important:
+	# 'attrib_' indicates a value to look up, anything after the underscore is unused
+	# 'string_' indicates a raw string, anything after the underscore is unused
+	# 'defines' get prefixed with the value given
+	# 'includes' get prefixed with the value given
+    # 'subattrib_' indicates a value to look up but not generate a 'makefile variable' for, instead directly place in the rule
+	c_dependencies_command_map = {\
+                               'attrib_exe'           : 'MAKE_CCDEP',                   # looking up the compiler executable name for in manifests
+                               'subattrib_depflags'   : 'MAKE_CCDEPFLAGS',              # looking up flag attribute in manifests
+                               'defines'              : '-D',                           # prefix for defines
+                               'includes'             : '-I',                           # prefix for include directories
+                               'subattrib_depflags_t' : 'MAKE_CCDEPFLAGS_TARGET',       # looking up another flag attribute in manifests 
+                               'string_preoutstr'     : '$@',                           # raw string for formatting command
+                               'subattrib_out'        : 'MAKE_CCDEPFLAGS_OUTPUT_FILE',  # looking up prefix string for output files from manifests
+                               'string_endstr'        : ['$*.d $<','']                  # raw string for formatting command
+                                   }
+	
+	c_dependencies_command_order = ['attrib_exe', 'subattrib_depflags', 'defines', 'includes', 'subattrib_depflags_t', 'string_preoutstr', 'subattrib_out', 'string_endstr']
+	
+	c_dep_command = t3_GnulikeActionCommand(c_dependencies_command_map, c_dependencies_command_order)
+	
+	c_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CC',' '],                 # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CFLAGS',' '],             # attribute to look for in manifests
+                               'defines'           : ['-D',' '],                      # prefix for defines
+                               'includes'          : ['-I',' '],                      # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $<','']                     # raw string
+                              }
+	c_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+
+	c_compile_command = t3_GnulikeActionCommand(c_compile_command_map, c_compile_command_order)
+    
+	c_in_suffixes = insuffixes
+	c_out_suffixes = outsuffixes
+	c_commands = [c_dep_command, c_compile_command]
+    
+	c_action = t3_GnulikeAction(c_in_suffixes,
+                      c_out_suffixes,
+                      c_commands,
+                      action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+	return c_action
+
+def rvct_compile_cpp(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = t3_GnulikeActionTypes()
+	
+	cpp_dependencies_command_map = {\
+                               'attrib_exe'           : 'MAKE_CCDEP',                  # attribute to look for in manifests
+                               'subattrib_depflags'   : 'MAKE_CCDEPFLAGS',             # attribute to look for in manifests
+                               'defines'              : '-D',                          # prefix for defines
+                               'includes'             : '-I',                          # prefix for include directories
+                               'subattrib_depflags_t' : 'MAKE_CCDEPFLAGS_TARGET',      # attribute to look for in manifests 
+                               'string_preoutstr'     : '$@',                          # raw string
+                               'subattrib_out'        : 'MAKE_CCDEPFLAGS_OUTPUT_FILE', # attribute to look for in manifests
+                               'string_endstr'        : ['$*.d $<','']                 # raw string
+                           }
+	cpp_dependencies_command_order = ['attrib_exe', 'subattrib_depflags', 'defines', 'includes', 'subattrib_depflags_t', 'string_preoutstr', 'subattrib_out', 'string_endstr']
+    
+	cpp_dep_command = t3_GnulikeActionCommand(cpp_dependencies_command_map, cpp_dependencies_command_order)
+	
+	cpp_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CXX',' '],                  # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CXXFLAGS',' '],             # attribute to look for in manifests
+                               'defines'           : ['-D',' '],                        # prefix for defines
+                               'includes'          : ['-I',' '],                        # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CXXFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : [' $@ $<','']                      # raw string
+                                }
+	cpp_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+    
+	cpp_compile_command = t3_GnulikeActionCommand(cpp_compile_command_map, cpp_compile_command_order)
+    
+	cpp_in_suffixes = insuffixes
+	cpp_out_suffixes = outsuffixes
+	cpp_commands = [cpp_dep_command, cpp_compile_command]
+    
+	cpp_action = t3_GnulikeAction(cpp_in_suffixes,
+                        cpp_out_suffixes,
+                        cpp_commands,
+                        action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+	return cpp_action
+
+def makefn_toolchain_rvct():
+
+	compile_c_action = rvct_compile_c(['.c'], ['.o', '.d'])
+	compile_cpp_action = rvct_compile_cpp(['.cpp'], ['.o', '.d'])
+	compile_asm_action = t3_gnulike_compile_asm(['.s'], ['.o'])
+	link_action = t3_gnulike_link(['.o','.lib','.a','.so'], [])
+	archive_action = t3_gnulike_archive(['.o','.lib','.a','.so'], [])
+
+	# function and class names from the gnulike template
+	toolchain_class = t3_GnulikeToolchain
+
+	# Toolchain definition consists of 3 types of objects
+	# Toolchain class: consists of actions
+	#      - Action class: e.g. 'Compile'  Each action consists of commands
+	#           - Command class e.g. 'gcc hello_world.c'
+
+	toolchain_name = 'rvct'
+	dependency_extensions = ['.d']
+	action_defs = [compile_c_action, compile_cpp_action, compile_asm_action, link_action, archive_action]
+
+	rvct_toolchain = toolchain_class(toolchain_name, action_defs, dependency_extensions)
+
+	return rvct_toolchain
+

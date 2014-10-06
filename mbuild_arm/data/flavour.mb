@@ -1,0 +1,16 @@
+@doc keyword(flavour_arm_simulate) = "Turn on optimiser, disable asserts and include debugging symbols"
+
+[flavour_arm_simulate]
+@add mbuild_arm_simulate
+
+[mbuild_arm_simulate]
+@add mbuild_sensible_defaults
+@add mbuild_debug_symbols
+@add mbuild_optimise
+@add mbuild_no_asserts
+
+[default]
+@att VALUES.flavour+='arm_simulate'
+
+[release.mbuild]
+@add flavour_arm_simulate

@@ -1,0 +1,36 @@
+[linker_icl.tool_msvs2012]
+@att VS2012_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[linker_icl.tool_msvs2012.mbuild_debug_symbols]
+@att VS2012_LINK_INCREMENTAL = true
+@att VS2012_OPTIMIZE_REFERENCES = keep
+@att VS2012_ENABLE_COMDAT_FOLDING = false
+
+[linker_icl.tool_msvs2012.mbuild_optimise]
+@att VS2012_LINK_INCREMENTAL = false
+@att VS2012_OPTIMIZE_REFERENCES = eliminate
+@att VS2012_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[linker_icl.tool_msvs2012.(config_type_console+config_type_dynamic_lib)]
+@att VS2012_SUBSYSTEM=console
+
+[linker_icl.tool_msvs2012.config_type_windowed]
+@att VS2012_SUBSYSTEM=windows
+
+[linker_icl.tool_msvs2012.config_type_static_lib]
+# No value (don't use linker)
+
+# Set up VS_TARGET_MACHINE
+[linker_icl.tool_msvs2012.processor_x86]
+@att VS2012_TARGET_MACHINE = x86
+
+[linker_icl.tool_msvs2012.processor_amd64]
+@att VS2012_TARGET_MACHINE = x64
+
+[linker_icl.tool_msvs2012]
+@att VS2012_LINK_SAFE_EXCEPTION_HANDLER = false
+
+[linker_icl.tool_msvs2012.processor_x86.vs2012_safe_exception]
+@att VS2012_LINK_SAFE_EXCEPTION_HANDLER = true

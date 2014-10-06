@@ -1,0 +1,5 @@
+[default]
+@import project_a/manifest.mb
+@import project_b/manifest.mb
+@import project_c/manifest.mb
+@import ../../../../../manifest.mb

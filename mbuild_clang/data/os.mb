@@ -1,0 +1,17 @@
+@doc keyword(os_ios) = "iOS"
+
+# Adding the following line automatically declares the keyword [os_ios]
+[default]
+@att VALUES.os+="ios"
+
+# Specify the extension for a dynamic library in the ios operating system
+[os_ios.config_type_dynamic_lib]
+@att EXT=".dylib"
+
+# Specify the extension for a static library in the ios operating system
+[os_ios.config_type_static_lib]
+@att EXT=".a"
+
+# Specify the extension for an executable in the ios operating system
+[os_ios.config_type_console]
+@att EXT=""

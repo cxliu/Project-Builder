@@ -1,0 +1,16 @@
+[default]
+@att VALUES.os+='bare'
+
+
+
+[toolchain_csmips.os_bare.config_type_console]
+@att EXT=''
+
+[toolchain_csmips.os_bare.config_type_windowed]
+@att EXT=''
+
+[toolchain_csmips.os_bare.config_type_dynamic_lib]
+@att EXT='.a'
+
+[toolchain_csmips.os_bare.config_type_static_lib]
+@att EXT='.a'

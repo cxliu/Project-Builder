@@ -1,0 +1,35 @@
+[linker_mips_ld]
+@att MAKE_LD = "mips-linux-gnu-gcc"
+
+[os_bare.linker_mips_ld]
+@att MAKE_LD = "mips-sde-elf-gcc"
+@att MAKE_LDFLAGS += "-Tmalta-ram-hosted.ld"
+
+[linker_mips_ld]
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+
+[cpp_linker.linker_mips_ld]
+@att MAKE_LDFLAGS += '-cpp'
+
+[sys_little_endian.linker_mips_ld]
+@att MAKE_LDFLAGS += "-EL"
+
+[sys_big_endian.linker_mips_ld]
+@att MAKE_LDFLAGS += "-EB"
+
+[syslib_math.linker_mips_ld]
+@att MAKE_LDLIBS += "-lm"
+
+[mips_feature_dynamic_lib.linker_mips_ld]
+@att MAKE_LDFLAGS += "-fPIC"
+@att MAKE_LDFLAGS += "-shared"
+
+[mips_feature_static_lib.linker_mips_ld]
+@att MAKE_LDFLAGS += '-static'
+
+[mips_feature_hardfloat.linker_mips_ld]
+@att MAKE_LDFLAGS += "-mhard-float"
+
+[mips_feature_softfloat.linker_mips_ld]
+@att MAKE_LDFLAGS += "-msoft-float"

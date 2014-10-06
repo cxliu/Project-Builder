@@ -1,0 +1,164 @@
+<html>
+<head>
+<title>How M-Build Queries Manifest Files</title>
+</head>
+
+<link rel="StyleSheet" href="./mbuild_doc.css" type="text/css" title="M-Build Documentation Style Sheet">
+
+<body>
+<h1>How M-Build Queries Manifest Files</h1>
+<br/>
+<h2>Introduction</h2>
+
+<p>This is an attempt to explain the M-Build manifest file syntax in a way that should be reasonably familiar to programmers. This is for understanding what M-Build will do to your manifest files under the hood, not for understanding how to write them well.</p>
+
+<h2>What M-Build Is</h2>
+
+<p>M-Build is a library for parsing manifest files, and querying them. Every query on a manifest file is asking either: "what set of files are interesting to me?" or "what is the value of this attribute?". Every query has a set of "keywords" which are passed in. The keywords define which project and which configuration we want the answer to be correct for.</p>
+
+<p>There are then programs which use M-Build to generate Makefiles or Visual Studio projects, but these programs should be considered to live outside the core of what M-Build does.</p>
+
+<h2>Resolving A Query</h2>
+
+<p>There are three steps to resolving a query. The first is determining which keywords are defined. The next is to find the outcomes of these keywords being defined. Finally, conflicts are resolved between these outcomes.</p>
+
+<ol>
+<li>
+<h4>Determining which keywords are defined:</h4>
+
+<p>We can treat everything that appears in [] as an "if" statement, every keyword as a variable, and every "@add" as an assignment. For example:</p>
+
+<pre>
+	[a]
+	@add b
+</pre>
+
+<p>Can be read as:</p>
+
+<pre>
+	if (a)
+		b = 1;
+</pre>
+
+<p>If we read a "." in the section heading ("[a]"), then it is treated as a logical AND, a "+" is treated as a logical OR:</p>
+
+<pre>
+	[a+b.c]
+	@add d
+</pre>
+
+<p>Is then:</p>
+
+<pre>
+	if (a || (b && c)) /* AND has higher precedence than OR */
+		d = 1;
+</pre>
+
+<p>There is no particular order that all of the manifest files are processed in. However, the set of keywords which are defined will always converge to something, as long as we run long enough.</p>
+
+<pre>
+	[b]
+	@add c
+	
+	[a]
+	@add b
+</pre>
+
+<p>The way this works, if just "a" is defined is as if it was all in a loop:</p>
+
+<pre>
+	dirty = 1;
+	while (dirty) {
+		dirty = 0;
+		
+		if (b)
+			if (!c)
+			{
+				c = 1;
+				dirty = 1;
+			}
+		
+		if (a)
+			if (!b)
+			{
+				b = 1;
+				dirty = 1;
+			}
+	}
+</pre>
+
+<p>The implementation that M-Build uses will not necessarily be this inefficient, but the outcome is that we end up with just the right set of variables all set to 1.</p>
+
+<p>Note that because there is no way to "unset" a keyword, this process will *always* terminate. There is also no way to set a keyword on the condition that another keyword was not set, which could lead to either cases where this condition must be violated, or cases where we never terminate.</p>
+</li>
+
+<li>
+<h4>Finding outcomes</h4>
+
+<p>An outcome is either an "@att" directive, or the name of a file (potentially with some tags). These are always attached to a section heading, so for every section heading, we can evaluate if it is true or not (based on the expanded set of keywords we just determined) and then pull out all the attribute sets and filenames.</p>
+
+<p>There is no particular order needed for this step, but the position of the outcomes is always recorded, as it may be useful in the next step.</p>
+</li>
+
+<li>
+<h4>Resolving conflicts</h4>
+
+<p>There is a partial ordering between all outcomes. This ordering is used for resolving conflicts between outcomes. For example, we might have two outcomes setting the name of the compiler to use, and we need to know if:</p>
+
+	<ol>
+	<li>The first outcome should be used</li>
+	<li>The second outcome should be used</li>
+	<li>It isn't clear which outcome should be used</li>
+	</ol>
+
+<p>The last case is important, as we don't want to be deciding things like which compiler to use based on lucky guesses. M-Build will throw an error if this case happens.</p>
+
+<p>For other conflicts, it is ok if we have a bit of a guess, because most of the time the resolution can go either way without trouble. An obvious example of this is when we are choosing the order that source files get sent to the compiler in. It doesn't matter which order, so in this case instead of throwing an error, M-Build will decide on the order based on some arbitrary tie breaking function, which will be the same each time (at the moment, this is based on position in file, but it may change in the future). This procedure is called "tie breaking".</p>
+
+<p>So the question is - when is it clear which outcome should be used? The only time we can decide is when all of the keywords that were used to constrain one outcome are present in the other outcome, and yet the other outcome still has more keywords that the first did not have. For example:</p>
+
+<pre>
+	[a.b.c.d]
+	@att FOO="1"
+	
+	[a.b.c.d.e]
+	@att FOO="2"
+</pre>
+
+<p>In this case, if "a", "b", "c", "d" and "e" are all defined, then the second outcome (FOO="2") should be used, as it is more specific. If we had:</p>
+
+<pre>
+	[a.b.c.d]
+	@att FOO="1"
+	
+	[a.b.c.e]
+	@att FOO="2"
+</pre>
+
+<p>And all the same keywords were defined, then M-Build will be unable to decide which outcome to use, as it can't tell if "d" is more important than "e".</p>
+
+<p>When you use a "+", things are slightly more complicated. Here we break down each expression into a canonical sum of products form:</p>
+
+<pre>
+	[a]
+	becomes: OR(AND(a))
+	
+	[a.b]
+	becomes: OR(AND(a, b))
+	
+	[(a+b).(c+d)]
+	becomes: OR(AND(a, c), AND(a, d), AND(b, c), AND(b, d))
+	
+	etc.
+</pre>
+
+<p>Then if one expression has a particular product which beats every product in the other expression (using the previous criteria), then it is declared to be the higher priority.</p>
+
+<p>For files, M-Build will allow tie breaking for choosing the order of files, but if M-Build is trying to choose a particular file to include (e.g. if there are two files with the same base name) then it will force the ordering to be well specified.</p>
+
+<p>For attributes, M-Build will allow tie breaking for lists (and maps of lists). For scalars (or maps of scalars), the ordering must be well specified.</p>
+</li>
+
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioProject Keyword="Win32Proj" Name="helloworld_as_one_project" ProjectGUID="{970471FA-691B-3F37-937F-7ED2F9AF7C3C}" ProjectType="Visual C++" RootNamespace="helloworld_as_one_project" Version="9.00">
+<Platforms>
+<Platform Name="Win32" /></Platforms>
+<ToolFiles />
+<Configurations>
+<Configuration CharacterSet="1" ConfigurationType="1" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="debug|Win32" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="0">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="..\..\..\include;..\..\..\.." BasicRuntimeChecks="3" BufferSecurityCheck="1" CompileAs="0" DebugInformationFormat="4" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="1" Name="VCCLCompilerTool" Optimization="0" PreprocessorDefinitions="WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1" RuntimeLibrary="3" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" EnableCOMDATFolding="1" GenerateDebugInformation="1" IgnoreDefaultLibraryNames="" LinkIncremental="2" ModuleDefinitionFile="" Name="VCLinkerTool" OptimizeReferences="1" OutputFile="$(OutDir)\$(ProjectName).exe" SubSystem="1" TargetMachine="1" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration>
+<Configuration CharacterSet="1" ConfigurationType="1" IntermediateDirectory="$(ConfigurationName)\VS2008" Name="release|Win32" OutputDirectory="$(SolutionDir)$(ConfigurationName)\VS2008" WholeProgramOptimization="1">
+<Tool Name="VCPreBuildEventTool" />
+<Tool Name="VCCustomBuildTool" />
+<Tool Name="VCXMLDataGeneratorTool" />
+<Tool Name="VCWebServiceProxyGeneratorTool" />
+<Tool AdditionalIncludeDirectories="..\..\..\include;..\..\..\.." BasicRuntimeChecks="0" BufferSecurityCheck="0" CompileAs="0" DebugInformationFormat="0" Detect64BitPortabilityProblems="0" DisableLanguageExtensions="false" DisableSpecificWarnings="" ExceptionHandling="0" MinimalRebuild="0" Name="VCCLCompilerTool" Optimization="2" PreprocessorDefinitions="NDEBUG=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1" RuntimeLibrary="0" UsePrecompiledHeader="0" WarningLevel="4" />
+<Tool Name="VCManagedResourceCompilerTool" />
+<Tool Name="VCResourceCompilerTool" />
+<Tool Name="VCPreLinkEventTool" />
+<Tool AdditionalDependencies="" AdditionalLibraryDirectories="" EnableCOMDATFolding="2" GenerateDebugInformation="0" IgnoreDefaultLibraryNames="" LinkIncremental="1" ModuleDefinitionFile="" Name="VCLinkerTool" OptimizeReferences="2" OutputFile="$(OutDir)\$(ProjectName).exe" SubSystem="1" TargetMachine="1" />
+<Tool Name="VCALinkTool" />
+<Tool Name="VCManifestTool" />
+<Tool Name="VCXDCMakeTool" />
+<Tool Name="VCBscMakeTool" />
+<Tool Name="VCFxCopTool" />
+<Tool Name="VCAppVerifierTool" />
+<Tool Name="VCWebDeploymentTool" />
+<Tool Name="VCPostBuildEventTool" /></Configuration></Configurations>
+<References />
+<Files>
+<Filter Name="example-1">
+<Filter Name="frontend">
+<File RelativePath="..\..\..\frontend\main.c" /></Filter>
+<Filter Name="include">
+<File RelativePath="..\..\..\include\helloworld.h" /></Filter>
+<Filter Name="src">
+<File RelativePath="..\..\..\src\helloworld.c" /></Filter></Filter></Files>
+<Globals /></VisualStudioProject>

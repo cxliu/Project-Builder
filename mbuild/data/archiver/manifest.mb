@@ -1,0 +1,5 @@
+[default]
+@import make/manifest.mb
+@import ar_manifest.mb
+@import armar_manifest.mb
+

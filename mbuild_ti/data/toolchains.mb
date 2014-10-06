@@ -1,0 +1,15 @@
+[default]
+@att VALUES.toolchain += 'ccs'
+@att VALUES.toolchain += 'c6run'
+
+[toolchain_ccs]
+@add compiler_cl6x
+@add linker_lnk6x
+@add assembler_cl6x
+@add archiver_ar6x
+
+[toolchain_c6run]
+@add compiler_c6run
+@add linker_c6run
+@add assembler_cl6x
+@add archiver_ar6x

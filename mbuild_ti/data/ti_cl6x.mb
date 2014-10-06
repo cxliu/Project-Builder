@@ -1,0 +1,99 @@
+[compiler_cl6x]
+@att MAKE_CC = "cl6x"
+@att MAKE_CXX = "cl6x"
+@att MAKE_CFLAGS += "--preproc_with_compile"
+@att MAKE_CXXFLAGS += "--preproc_with_compile"
+@att MAKE_CCDEP_OUTPUT_FILE = "--preproc_dependency="
+
+[compiler_cl6x.mbuild_sensible_defaults]
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS += "--gcc"
+@att MAKE_CFLAGS += "-on2"
+@att MAKE_CFLAGS += "-pden"
+@att MAKE_CFLAGS += "-pdv"
+@att MAKE_CFLAGS_OUTPUT_DIR = "--obj_directory="
+@att MAKE_CFLAGS_OUTPUT_FILE = "--output_file="
+@att MAKE_CXXFLAGS += "-c"
+@att MAKE_CXXFLAGS += "--gcc"
+@att MAKE_CXXFLAGS += "-on2"
+@att MAKE_CXXFLAGS += "-pden"
+@att MAKE_CXXFLAGS += "-pdv"
+@att MAKE_CXXFLAGS_OUTPUT_DIR = "--obj_directory="
+@att MAKE_CXXFLAGS_OUTPUT_FILE = "--output_file="
+
+[compiler_cl6x.os_tisim_eabi]
+@att MAKE_CFLAGS += "--abi=eabi"
+@att MAKE_CFLAGS += "--strip_coff_underscore"
+@att MAKE_CXXFLAGS += "--abi=eabi"
+@att MAKE_CXXFLAGS += "--strip_coff_underscore"
+
+[compiler_cl6x.os_tisim_coffabi]
+@att MAKE_CFLAGS += "--abi=coffabi"
+@att MAKE_CXXFLAGS += "--abi=coffabi"
+
+[assembler_cl6x]
+@att MAKE_AS = "cl6x"
+
+[assembler_cl6x.mbuild_sensible_defaults]
+@att MAKE_ASFLAGS += "-c"
+@att MAKE_ASFLAGS += "-on2"
+@att MAKE_ASFLAGS_OUTPUT_DIR = "--obj_directory="
+@att MAKE_ASFLAGS_OUTPUT_FILE = ""
+
+[assembler_cl6x.os_tisim_eabi]
+@att MAKE_ASFLAGS += "--abi=eabi"
+@att MAKE_ASFLAGS += "--strip_coff_underscore"
+
+[assembler_cl6x.os_tisim_coffabi]
+@att MAKE_ASFLAGS += "--abi=coffabi"
+
+[processor_c64]
+@att MAKE_CFLAGS += "-mv6400"
+@att MAKE_CXXFLAGS += "-mv6400"
+@att MAKE_ASFLAGS += "-mv6400"
+
+[processor_c64plus]
+@att MAKE_CFLAGS += "-mv64p"
+@att MAKE_CXXFLAGS += "-mv64p"
+@att MAKE_ASFLAGS += "-mv64p"
+
+[processor_c66]
+@att MAKE_CFLAGS += "-mv6600"
+@att MAKE_CXXFLAGS += "-mv6600"
+@att MAKE_ASFLAGS += "-mv6600"
+
+[processor_c67]
+@att MAKE_CFLAGS += "-mv6700"
+@att MAKE_CXXFLAGS += "-mv6700"
+@att MAKE_ASFLAGS += "-mv6700"
+
+[processor_c67plus]
+@att MAKE_CFLAGS += "-mv67p"
+@att MAKE_CXXFLAGS += "-mv67p"
+@att MAKE_ASFLAGS += "-mv67p"
+
+[processor_c674]
+@att MAKE_CFLAGS += "-mv6740"
+@att MAKE_CXXFLAGS += "-mv6740"
+@att MAKE_ASFLAGS += "-mv6740"
+
+[mbuild_debug_symbols]
+@att MAKE_CFLAGS += "-g"
+@att MAKE_CXXFLAGS += "-g"
+@att MAKE_ASFLAGS += "-g"
+
+[mbuild_optimise]
+@att MAKE_CFLAGS += "-O3"
+@att MAKE_CFLAGS += "-pm"
+@att MAKE_CFLAGS += "-mf"
+@att MAKE_CXXFLAGS += "-O3"
+@att MAKE_CXXFLAGS += "-pm"
+@att MAKE_CXXFLAGS += "-mf"
+@att MAKE_ASFLAGS += "-O3"
+@att MAKE_ASFLAGS += "-pm"
+@att MAKE_ASFLAGS += "-mf"
+
+[mbuild_debug_symbols.mbuild_optimise]
+@att MAKE_CFLAGS += "--optimize_with_debug"
+@att MAKE_CXXFLAGS += "--optimize_with_debug"
+@att MAKE_ASFLAGS += "--optimize_with_debug"

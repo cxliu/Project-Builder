@@ -1,0 +1,5 @@
+[default]
+@import frontend/manifest.mb
+@import include/manifest.mb
+@import make/manifest.mb
+@import src/manifest.mb

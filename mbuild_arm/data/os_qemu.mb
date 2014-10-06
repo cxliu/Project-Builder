@@ -1,0 +1,13 @@
+@doc keyword(os_qemu) = "Qemu-user emulator for running ARM executables on Linux X86/AMD64 machines."
+
+[os_qemu.config_type_console]
+@att EXT='.axf'
+
+[os_qemu.config_type_windowed]
+@att EXT='.axf'
+
+[os_qemu.config_type_dynamic_lib]
+@att EXT=.so
+
+[os_qemu.config_type_static_lib]
+@att EXT=.lib

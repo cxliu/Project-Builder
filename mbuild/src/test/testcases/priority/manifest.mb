@@ -1,0 +1,6 @@
+[a+b]
+@att ATTR = 1
+[a+c.f]
+@att ATTR = 2
+[d.e]
+@att ATTR = 3

@@ -1,0 +1,6 @@
+[default]
+mbuild.p2_plugin
+strip.ps_plugin
+gnulike_toolchain_template.t3_plugin
+t3_helpers.t3_plugin
+environment_variable.t3_plugin

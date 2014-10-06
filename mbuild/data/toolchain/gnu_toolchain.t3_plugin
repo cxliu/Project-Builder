@@ -1,0 +1,47 @@
+
+# Export toolchain makefile plugin function name.  Name must start with 'makefn'
+def get_symbols():
+    return {'makefn_toolchain_gnu': makefn_toolchain_gnu,
+           }
+
+# These functions and classes can be found in the gnulike_toolchain_template.t3_plugin file
+require('t3_gnulike_compile_c')
+require('t3_gnulike_compile_cpp')
+require('t3_gnulike_compile_asm')
+require('t3_gnulike_link')
+require('t3_gnulike_archive')
+require('t3_GnulikeToolchain')
+
+# Return a Toolchain object, in this case the GnulikeToolchain object
+def makefn_toolchain_gnu():
+    
+	# First argument to each of these is the set of suffixes of input files
+	# Second argument is the set of suffixes of output files
+	# For example a gnu C compiler takes in .c files and outputs .o object files and .d dependency files
+    compile_c_action = t3_gnulike_compile_c(['.c'], ['.o','.d'])
+    compile_cpp_action = t3_gnulike_compile_cpp(['.cpp'], ['.o','.d'])
+    compile_asm_action = t3_gnulike_compile_asm(['.s'], ['.o'])
+	# The second argument is omitted for linker and archiver as the output suffix is taking from the manifests
+	# for executable and library respectively
+    link_action = t3_gnulike_link(['.o','.lib','.a','.so'], [])
+    archive_action = t3_gnulike_archive(['.o','.lib','.a','.so'], [])
+    
+    # function and class names from the gnulike template
+    toolchain_class = t3_GnulikeToolchain
+
+    # Toolchain definition consists of 3 types of objects
+    # Toolchain class: consists of actions
+    #      - Action class: e.g. 'Compile'  Each action consists of commands
+    #           - Command class e.g. 'gcc hello_world.c'
+
+	# This name equal the dimension corresponding to 'toolchain'
+    toolchain_name = 'gnu'
+	# This tells M-Build to 'include' all files of this suffix which are generated into the makefile
+    dependency_extensions = ['.d']
+	# The set of all actions, these will be translated into makefile rules by M-Build
+    action_defs = [compile_c_action, compile_cpp_action, compile_asm_action, link_action, archive_action]
+
+    gnu_toolchain = toolchain_class(toolchain_name, action_defs, dependency_extensions)
+
+    return gnu_toolchain
+

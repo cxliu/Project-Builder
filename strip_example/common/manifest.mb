@@ -1,0 +1,6 @@
+[default]
+@att INCLUDE+=p'.'
+@import doc/manifest.mb
+
+[strip_example]
+strip_example.h

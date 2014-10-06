@@ -1,0 +1,131 @@
+# This describes how to link with different libraries for different
+# compilers/platforms. These should be libraries that are expected
+# to be installed on the system, not libraries which we distribute
+# or build. However in general, they are not available for every
+# platform.
+
+@doc keyword(syslib_math) = "Link with the standard C math library"
+@doc keyword(syslib_asound) = "Link with the ALSA library"
+@doc keyword(syslib_winmm) = "Link with the Windows Multimedia Library"
+@doc keyword(syslib_opengl) = "Link with the OpenGL library"
+@doc keyword(syslib_winsock2) = "Link with the Winsock2 library"
+@doc keyword(syslib_pthread) = "Link with the pthreads library"
+@doc keyword(syslib_ipp) = "Link with the ipp library"
+@doc keyword(syslib_rt) = "Link with the rt (realtime) library for clock functions"
+
+[syslib_math.(linker_gcc+linker_icc+linker_clang+linker_aarch64_linaro_gnu)]
+@att MAKE_LDLIBS+=-lm
+
+[syslib_asound.(linker_gcc+linker_icc+linker_clang+linker_aarch64_linaro_gnu)]
+@att MAKE_LDLIBS+=-lasound
+
+[syslib_rt.(linker_gcc+linker_icc+linker_clang+linker_aarch64_linaro_gnu)]
+@att MAKE_LDLIBS+=-lrt
+
+[syslib_winmm]
+@att VS2005_LIBRARIES+=winmm.lib
+@att VS2008_LIBRARIES+=winmm.lib
+@att VS2010_LIBRARIES+=winmm.lib
+@att VS2012_LIBRARIES+=winmm.lib
+@att VS2013_LIBRARIES+=winmm.lib
+
+[syslib_opengl]
+@att VS2005_LIBRARIES+=OpenGL32.lib
+@att VS2008_LIBRARIES+=OpenGL32.lib
+@att VS2010_LIBRARIES+=OpenGL32.lib
+@att VS2012_LIBRARIES+=OpenGL32.lib
+@att VS2013_LIBRARIES+=OpenGL32.lib
+
+[syslib_opengl.(os_linux+os_windows)]
+@att MAKE_LDLIBS+=-lGL
+
+[syslib_opengl.os_osx]
+@att MAKE_LDLIBS+="-framework OpenGL"
+
+[syslib_glu]
+@add syslib_opengl
+@att VS2005_LIBRARIES+=glu32.lib
+@att VS2008_LIBRARIES+=glu32.lib
+@att VS2010_LIBRARIES+=glu32.lib
+@att VS2012_LIBRARIES+=glu32.lib
+@att VS2013_LIBRARIES+=glu32.lib
+
+[syslib_glu.(os_linux+os_windows)]
+@att MAKE_LDLIBS+=-lGLU
+
+[syslib_winsock2]
+@att VS2005_LIBRARIES+=ws2_32.lib
+@att VS2008_LIBRARIES+=ws2_32.lib
+@att VS2010_LIBRARIES+=ws2_32.lib
+@att VS2012_LIBRARIES+=ws2_32.lib
+@att VS2013_LIBRARIES+=ws2_32.lib
+
+[syslib_pthread.(linker_gcc+linker_icc+linker_clang+linker_aarch64_linaro_gnu)]
+@att MAKE_LDFLAGS+=-pthread
+
+# Following sections will be used for adding ipp libaries to MSVS project files.
+[ipp_library]
+@add syslib_ipp
+
+[syslib_ipp]
+@add syslib_math
+
+[syslib_ipp.tool_msvs.(processor_x86+processor_amd64)]
+@att INCLUDE += '$(IPPROOT)\\include'
+
+[syslib_ipp.processor_x86.toolchain_msvs.(config_type_console+config_type_windowed)]
+@att VS2005_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\ia32'
+@att VS2008_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\ia32'
+@att VS2010_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\ia32'
+@att VS2012_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\ia32'
+@att VS2013_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\ia32'
+
+[syslib_ipp.processor_amd64.toolchain_msvs.(config_type_console+config_type_windowed)]
+@att VS2005_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\intel64'
+@att VS2008_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\intel64'
+@att VS2010_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\intel64'
+@att VS2012_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\intel64'
+@att VS2013_LIBRARY_DIRECTORIES += '$(IPPROOT)\\lib\\intel64'
+
+[syslib_ipp.(processor_x86+processor_amd64).toolchain_msvs.(config_type_console+config_type_windowed)]
+# Use unthreaded libraries with simple static linkage
+@att VS2005_LIBRARIES += 'ippcore_l.lib;ipps_l.lib;ippac_l.lib'
+@att VS2008_LIBRARIES += 'ippcore_l.lib;ipps_l.lib;ippac_l.lib'
+@att VS2010_LIBRARIES += 'ippcore_l.lib;ipps_l.lib;ippac_l.lib'
+@att VS2012_LIBRARIES += 'ippcore_l.lib;ipps_l.lib;ippac_l.lib'
+@att VS2013_LIBRARIES += 'ippcore_l.lib;ipps_l.lib;ippac_l.lib'
+
+[syslib_ipp.compiler_icl.tool_msvs2010]
+@att VS2010_EXTRA_PROPERTYGROUP.UseIntelIPP = "Sequential"
+
+[syslib_ipp.compiler_icl.tool_msvs2012]
+@att VS2012_EXTRA_PROPERTYGROUP.UseIntelIPP = "Sequential"
+
+[syslib_ipp.compiler_icl.tool_msvs2013]
+@att VS2013_EXTRA_PROPERTYGROUP.UseIntelIPP = "Sequential"
+
+# Following sections will be used for adding ipp libaries to Makefiles.
+[syslib_ipp.tool_make.(compiler_gcc+compiler_icc+compiler_icl+compiler_clang)]
+@att INCLUDE += '${IPPROOT}/include'
+
+[syslib_ipp.syslib_math.tool_make.(linker_icc+linker_gcc+linker_clang)]
+@att MAKE_LDLIBS += '-lippac_l -lipps_l -lippcore_l'
+
+[syslib_ipp.syslib_math.tool_make.linker_icl]
+@att MAKE_LDLIBS += 'ippac_l.lib ipps_l.lib ippcore_l.lib'
+
+[syslib_ipp.tool_make.(os_linux+os_windows).processor_x86.(linker_icc+linker_gcc)]
+@att MAKE_LDFLAGS += '-L${IPPROOT}/lib/ia32'
+
+[syslib_ipp.tool_make.os_windows.processor_x86.linker_icl]
+@att MAKE_LDFLAGS += '/LIBPATH:"${IPPROOT}/lib/ia32"'
+
+[syslib_ipp.tool_make.(os_linux+os_windows).processor_amd64.(linker_icc+linker_gcc)]
+@att MAKE_LDFLAGS += '-L${IPPROOT}/lib/intel64'
+
+[syslib_ipp.tool_make.os_windows.processor_amd64.linker_icl]
+@att MAKE_LDFLAGS += '/LIBPATH:"${IPPROOT}/lib/intel64"'
+
+# By default, IPP library files on OS X platform are universal version.
+[syslib_ipp.tool_make.os_osx.(linker_icc+linker_gcc+linker_clang)]
+@att MAKE_LDFLAGS += '-L${IPPROOT}/lib'

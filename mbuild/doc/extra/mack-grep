@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# This is a convenience wrapper around "ack" to make it search manifest
+# files.
+# See:
+#  http://betterthangrep.com/
+# For installing "ack". Under Debian-like systems, it will be called "ack-grep"
+# You may need to symlink an "ack-grep" to something else if your OS calls it
+# something else.
+
+ack-grep -a -G '(?:manifest)|(?:\.mb)' $@

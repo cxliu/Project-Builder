@@ -1,0 +1,38 @@
+[simple]
+# This should have the spaces stripped:
+  filename_with_unquoted_spaces_at_start.c
+
+# This should also have the spaces stripped
+filename_with_unquoted_spaces_at_end.c  
+
+# This should keep its spaces
+filename with internal spaces.c
+
+# This should lose ths spaces at the start and end, but keep those in the middle
+  filename with unquoted spaces internally and externally.c  
+
+  unquoted_spaces.c  
+		unquoted_tabs.c		
+
+
+# These should keep their spaces
+"  filename with quoted spaces.c  "
+'  filename with alternatively quoted spaces.c  '
+
+# Just keep quoted whitespace
+  "  filename with some quoted and some unquoted spaces  "  
+
+[tagged]
+# Tags shouldn't change things
+tag:  tagged_filename_with_spaces_at_start.c
+tag:tagged_filename_with_spaces_at_end.c  
+tag:"  tagged_filename_with_quoted_spaces_at_start.c"
+tag:"tagged_filename_with_quoted_spaces_at_end.c  "
+tag:  "  tagged filename with quoted spaces and unquoted spaces  "  
+
+[tagged_with_args]
+tag(args):  tagged_filename_with_args_and_spaces_at_start.c
+tag(args):tagged_filename_with_args_and_spaces_at_end.c  
+tag(args):"  tagged_filename_with_args_and_quoted_spaces_at_start.c"
+tag(args):"tagged_filename_with_args_and_quoted_spaces_at_end.c  "
+tag(args):  "  tagged filename with args and quoted spaces and unquoted spaces  "  

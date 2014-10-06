@@ -1,0 +1,29 @@
+@doc keyword(os_windows_phone) = "Target static library running on mobile phone with windows 8."
+
+[os_windows_phone]
+@att DEFINE.WINAPI_FAMILY=WINAPI_FAMILY_APP
+
+[os_windows_phone.config_type_console]
+@att EXT=".exe"
+@att DEFINE._CONSOLE=1
+@att VS2012_CONFIGURATION_TYPE=application
+@att VS2013_CONFIGURATION_TYPE=application
+
+[os_windows_phone.config_type_windowed]
+@att EXT=".exe"
+@att DEFINE._WINDOWS=1
+@att VS2012_CONFIGURATION_TYPE=application
+@att VS2013_CONFIGURATION_TYPE=application
+
+[os_windows_phone.config_type_dynamic_lib]
+@att EXT=".dll"
+@att DEFINE._USRDLL=1
+@att DEFINE._WINDOWS=1
+@att VS2012_CONFIGURATION_TYPE=dynamic_library
+@att VS2013_CONFIGURATION_TYPE=dynamic_library
+
+[os_windows_phone.config_type_static_lib]
+@att EXT=".lib"
+@att DEFINE._LIB=1
+@att VS2012_CONFIGURATION_TYPE=static_library
+@att VS2013_CONFIGURATION_TYPE=static_library

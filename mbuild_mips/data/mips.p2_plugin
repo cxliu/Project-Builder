@@ -1,0 +1,48 @@
+def get_symbols():
+	return {'mips_support': mips_support,
+	       }
+
+
+toolchains = ['csmips']
+cores = ['24kec_el', '24kec_eb', '24kef_el', '24kef_eb']
+
+operating_systems = ['linux','bare']
+
+flavours = ['mips_simulate', 'release', 'debug' ]
+
+
+def toolchain_csmips_exception(configuration, parent_answer, parent_function):
+	if not configuration['tool'] == 'make':
+		return False
+	
+	if not configuration['toolchain'] in toolchains:
+		return False
+	
+	if not configuration['processor'] in cores:
+		return False
+	
+	if not configuration['os'] in operating_systems:
+		return False
+	
+	if configuration['os'] == 'linux':
+		if configuration['toolchain'] != 'csmips':
+			return False
+
+	if configuration['os'] == 'bare':
+		if configuration['toolchain'] != 'csmips':
+			return False
+
+	if not configuration['flavour'] in flavours:
+		return False
+	else:
+		if configuration['flavour'] == 'mips_simulate':
+			if configuration['os'] != 'csmips':
+				return False
+
+	return True
+
+require('mbuild_standard')
+require('mbuild_exception')
+
+mips_support = mbuild_exception(mbuild_standard, toolchain_csmips_exception)
+

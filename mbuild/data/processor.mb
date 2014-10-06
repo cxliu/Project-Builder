@@ -1,0 +1,7 @@
+@doc dimension(processor) = 'The type of processor to run on'
+@doc keyword(processor_x86) = 'A 32-bit x86 processor'
+@doc keyword(processor_amd64) = 'A 64-bit x86-64 processor'
+
+[default]
+@att VALUES.processor+='x86'
+@att VALUES.processor+='amd64'

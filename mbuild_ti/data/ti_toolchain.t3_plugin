@@ -1,0 +1,185 @@
+
+def get_symbols():
+    return {'makefn_toolchain_ccs': makefn_toolchain_ccs,
+            'makefn_toolchain_c6run': makefn_toolchain_c6run,
+           }
+
+require('t3_GnulikeToolchain')
+require('t3_GnulikeActionTypes')
+require('t3_GnulikeActionCommand')
+require('t3_GnulikeAction')
+
+def ccs_compile_c(insuffixes, outsuffixes):
+
+    # This just used to access constants
+    action_types = t3_GnulikeActionTypes()
+    
+    #      - Action class: e.g. 'Compile'  Each action consists of commands
+    #           - Command class e.g. 'gcc hello_world.c'
+    
+    c_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CC',' '],          # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CFLAGS',' '],      # attribute to look for in manifests
+                               'subattrib_depflags': ['MAKE_CCDEP_OUTPUT_FILE', ''],  # attribute to look for in manifests
+                               'string_depout'     : ['$*.d', ' '],            # raw sting for formatting command
+                               'defines'           : ['-D',' '],               # prefix for defines
+                               'includes'          : ['-I',' '],               # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CFLAGS_OUTPUT_FILE', ''],
+                               'string_endstr'     : ['$@ $<','']              # raw string
+                              }
+    c_compile_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_depflags', 'string_depout', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+
+
+    c_compile_command = t3_GnulikeActionCommand(c_compile_command_map, c_compile_command_order)
+    
+    c_in_suffixes = insuffixes
+    c_out_suffixes = outsuffixes
+    c_commands = [c_compile_command]
+    
+    c_action = t3_GnulikeAction(c_in_suffixes,
+                      c_out_suffixes,
+                      c_commands,
+                      action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+    return c_action
+
+def ccs_compile_cpp(insuffixes, outsuffixes):
+    
+    # This just used to access constants
+    action_types = t3_GnulikeActionTypes()
+
+    cpp_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CXX',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CXXFLAGS',' '],  # attribute to look for in manifests
+                               'subattrib_depflags': ['MAKE_CCDEP_OUTPUT_FILE', ''],  # attribute to look for in manifests
+                               'string_depout'     : ['$*.d', ' '],            # raw sting for formatting command
+                               'defines'           : ['-D',' '],               # prefix for defines
+                               'includes'          : ['-I',' '],               # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CXXFLAGS_OUTPUT_FILE', ''],
+                               'string_endstr'     : ['$@ $<','']         # raw string
+                                }
+    cpp_compile_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_depflags', 'string_depout', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+    
+    cpp_compile_command = t3_GnulikeActionCommand(cpp_compile_command_map, cpp_compile_command_order)
+    
+    cpp_in_suffixes = insuffixes
+    cpp_out_suffixes = outsuffixes
+    cpp_commands = [cpp_compile_command]
+    
+    cpp_action = t3_GnulikeAction(cpp_in_suffixes,
+                        cpp_out_suffixes,
+                        cpp_commands,
+                        action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+    return cpp_action
+
+def ccs_compile_asm(insuffixes, outsuffixes):
+    
+    # This just used to access constants
+    action_types = t3_GnulikeActionTypes()
+    
+    asm_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_AS',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_ASFLAGS',' '],  # attribute to look for in manifests
+                               'defines'           : ['-D',' '],               # prefix for defines
+                               'includes'          : ['-I',' '],               # prefix for include directories
+                               'string_endstr'     : ['--output_file=$@ $<','']         # raw string
+                                }
+    asm_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'string_endstr']
+
+    asm_compile_command = t3_GnulikeActionCommand(asm_compile_command_map, asm_compile_command_order)
+    
+    asm_in_suffixes = insuffixes
+    asm_out_suffixes = outsuffixes
+    asm_commands = [asm_compile_command]
+    
+    asm_action = t3_GnulikeAction(asm_in_suffixes,
+                        asm_out_suffixes,
+                        asm_commands,
+                        action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+    return asm_action
+
+def ccs_link(insuffixes, outsuffixes):
+    
+    # This just used to access constants
+    action_types = t3_GnulikeActionTypes()
+
+    link_command_map   = {\
+                               'attrib_exe'        : ['MAKE_LD',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_LDFLAGS',' '],  # attribute to look for in manifests
+                               'subattrib_out'     : ['MAKE_LDFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $^ ',' '],        # raw string
+                               'attrib_ldlibs'     : ['MAKE_LDLIBS','']  # attribute to look for in manifests
+                         }
+    link_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_out', 'string_endstr', 'attrib_ldlibs']
+ 
+    link_command = t3_GnulikeActionCommand(link_command_map, link_command_order)
+    
+    link_in_suffixes = insuffixes
+    link_out_suffixes = outsuffixes # output suffix determined by output file name in manifests
+    link_commands = [link_command]
+    
+    link_action = t3_GnulikeAction(link_in_suffixes,
+                         link_out_suffixes,
+                         link_commands,
+                         action_types.GNULIKE_ACTION_TYPE_LINK)
+
+    return link_action
+
+def ccs_archive(insuffixes, outsuffixes):
+    
+    # This just used to access constants
+    action_types = t3_GnulikeActionTypes()
+
+    archive_command_map = {\
+                               'attrib_exe'        : ['MAKE_AR',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_ARFLAGS',' '],  # attribute to look for in manifests
+                               'subattrib_out'     : ['MAKE_ARFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $^','']         # raw string
+                          }
+    archive_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_out', 'string_endstr']
+
+    archive_command = t3_GnulikeActionCommand(archive_command_map, archive_command_order)
+
+    archive_in_suffixes = insuffixes
+    archive_out_suffixes = outsuffixes # output suffix determined by output file name in manifests
+    archive_commands = [archive_command]
+    
+    archive_action = t3_GnulikeAction(archive_in_suffixes,
+                            archive_out_suffixes,
+                            archive_commands,
+                            action_types.GNULIKE_ACTION_TYPE_ARCHIVE)
+
+    return archive_action
+
+
+def makefn_toolchain_ccs():
+    
+    compile_c_action = ccs_compile_c(['.c'], ['.o','.d'])
+    compile_cpp_action = ccs_compile_cpp(['.cpp'], ['.o','.d'])
+    compile_linear_asm_action = ccs_compile_asm(['.sa'], ['.o'])
+    compile_asm_action = ccs_compile_asm(['.s'], ['.o'])
+    link_action = ccs_link(['.o','.lib','.a','.so'], [])
+    archive_action = ccs_archive(['.o','.lib','.a','.so'], [])
+   
+    # function and class names from the gnulike template
+    toolchain_class = t3_GnulikeToolchain
+    
+    # Toolchain definition consists of 3 types of objects
+    # Toolchain class: consists of actions
+    #      - Action class: e.g. 'Compile'  Each action consists of commands
+    #           - Command class e.g. 'gcc hello_world.c'
+
+    toolchain_name = 'ccs'
+    dependency_extensions = ['.d']
+    action_defs = [compile_c_action, compile_cpp_action, compile_linear_asm_action, compile_asm_action, link_action, archive_action]
+
+    ccs_toolchain = toolchain_class(toolchain_name, action_defs, dependency_extensions)
+
+    return ccs_toolchain
+
+def makefn_toolchain_c6run():
+    c6run_toolchain = makefn_toolchain_ccs()
+    c6run_toolchain.dimension_value = "c6run"
+    return c6run_toolchain

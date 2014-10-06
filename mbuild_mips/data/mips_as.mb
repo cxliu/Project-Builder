@@ -1,0 +1,50 @@
+[assembler_mips_as]
+@att MAKE_AS = "mips-linux-gnu-as"
+
+[os_bare.assembler_mips_as]
+@att MAKE_AS = "mips-sde-elf-as"
+
+[assembler_mips_as]
+@att MAKE_ASFLAGS_OUTPUT_FILE = "-o"
+
+# Set --cpu flag 
+[mips_processor_24kef.assembler_mips_as]
+@att MAKE_ASFLAGS += "-march=24kef"
+
+[mips_processor_24kec.assembler_mips_as]
+@att MAKE_ASFLAGS += "-march=24kec"
+
+[sys_little_endian.assembler_mips_as]
+@att MAKE_ASFLAGS += "-EL"
+
+[sys_big_endian.assembler_mips_as]
+@att MAKE_ASFLAGS += "-EB"
+
+[mips_architecture_mips32.assembler_mips_as]
+@att MAKE_ASFLAGS += "-mips32"
+
+[mips_architecture_mips32r2.assembler_mips_as]
+@att MAKE_ASFLAGS += "-mips32r2"
+
+[mips_feature_hardfloat.assembler_mips_as]
+@att MAKE_ASFLAGS += "-mhard-float"
+
+[mips_feature_softfloat.assembler_mips_as]
+@att MAKE_ASFLAGS += "-msoft-float"
+
+# Default use "-mdsp"
+# Option -mdspr2 is needed with some (older) version of MIPS compiler 
+# because they don't recognize accu1..accu3 although they are supported
+# by MIPS dsp ase r1 architecture. There is no need to specify -mdspr2 with
+# more recent versions of compilers/cross compilers (CodeSourcery 
+# version 4.5.1 is aware that accu1..accu3 are available in MIPS dsp ase r1). 
+# When we start using compiler that was installed on the board -mdspr2 was introduced. 
+# Preferred way is to use -mdsp (if compiler/cross compiler can compile the
+# code with it). Additional accumulators are used in FFT and some math 
+# functions, but not in low level intrinsics (that may have influence 
+# on performance).
+[mips_feature_dspr1.assembler_mips_as]
+@att MAKE_ASFLAGS += "-mdsp"
+
+[mips_feature_dspr2.assembler_mips_as]
+@att MAKE_ASFLAGS += "-mdsp2"

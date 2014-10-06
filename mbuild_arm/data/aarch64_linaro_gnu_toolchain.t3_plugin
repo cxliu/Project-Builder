@@ -1,0 +1,34 @@
+
+def get_symbols():
+    return {'makefn_toolchain_aarch64_linaro_gnu': makefn_toolchain_aarch64_linaro_gnu,
+           }
+
+# These functions and classes can be found in the gnulike_toolchain_template.t3_plugin file
+require('t3_gnulike_compile_c')
+require('t3_gnulike_compile_cpp')
+require('t3_gnulike_compile_asm')
+require('t3_gnulike_link')
+require('t3_gnulike_archive')
+require('t3_GnulikeToolchain')
+
+# Return a Toolchain object, in this case the GnulikeToolchain object
+def makefn_toolchain_aarch64_linaro_gnu():
+    
+    compile_c_action = t3_gnulike_compile_c(['.c'], ['.o','.d'])
+    compile_cpp_action = t3_gnulike_compile_cpp(['.cpp'], ['.o','.d'])
+    compile_asm_action = t3_gnulike_compile_asm(['.s'], ['.o'])
+    link_action = t3_gnulike_link(['.o','.lib','.a','.so'], [])
+    archive_action = t3_gnulike_archive(['.o','.lib','.a','.so'], [])
+    toolchain_class = t3_GnulikeToolchain
+
+    # This name equal the dimension corresponding to 'toolchain'
+    toolchain_name = 'aarch64_linaro_gnu'
+    # This tells M-Build to 'include' all files of this suffix which are generated into the makefile
+    dependency_extensions = ['.d']
+    # The set of all actions, these will be translated into makefile rules by M-Build
+    action_defs = [compile_c_action, compile_cpp_action, compile_asm_action, link_action, archive_action]
+
+    aarch64_linaro_gnu_toolchain = toolchain_class(toolchain_name, action_defs, dependency_extensions)
+
+    return aarch64_linaro_gnu_toolchain
+

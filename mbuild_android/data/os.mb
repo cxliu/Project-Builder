@@ -1,0 +1,9 @@
+[default]
+@att VALUES.os += "android"
+
+[os_android.config_type_static_lib]
+@att EXT = ".a"
+
+[os_android.config_type_dynamic_lib]
+@att EXT = ".so"
+

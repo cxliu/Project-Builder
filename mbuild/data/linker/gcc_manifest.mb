@@ -1,0 +1,22 @@
+[linker_gcc]
+@att MAKE_LD = 'gcc'
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+[linker_gcc.cpp_linker]
+@att MAKE_LD = 'g++'
+
+[linker_gcc.mbuild_debug_symbols]
+@att MAKE_LDFLAGS += '-rdynamic'
+
+[linker_gcc.mbuild_optimise]
+@att MAKE_LDFLAGS += '-O2'
+
+[linker_gcc.config_type_dynamic_lib]
+@att MAKE_LDFLAGS += "-fPIC"
+@att MAKE_LDFLAGS += "-shared"
+
+[linker_gcc.processor_x86]
+@att MAKE_LDFLAGS += "-m32"
+
+[linker_gcc.processor_amd64]
+@att MAKE_LDFLAGS += "-m64"

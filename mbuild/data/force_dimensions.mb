@@ -1,0 +1,19 @@
+[default]
+# Supported dimension values for Makefile
+@att MBUILD_MAKE_SUPPORT.tool += 'make'
+@att MBUILD_MAKE_SUPPORT.toolchain += 'gnu'
+
+# Supported dimension values for VS project files.
+@att MBUILD_MSVS_SUPPORT.tool += 'msvs2005'
+@att MBUILD_MSVS_SUPPORT.tool += 'msvs2008'
+@att MBUILD_MSVS_SUPPORT.tool += 'msvs2010'
+@att MBUILD_MSVS_SUPPORT.tool += 'msvs2012'
+@att MBUILD_MSVS_SUPPORT.tool += 'msvs2013'
+@att MBUILD_MSVS_SUPPORT.os += 'windows'
+@att MBUILD_MSVS_SUPPORT.processor += 'x86'
+@att MBUILD_MSVS_SUPPORT.processor += 'amd64'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'msvs2005'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'msvs2008'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'msvs2010'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'msvs2012'
+@att MBUILD_MSVS_SUPPORT.toolchain += 'msvs2013'

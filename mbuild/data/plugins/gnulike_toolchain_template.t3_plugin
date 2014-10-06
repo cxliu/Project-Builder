@@ -1,0 +1,374 @@
+# Export function and class names to be used by makefile-toolchain-plugins.  The 't3' prefix is a convention
+def get_symbols():
+	return {'t3_GnulikeActionTypes' : GnulikeActionTypes,
+		    't3_GnulikeActionCommand' : GnulikeActionCommand,
+		    't3_GnulikeAction' : GnulikeAction,
+		    't3_GnulikeToolchain' : GnulikeToolchain,
+		    't3_gnulike_compile_c' : gnulike_compile_c,
+		    't3_gnulike_compile_cpp' : gnulike_compile_cpp,
+		    't3_gnulike_compile_asm' : gnulike_compile_asm,
+		    't3_gnulike_link' : gnulike_link,
+		    't3_gnulike_archive' : gnulike_archive,
+           }
+
+# Helper functions found in t3_helpers.t3_plugin
+require('t3_join_list')
+require('t3_join_map')
+require('t3_get_var_from_project')
+require('t3_get_file_list')
+
+# Constructs a 'compile action' object for describing what steps are needed to compile a C file for this toolchain
+def gnulike_compile_c(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = GnulikeActionTypes()
+    
+    #      - Action class: e.g. 'Compile'  Each action consists of commands
+    #           - Command class e.g. 'gcc hello_world.c'
+    
+    
+    # names for these maps are important:
+    # 'attrib_' indicates a value to look up, anything after the underscore is unused
+    # 'string_' indicates a raw string, anything after the underscore is unused
+    # 'defines' get prefixed with the value given
+    # 'includes' get prefixed with the value given
+    # 'subattrib_' indicates a value to look up but not generate a 'makefile variable' for, instead directly place in the rule
+    
+    # The second item in the array gives any string to append after this entry.  This will usually be a single space ' ' but
+    # in some cases you may not want to have any space between entries
+	c_dependencies_command_map   = {\
+                               'attrib_exe'           : 'MAKE_CCDEP',             # looking up the compiler executable name for in manifests
+                               'subattrib_depflags'   : 'MAKE_CCDEPFLAGS',        # looking up flag attribute in manifests
+                               'defines'              : '-D',                     # prefix for defines
+                               'includes'             : '-I',                     # prefix for include directories
+                               'subattrib_depflags_t' : 'MAKE_CCDEPFLAGS_TARGET', # looking up another flag attribute in manifests 
+                               'string_preoutstr'     : '$@',                     # raw string for formatting command
+                               'subattrib_out'        : 'MAKE_CFLAGS_OUTPUT_FILE',# looking up prefix string for output files from manifests
+                               'string_endstr'        : ['$*.d $<','']                  # raw string for formatting command
+                                   }
+	c_dependencies_command_order = ['attrib_exe', 'subattrib_depflags', 'defines', 'includes', 'subattrib_depflags_t', 'string_preoutstr', 'subattrib_out', 'string_endstr']
+
+	c_dep_command = GnulikeActionCommand(c_dependencies_command_map, c_dependencies_command_order)
+    
+    
+	c_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CC',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CFLAGS',' '],  # attribute to look for in manifests
+                               'defines'           : ['-D',' '],               # prefix for defines
+                               'includes'          : ['-I',' '],               # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $<','']         # raw string
+                              }
+	c_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+
+	c_compile_command = GnulikeActionCommand(c_compile_command_map, c_compile_command_order)
+    
+	c_in_suffixes = insuffixes
+	c_out_suffixes = outsuffixes
+	c_commands = [c_dep_command, c_compile_command]
+    
+	c_action = GnulikeAction(c_in_suffixes,
+                      c_out_suffixes,
+                      c_commands,
+                      action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+	return c_action
+
+def gnulike_compile_cpp(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = GnulikeActionTypes()
+   
+	cpp_dependencies_command_map   = {\
+                               'attrib_exe'           : 'MAKE_CCDEP',       # attribute to look for in manifests
+                               'subattrib_depflags'   : 'MAKE_CCDEPFLAGS',  # attribute to look for in manifests
+                               'defines'              : '-D',               # prefix for defines
+                               'includes'             : '-I',               # prefix for include directories
+                               'subattrib_depflags_t' : 'MAKE_CCDEPFLAGS_TARGET',  # attribute to look for in manifests 
+                               'string_preoutstr'     : '$@',              # raw string
+                               'subattrib_out'        : 'MAKE_CXXFLAGS_OUTPUT_FILE', # attribute to look for in manifests
+                               'string_endstr'        : ['$*.d $<','']         # raw string
+                           }
+	cpp_dependencies_command_order = ['attrib_exe', 'subattrib_depflags', 'defines', 'includes', 'subattrib_depflags_t', 'string_preoutstr', 'subattrib_out', 'string_endstr']
+    
+	cpp_dep_command = GnulikeActionCommand(cpp_dependencies_command_map, cpp_dependencies_command_order)
+
+	cpp_compile_command_map   = {\
+                               'attrib_exe'        : ['MAKE_CXX',' '],       # attribute to look for in manifests
+                               'attrib_flags'      : ['MAKE_CXXFLAGS',' '],  # attribute to look for in manifests
+                               'defines'           : ['-D',' '],               # prefix for defines
+                               'includes'          : ['-I',' '],               # prefix for include directories
+                               'subattrib_out'     : ['MAKE_CFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $<','']         # raw string
+                                }
+	cpp_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+    
+	cpp_compile_command = GnulikeActionCommand(cpp_compile_command_map, cpp_compile_command_order)
+    
+	cpp_in_suffixes = insuffixes
+	cpp_out_suffixes = outsuffixes
+	cpp_commands = [cpp_dep_command, cpp_compile_command]
+    
+	cpp_action = GnulikeAction(cpp_in_suffixes,
+                        cpp_out_suffixes,
+                        cpp_commands,
+                        action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+	return cpp_action
+
+def gnulike_compile_asm(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = GnulikeActionTypes()
+    
+	asm_compile_command_map   = {\
+                               'attrib_exe'        : 'MAKE_AS',       # attribute to look for in manifests
+                               'attrib_flags'      : 'MAKE_ASFLAGS',  # attribute to look for in manifests
+                               'subattrib_out'     : 'MAKE_ASFLAGS_OUTPUT_FILE', # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $<','']         # raw string
+                                }
+	asm_compile_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_out', 'string_endstr']
+
+	asm_compile_command = GnulikeActionCommand(asm_compile_command_map, asm_compile_command_order)
+    
+	asm_in_suffixes = insuffixes
+	asm_out_suffixes = outsuffixes
+	asm_commands = [asm_compile_command]
+    
+	asm_action = GnulikeAction(asm_in_suffixes,
+                        asm_out_suffixes,
+                        asm_commands,
+                        action_types.GNULIKE_ACTION_TYPE_COMPILE)
+
+	return asm_action
+
+def gnulike_link(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = GnulikeActionTypes()
+
+	link_command_map   = {\
+                               'attrib_exe'        : 'MAKE_LD',       # attribute to look for in manifests
+                               'attrib_flags'      : 'MAKE_LDFLAGS',  # attribute to look for in manifests
+                               'subattrib_out'     : 'MAKE_LDFLAGS_OUTPUT_FILE', # attribute to look for in manifests
+                               'string_endstr'     : '$@ $+',         # raw string
+                               'attrib_ldlibs'     : ['MAKE_LDLIBS','']  # attribute to look for in manifests
+                         }
+	link_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_out', 'string_endstr', 'attrib_ldlibs']
+ 
+	link_command = GnulikeActionCommand(link_command_map, link_command_order)
+    
+	link_in_suffixes = insuffixes
+	link_out_suffixes = outsuffixes # output suffix determined by output file name in manifests
+	link_commands = [link_command]
+    
+	link_action = GnulikeAction(link_in_suffixes,
+                         link_out_suffixes,
+                         link_commands,
+                         action_types.GNULIKE_ACTION_TYPE_LINK)
+
+	return link_action
+
+def gnulike_archive(insuffixes, outsuffixes):
+    
+	# This just used to access constants
+	action_types = GnulikeActionTypes()
+
+	archive_command_map = {\
+                               'attrib_exe'        : 'MAKE_AR',       # attribute to look for in manifests
+                               'attrib_flags'      : 'MAKE_ARFLAGS',  # attribute to look for in manifests
+                               'subattrib_out'     : 'MAKE_ARFLAGS_OUTPUT_FILE', # attribute to look for in manifests
+                               'string_endstr'     : ['$@ $^','']     # raw string
+                          }
+	archive_command_order = ['attrib_exe', 'attrib_flags', 'subattrib_out', 'string_endstr']
+
+	archive_command = GnulikeActionCommand(archive_command_map, archive_command_order)
+
+	archive_in_suffixes = insuffixes
+	archive_out_suffixes = outsuffixes # output suffix determined by output file name in manifests
+	archive_commands = [archive_command]
+    
+	archive_action = GnulikeAction(archive_in_suffixes,
+                            archive_out_suffixes,
+                            archive_commands,
+                            action_types.GNULIKE_ACTION_TYPE_ARCHIVE)
+
+	return archive_action
+
+
+
+class GnulikeActionTypes(object):
+	GNULIKE_ACTION_TYPE_COMPILE = 0
+	GNULIKE_ACTION_TYPE_ARCHIVE = 1
+	GNULIKE_ACTION_TYPE_LINK = 2
+
+# An action command is a step within a rule
+# It is primarily described with the .map variable
+# e.g. 
+#	c_compile_command_map   = {\
+#                               'attrib_exe'        : ['MAKE_CC',' '],       # attribute to look for in manifests
+#                               'attrib_flags'      : ['MAKE_CFLAGS',' '],  # attribute to look for in manifests
+#                               'defines'           : ['-D',' '],               # prefix for defines
+#                               'includes'          : ['-I',' '],               # prefix for include directories
+#                               'subattrib_out'     : ['MAKE_CFLAGS_OUTPUT_FILE',' '], # attribute to look for in manifests
+#                               'string_endstr'     : ['$@ $<','']         # raw string
+#                              }
+#	c_compile_command_order = ['attrib_exe', 'attrib_flags', 'defines', 'includes', 'subattrib_out', 'string_endstr']
+#
+# The above Action Command will compile C files by first extracting the value of all values which start with 'attrib' or 'subattrib'
+# from the manifests (e.g. MAKE_CC -> 'gcc', MAKE_CFLAGS-> '-Wall', MAKE_CFLAGS_OUTPUT_FILE -> '-o')
+# Values which begin with 'attrib' will then be made into variables to be placed at the beginning of Makefiles,
+# variables which begin with 'subattrib' will be directly placed into the rule text, no make variable will be constructed
+# Any variables which start with 'string' are also directly placed into the rule text 
+# 'defines' and 'includes' will extract the values 'DEFINES' and 'INCLUDES' from the manifests and prefix the given value to each one
+# e.g. each define will be prefixed with -D in this case
+# The second item in the array gives any string to append after this entry.  This will usually be a single space ' ' but
+# in some cases you may not want to have any space between entries
+
+class GnulikeActionCommand(object):
+
+# names for these maps are important:
+# 'attrib_' indicates a value to look up, anything after the underscore is unused
+# 'string_' indicates a raw string, anything after the underscore is unused
+# 'defines' get prefixed with the value given
+# 'includes' get prefixed with the value given
+# 'subattrib_' indicates a value to look up but not generate a 'makefile variable' for, instead directly place in the rule
+
+# the order of these arguments gives the order of each string within the action command
+	def __init__(self, action_map, order):
+		self.order = order
+		# We currently support two ways of specifying the action - either a single
+		# string with an implied ' ' to use for separating items, or as a list
+		# containing two strings, where the the second is the string to use for
+		# separating items.
+		# Here we normalise into the second format.
+		self.map = {}
+		for key, value in action_map.iteritems():
+			if isinstance(value, str):
+				self.map[key] = [value, ' ']
+			else:
+				self.map[key] = value
+
+class GnulikeAction(object):
+	def __init__(self, insufs, outsufs, commands, action_type):
+		self.insufs = insufs
+		self.outsufs = outsufs
+		self.commands = commands
+		self.type = action_type
+
+class GnulikeToolchain(object):
+	def __init__(self, toolchain_name, action_defs, dependency_extensions):
+		self.action_defs = action_defs
+		self.dependency_extensions = dependency_extensions
+		self.setup_fn = gnulike_setup_actions
+		self.dimension = 'toolchain'
+		self.dimension_value = toolchain_name
+
+def gnulike_setup_actions(makefile, config, action_to_setup, identifier, full_identifier, out_name, toolchain_def):
+	action_types = GnulikeActionTypes()
+	
+	# indicate that this configuration will be used
+	makefile.add_config(config)
+
+	# indicate that dependency files need to be included into the makefile
+	makefile.include_dependencies(toolchain_def.dependency_extensions)  
+
+	for cdef in toolchain_def.action_defs:
+		if cdef.type == action_types.GNULIKE_ACTION_TYPE_COMPILE and action_to_setup == 'compile':
+			action_name = 'compile'
+			rule = makefile.add_rule(config,toolchain_def.dimension_value, action_name)
+			rule.rule_type = rule.TYPE_INPUTS_TO_OUTPUTS
+			setup_this_action = True
+		elif cdef.type == action_types.GNULIKE_ACTION_TYPE_LINK and action_to_setup == 'link':
+			action_name = 'link'
+			rule = makefile.add_rule(config,toolchain_def.dimension_value, action_name)
+			rule.rule_type = rule.TYPE_INPUTS_TO_OUTPUT
+			setup_this_action = True
+		elif cdef.type == action_types.GNULIKE_ACTION_TYPE_ARCHIVE and action_to_setup == 'archive':
+			action_name = 'archive'
+			rule = makefile.add_rule(config,toolchain_def.dimension_value, action_name)
+			rule.rule_type = rule.TYPE_INPUTS_TO_OUTPUT
+			rule.is_archive_rule = True
+			setup_this_action = True
+		else:
+			setup_this_action = False
+		
+		if setup_this_action:
+
+			if rule.rule_type == rule.TYPE_INPUTS_TO_OUTPUT:
+				
+				out_name = out_name[2]
+				if (out_name.split(".") == [out_name]):
+					# no extension
+					rule.output_suffixes.append('')
+				else:
+					rule.output_suffixes.append("." + out_name.split(".")[-1])
+				rule.output_files = [makefile.io_file(out_name)]
+
+			rule.identifier = identifier
+			rule.full_identifier = full_identifier
+			# if no input or output suffix, no general rule
+			# get input_files list
+			rule.input_files = []
+			for insuf in cdef.insufs:
+				rule.input_suffixes.append(insuf)
+				search_string = '*' + insuf
+				rule.input_files.extend(t3_get_file_list(makefile, search_string))
+	
+			for outsuf in cdef.outsufs:
+				rule.output_suffixes.append(outsuf)
+	
+			# no output files specified, produced by rule
+			rule.description = '%s files with %s compiler into object files and produce dependency files', (action_name, toolchain_def.dimension_value)
+			
+			for cmd in cdef.commands:
+				var_names = []
+				var_values = []
+				condense = []
+				separators = []
+				for section in cmd.order:
+					if section not in cmd.map:
+						raise T3PluginError('Toolchain plugin section definition not correct')
+					if section.startswith('attrib'):
+						var_value = t3_get_var_from_project(makefile, cmd.map[section][0], '', False)
+						separator = cmd.map[section][1]
+						var_name = cmd.map[section][0]
+						if var_name.startswith('MAKE_'):
+							var_name = var_name[len('MAKE_'):len(var_name)] 
+						condense_this = True
+					elif section.startswith('subattrib'):
+						var_value = t3_get_var_from_project(makefile, cmd.map[section][0], '', False)
+						separator = cmd.map[section][1]
+						var_name = var_value
+						condense_this = False
+					elif section.startswith('string'):
+						var_value = cmd.map[section][0]
+						var_name = cmd.map[section][0]
+						separator = cmd.map[section][1]
+						condense_this = False
+					elif section.startswith('defines'):	
+						var_value = t3_get_var_from_project(makefile, 'DEFINE', cmd.map[section][0], True)
+						var_name = 'DEFINES'
+						condense_this = True
+						separator = cmd.map[section][1]
+					elif section.startswith('includes'):
+						var_value = t3_get_var_from_project(makefile, 'INCLUDE', cmd.map[section][0], False)
+						var_name = 'INCLUDES'
+						condense_this = True
+						separator = cmd.map[section][1]
+					elif section.startswith('identifier'):
+						var_value = identifier
+						var_name = 'identifier'
+						condense_this = False
+						separator = cmd.map[section][1]
+					else:
+						raise T3PluginError('Bad toolchain plugin section definition')
+					var_names.append(var_name)
+					var_values.append(var_value)
+					condense.append(condense_this)
+					separators.append(separator)
+				
+				rule.add_step(var_names, var_values, condense, separators)
+	
+	return makefile
+

@@ -1,0 +1,25 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfoo_dynamic", "libfoo_dynamic_2013.vcxproj", "{D37008A0-06F2-37D9-923E-2A1C9E816B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		add1_debug|ARM = add1_debug|ARM
+		add1_release|ARM = add1_release|ARM
+		add2_debug|ARM = add2_debug|ARM
+		add2_release|ARM = add2_release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|ARM.ActiveCfg = add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_debug|ARM.Build.0 = add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|ARM.ActiveCfg = add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add1_release|ARM.Build.0 = add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|ARM.ActiveCfg = add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_debug|ARM.Build.0 = add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|ARM.ActiveCfg = add2_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.add2_release|ARM.Build.0 = add2_release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

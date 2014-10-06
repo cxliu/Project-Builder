@@ -1,0 +1,219 @@
+#-*-makefile-*-
+
+BASE=../../../../../../../../../
+CCDEP_a0_c0_debug = $(CC)
+CCDEP_a0_c0_release = $(CC)
+CCDEP_a0_c1_debug = $(CC)
+CCDEP_a0_c1_release = $(CC)
+CCDEP_a1_c0_debug = $(CC)
+CCDEP_a1_c0_release = $(CC)
+CCDEP_a1_c1_debug = $(CC)
+CCDEP_a1_c1_release = $(CC)
+CC_a0_c0_debug = $(CC)
+CC_a0_c0_release = $(CC)
+CC_a0_c1_debug = $(CC)
+CC_a0_c1_release = $(CC)
+CC_a1_c0_debug = $(CC)
+CC_a1_c0_release = $(CC)
+CC_a1_c1_debug = $(CC)
+CC_a1_c1_release = $(CC)
+CFLAGS_a0_c0_debug = -msse2 -g -ggdb3 -O0 -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a0_c0_release = -msse2 -O3 -funroll-loops -ftree-vectorize -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a0_c1_debug = -msse2 -g -ggdb3 -O0 -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a0_c1_release = -msse2 -O3 -funroll-loops -ftree-vectorize -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a1_c0_debug = -msse2 -g -ggdb3 -O0 -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a1_c0_release = -msse2 -O3 -funroll-loops -ftree-vectorize -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a1_c1_debug = -msse2 -g -ggdb3 -O0 -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+CFLAGS_a1_c1_release = -msse2 -O3 -funroll-loops -ftree-vectorize -m32 -c -Wall -Wextra -Wstrict-prototypes -Wmissing-prototypes -pedantic -std=gnu99 -Wdeclaration-after-statement -Wvla
+DEFINES_a0_c0_debug = -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a0_c0_release = -DNDEBUG=1 -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a0_c1_debug = -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a0_c1_release = -DNDEBUG=1 -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a1_c0_debug = -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a1_c0_release = -DNDEBUG=1 -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a1_c1_debug = -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+DEFINES_a1_c1_release = -DNDEBUG=1 -DPROJECT_A=1 -DWIN32=1 -D_CONSOLE=1
+INCLUDES_a0_c0_debug = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a0_c0_release = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a0_c1_debug = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a0_c1_release = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a1_c0_debug = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a1_c0_release = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a1_c1_debug = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+INCLUDES_a1_c1_release = -I$(BASE)mbuild/src/test/testcases/backend/input/project_a
+LDFLAGS_a0_c0_debug = -rdynamic -m32
+LDFLAGS_a0_c0_release = -O2 -m32
+LDFLAGS_a0_c1_debug = -rdynamic -m32
+LDFLAGS_a0_c1_release = -O2 -m32
+LDFLAGS_a1_c0_debug = -rdynamic -m32
+LDFLAGS_a1_c0_release = -O2 -m32
+LDFLAGS_a1_c1_debug = -rdynamic -m32
+LDFLAGS_a1_c1_release = -O2 -m32
+LD_a0_c0_debug = gcc
+LD_a0_c0_release = gcc
+LD_a0_c1_debug = gcc
+LD_a0_c1_release = gcc
+LD_a1_c0_debug = gcc
+LD_a1_c0_release = gcc
+LD_a1_c1_debug = gcc
+LD_a1_c1_release = gcc
+
+COMMON_FILES = $(BASE)mbuild/src/test/testcases/backend/input/project_a/file
+
+INPUTS_COMMON_LINK_a0_c0_debug = $(addsuffix .project_a_windows_x86_gnu_a0_c0_debug.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a0_c0_release = $(addsuffix .project_a_windows_x86_gnu_a0_c0_release.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a0_c1_debug = $(addsuffix .project_a_windows_x86_gnu_a0_c1_debug.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a0_c1_release = $(addsuffix .project_a_windows_x86_gnu_a0_c1_release.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a1_c0_debug = $(addsuffix .project_a_windows_x86_gnu_a1_c0_debug.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a1_c0_release = $(addsuffix .project_a_windows_x86_gnu_a1_c0_release.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a1_c1_debug = $(addsuffix .project_a_windows_x86_gnu_a1_c1_debug.o,$(COMMON_FILES))
+INPUTS_COMMON_LINK_a1_c1_release = $(addsuffix .project_a_windows_x86_gnu_a1_c1_release.o,$(COMMON_FILES))
+
+DEP_PROJ_LINK_a0_c0_debug = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c0_debug.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c0_debug.lib
+DEP_PROJ_LINK_a0_c0_release = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c0_release.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c0_release.lib
+DEP_PROJ_LINK_a0_c1_debug = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c1_debug.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c1_debug.lib
+DEP_PROJ_LINK_a0_c1_release = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c1_release.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c1_release.lib
+DEP_PROJ_LINK_a1_c0_debug = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c0_debug.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c0_debug.lib
+DEP_PROJ_LINK_a1_c0_release = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c0_release.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c0_release.lib
+DEP_PROJ_LINK_a1_c1_debug = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c1_debug.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c1_debug.lib
+DEP_PROJ_LINK_a1_c1_release = $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu/project_b_c1_release.lib $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu/project_c_c1_release.lib
+
+default: project_a_a0_c0_debug.exe project_a_a0_c1_debug.exe project_a_a1_c0_debug.exe project_a_a1_c1_debug.exe project_a_a0_c0_release.exe project_a_a0_c1_release.exe project_a_a1_c0_release.exe project_a_a1_c1_release.exe
+
+project_a_a0_c0_debug.exe: $(INPUTS_COMMON_LINK_a0_c0_debug) $(DEP_PROJ_LINK_a0_c0_debug)
+	$(LD_a0_c0_debug) $(LDFLAGS_a0_c0_debug) -o $@ $+ 
+
+project_a_a0_c1_debug.exe: $(INPUTS_COMMON_LINK_a0_c1_debug) $(DEP_PROJ_LINK_a0_c1_debug)
+	$(LD_a0_c1_debug) $(LDFLAGS_a0_c1_debug) -o $@ $+ 
+
+project_a_a1_c0_debug.exe: $(INPUTS_COMMON_LINK_a1_c0_debug) $(DEP_PROJ_LINK_a1_c0_debug)
+	$(LD_a1_c0_debug) $(LDFLAGS_a1_c0_debug) -o $@ $+ 
+
+project_a_a1_c1_debug.exe: $(INPUTS_COMMON_LINK_a1_c1_debug) $(DEP_PROJ_LINK_a1_c1_debug)
+	$(LD_a1_c1_debug) $(LDFLAGS_a1_c1_debug) -o $@ $+ 
+
+project_a_a0_c0_release.exe: $(INPUTS_COMMON_LINK_a0_c0_release) $(DEP_PROJ_LINK_a0_c0_release)
+	$(LD_a0_c0_release) $(LDFLAGS_a0_c0_release) -o $@ $+ 
+
+project_a_a0_c1_release.exe: $(INPUTS_COMMON_LINK_a0_c1_release) $(DEP_PROJ_LINK_a0_c1_release)
+	$(LD_a0_c1_release) $(LDFLAGS_a0_c1_release) -o $@ $+ 
+
+project_a_a1_c0_release.exe: $(INPUTS_COMMON_LINK_a1_c0_release) $(DEP_PROJ_LINK_a1_c0_release)
+	$(LD_a1_c0_release) $(LDFLAGS_a1_c0_release) -o $@ $+ 
+
+project_a_a1_c1_release.exe: $(INPUTS_COMMON_LINK_a1_c1_release) $(DEP_PROJ_LINK_a1_c1_release)
+	$(LD_a1_c1_release) $(LDFLAGS_a1_c1_release) -o $@ $+ 
+
+%.project_a_windows_x86_gnu_a0_c0_debug.o: %.c
+	$(CCDEP_a0_c0_debug) -msse2 -MM $(DEFINES_a0_c0_debug) $(INCLUDES_a0_c0_debug) -MT $@ -o $*.project_a_windows_x86_gnu_a0_c0_debug.d $<
+	$(CC_a0_c0_debug) $(CFLAGS_a0_c0_debug) $(DEFINES_a0_c0_debug) $(INCLUDES_a0_c0_debug) -o $@ $<
+
+%.project_a_windows_x86_gnu_a0_c0_release.o: %.c
+	$(CCDEP_a0_c0_release) -msse2 -MM $(DEFINES_a0_c0_release) $(INCLUDES_a0_c0_release) -MT $@ -o $*.project_a_windows_x86_gnu_a0_c0_release.d $<
+	$(CC_a0_c0_release) $(CFLAGS_a0_c0_release) $(DEFINES_a0_c0_release) $(INCLUDES_a0_c0_release) -o $@ $<
+
+%.project_a_windows_x86_gnu_a0_c1_debug.o: %.c
+	$(CCDEP_a0_c1_debug) -msse2 -MM $(DEFINES_a0_c1_debug) $(INCLUDES_a0_c1_debug) -MT $@ -o $*.project_a_windows_x86_gnu_a0_c1_debug.d $<
+	$(CC_a0_c1_debug) $(CFLAGS_a0_c1_debug) $(DEFINES_a0_c1_debug) $(INCLUDES_a0_c1_debug) -o $@ $<
+
+%.project_a_windows_x86_gnu_a0_c1_release.o: %.c
+	$(CCDEP_a0_c1_release) -msse2 -MM $(DEFINES_a0_c1_release) $(INCLUDES_a0_c1_release) -MT $@ -o $*.project_a_windows_x86_gnu_a0_c1_release.d $<
+	$(CC_a0_c1_release) $(CFLAGS_a0_c1_release) $(DEFINES_a0_c1_release) $(INCLUDES_a0_c1_release) -o $@ $<
+
+%.project_a_windows_x86_gnu_a1_c0_debug.o: %.c
+	$(CCDEP_a1_c0_debug) -msse2 -MM $(DEFINES_a1_c0_debug) $(INCLUDES_a1_c0_debug) -MT $@ -o $*.project_a_windows_x86_gnu_a1_c0_debug.d $<
+	$(CC_a1_c0_debug) $(CFLAGS_a1_c0_debug) $(DEFINES_a1_c0_debug) $(INCLUDES_a1_c0_debug) -o $@ $<
+
+%.project_a_windows_x86_gnu_a1_c0_release.o: %.c
+	$(CCDEP_a1_c0_release) -msse2 -MM $(DEFINES_a1_c0_release) $(INCLUDES_a1_c0_release) -MT $@ -o $*.project_a_windows_x86_gnu_a1_c0_release.d $<
+	$(CC_a1_c0_release) $(CFLAGS_a1_c0_release) $(DEFINES_a1_c0_release) $(INCLUDES_a1_c0_release) -o $@ $<
+
+%.project_a_windows_x86_gnu_a1_c1_debug.o: %.c
+	$(CCDEP_a1_c1_debug) -msse2 -MM $(DEFINES_a1_c1_debug) $(INCLUDES_a1_c1_debug) -MT $@ -o $*.project_a_windows_x86_gnu_a1_c1_debug.d $<
+	$(CC_a1_c1_debug) $(CFLAGS_a1_c1_debug) $(DEFINES_a1_c1_debug) $(INCLUDES_a1_c1_debug) -o $@ $<
+
+%.project_a_windows_x86_gnu_a1_c1_release.o: %.c
+	$(CCDEP_a1_c1_release) -msse2 -MM $(DEFINES_a1_c1_release) $(INCLUDES_a1_c1_release) -MT $@ -o $*.project_a_windows_x86_gnu_a1_c1_release.d $<
+	$(CC_a1_c1_release) $(CFLAGS_a1_c1_release) $(DEFINES_a1_c1_release) $(INCLUDES_a1_c1_release) -o $@ $<
+
+CLEAN_COMMON_COMPILE_a0_c0_debug = $(addsuffix .project_a_windows_x86_gnu_a0_c0_debug.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a0_c0_release = $(addsuffix .project_a_windows_x86_gnu_a0_c0_release.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a0_c1_debug = $(addsuffix .project_a_windows_x86_gnu_a0_c1_debug.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a0_c1_release = $(addsuffix .project_a_windows_x86_gnu_a0_c1_release.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a1_c0_debug = $(addsuffix .project_a_windows_x86_gnu_a1_c0_debug.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a1_c0_release = $(addsuffix .project_a_windows_x86_gnu_a1_c0_release.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a1_c1_debug = $(addsuffix .project_a_windows_x86_gnu_a1_c1_debug.d,$(COMMON_FILES))
+CLEAN_COMMON_COMPILE_a1_c1_release = $(addsuffix .project_a_windows_x86_gnu_a1_c1_release.d,$(COMMON_FILES))
+
+cleandeps:
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c0_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c0_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c1_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c1_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c0_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c0_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c1_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c1_release)
+
+clean: cleanself
+	$(MAKE) -C $(BASE)mbuild/src/test/testcases/backend/input/project_b/project_b/windows_x86_gnu cleanself
+	$(MAKE) -C $(BASE)mbuild/src/test/testcases/backend/input/project_c/project_c/windows_x86_gnu cleanself
+
+cleanself:
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c0_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c0_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c1_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a0_c1_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c0_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c0_release)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c1_debug)
+	$(RM) $(CLEAN_COMMON_COMPILE_a1_c1_release)
+	$(RM) $(INPUTS_COMMON_LINK_a0_c0_debug)
+	$(RM) $(INPUTS_COMMON_LINK_a0_c1_debug)
+	$(RM) $(INPUTS_COMMON_LINK_a1_c0_debug)
+	$(RM) $(INPUTS_COMMON_LINK_a1_c1_debug)
+	$(RM) $(INPUTS_COMMON_LINK_a0_c0_release)
+	$(RM) $(INPUTS_COMMON_LINK_a0_c1_release)
+	$(RM) $(INPUTS_COMMON_LINK_a1_c0_release)
+	$(RM) $(INPUTS_COMMON_LINK_a1_c1_release)
+	$(RM) project_a_a0_c0_debug.exe
+	$(RM) project_a_a0_c1_debug.exe
+	$(RM) project_a_a1_c0_debug.exe
+	$(RM) project_a_a1_c1_debug.exe
+	$(RM) project_a_a0_c0_release.exe
+	$(RM) project_a_a0_c1_release.exe
+	$(RM) project_a_a1_c0_release.exe
+	$(RM) project_a_a1_c1_release.exe
+
+.PHONY: default FORCE clean cleandeps cleanself help
+
+FORCE:
+
+help:
+	@echo "This makefile has the following targets:"
+	@echo " project_a_a0_c0_debug.exe"
+	@echo " project_a_a0_c1_debug.exe"
+	@echo " project_a_a1_c0_debug.exe"
+	@echo " project_a_a1_c1_debug.exe"
+	@echo " project_a_a0_c0_release.exe"
+	@echo " project_a_a0_c1_release.exe"
+	@echo " project_a_a1_c0_release.exe"
+	@echo " project_a_a1_c1_release.exe"
+	@echo " default"
+	@echo " clean"
+	@echo " cleandeps"
+	@echo " help"
+
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a0_c0_debug.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a0_c0_release.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a0_c1_debug.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a0_c1_release.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a1_c0_debug.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a1_c0_release.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a1_c1_debug.d)
+include $(wildcard $(BASE)mbuild/src/test/testcases/backend/input/project_a/file.project_a_windows_x86_gnu_a1_c1_release.d)
+
+%.lib: FORCE
+	$(MAKE) -C $(@D) $(@F)
+
+

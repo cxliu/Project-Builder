@@ -1,0 +1,8 @@
+[release]
+error_helper.py
+error_messages.py
+__init__.py
+m2.py
+p2.py
+p2_naming.py
+plugin_manager.py

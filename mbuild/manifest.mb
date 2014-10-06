@@ -1,0 +1,14 @@
+[release]:internal
+frontend/build.py
+frontend/create_doc.py
+frontend/create_makefiles.py
+frontend/create_vs_projects.py
+frontend/process_source.py
+frontend/query_manifests.py
+frontend/__init__.py
+__init__.py
+release_notes.txt
+
+[default]:internal
+@import src/manifest.mb
+@import data/manifest.mb

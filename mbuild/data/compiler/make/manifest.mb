@@ -1,0 +1,8 @@
+@doc attribute(MAKE_CFLAGS) = "A list of compiler flags to pass to the compiler MAKE_CC. Do not include extra include paths or preprocessor definitions here, use the INCLUDE and DEFINE attributes instead."
+@doc attribute(MAKE_CC) = "The C compiler to use."
+@doc attribute(MAKE_CFLAGS_OUTPUT_FILE) = "The spelling of the option to the C compiler which says what the name of the output is."
+
+@doc attribute(MAKE_CCDEP) = "The name of the tool used to do dependency generation. This tool must be capable of producing Makefile format dependency files. If left empty, then no dependency generation is used."
+@doc attribute(MAKE_CCDEPFLAGS) = "The flags to passed to MAKE_CCDEP. Not used if MAKE_CCDEP is empty."
+@doc attribute(MAKE_CCDEPFLAGS_TARGET) = "The spelling of the flag to MAKE_CCDEP which takes an argument which is the name of the target object file to write in the Makefile created by MAKE_CCDEP. Not used if MAKE_CCDEP is empty."
+@doc attribute(MAKE_CCDEPFLAGS_OUTPUT_FILE) = "The spelling of the option to the C compiler which says what the name of the output is. Note used if MAKE_CCDEP is empty."

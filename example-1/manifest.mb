@@ -1,0 +1,9 @@
+# The top level manifest file for a component generally just needs to @import
+# the lower level manifest files.
+
+[default]
+@import frontend/manifest.mb
+@import include/manifest.mb
+@import make/manifest.mb
+@import src/manifest.mb
+

@@ -1,0 +1,8 @@
+[syslib_pthread.linker_rvct_armlink.os_linux]
+@att MAKE_LDFLAGS += '-L--library=pthread'
+
+[syslib_math.os_linux.linker_rvct_armlink]
+@att MAKE_LDFLAGS += '-L--library=m'
+
+[syslib_rt.os_linux.linker_rvct_armlink]
+@att MAKE_LDFLAGS += '-L--library=rt'

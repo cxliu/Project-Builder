@@ -1,0 +1,39 @@
+@doc dimension(flavour) = 'The purpose of this build'
+@doc keyword(flavour_debug) = "Turn off optimiser and include debugging symbols"
+@doc keyword(flavour_release) = "Turn on optimiser and disable asserts"
+
+@doc keyword(mbuild_debug_symbols) = 'Include debug symbols'
+@doc keyword(mbuild_no_debug_symbols) = 'Strip debug symbols'
+@doc keyword(mbuild_optimise) = 'Turn on optimiser'
+@doc keyword(mbuild_no_optimise) = 'Turn off optimiser'
+@doc keyword(mbuild_asserts) = 'Enable asserts'
+@doc keyword(mbuild_no_asserts) = 'Disable asserts'
+
+[flavour_debug+flavour_release]
+@add flavour_mbuild
+
+[flavour_debug]
+@add mbuild_debug
+
+[flavour_release]
+@add mbuild_release
+
+[mbuild_debug]
+@add mbuild_sensible_defaults
+@add mbuild_debug_symbols
+@add mbuild_no_optimise
+@add mbuild_asserts
+
+[mbuild_release]
+@add mbuild_sensible_defaults
+@add mbuild_optimise
+@add mbuild_no_debug_symbols
+@add mbuild_no_asserts
+
+[default]
+@att VALUES.flavour+='debug'
+@att VALUES.flavour+='release'
+
+[release.mbuild]
+@add flavour_debug
+@add flavour_release

@@ -1,0 +1,10 @@
+[archiver_clang]
+@att MAKE_ARFLAGS+="-rc"
+@att MAKE_ARFLAGS+="-s"
+@att MAKE_ARFLAGS_OUTPUT_FILE=" "
+
+[archiver_clang.os_osx]
+@att MAKE_AR="xcrun ar"
+
+[archiver_clang.os_ios]
+@att MAKE_AR="xcrun -sdk iphoneos ar"

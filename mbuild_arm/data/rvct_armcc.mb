@@ -1,0 +1,196 @@
+@doc keyword(rvct_vectorize) = "Turn on auto-vectorizer"
+
+@doc keyword(rvct_code_gen_arm) = "Request compiler targets the ARM instruction set"
+@doc keyword(rvct_code_gen_arm_only) = "Enforce that compiler generates ARM-only instructions"
+@doc keyword(rvct_code_gen_thumb) = "Request compiler targets the Thumb instruction set"
+
+@doc keyword(rvct_fpmode_ieee_full) = "Full IEEE floating point model"
+@doc keyword(rvct_fpmode_ieee_fixed) = "IEEE standard with round-to-nearest and no inexact exceptions"
+@doc keyword(rvct_fpmode_ieee_no_fenv) = "IEEE standard with round-to-nearest and no exceptions, this model is stateless"
+@doc keyword(rvct_fpmode_none) = "Source code will not use any floating point"
+@doc keyword(rvct_fpmode_std) = "IEEE finite values with denormals flushed to zero, round-to-zero and no exceptions."
+@doc keyword(rvct_fpmode_ieee_fast) = "Fast floating point, not fully compliant with ISO C or C++ standards"
+
+[compiler_rvct_armcc]
+@att MAKE_CC = "armcc"
+@att MAKE_CXX = "armcc"
+@att MAKE_CFLAGS += "-c"
+@att MAKE_CFLAGS_OUTPUT_FILE = "-o"
+@att MAKE_CXXFLAGS += "-c"
+@att MAKE_CXXFLAGS_OUTPUT_FILE = "-o"
+
+[compiler_rvct_armcc]
+@att MAKE_CCDEP = "armcc"
+@att MAKE_CCDEPFLAGS += "--mm"
+@att MAKE_CCDEPFLAGS_TARGET = "-o"
+@att MAKE_CCDEPFLAGS_OUTPUT_FILE = ">"
+
+[armcc_gcc_options]
+@att MAKE_CFLAGS += '--translate_gcc'
+@att MAKE_CXXFLAGS += '--translate_gcc'
+
+[compiler_rvct_armcc]
+@att MAKE_CFLAGS += '--c99'
+
+[armcc_dynamic_lib_options]
+@att MAKE_CFLAGS += "--apcs=/fpic"
+@att MAKE_CXXFLAGS += "--apcs=/fpic"
+
+# Set --cpu flag correctly
+[processor_armv5te]
+@att MAKE_CFLAGS += "--cpu=5TE"
+@att MAKE_CXXFLAGS += "--cpu=5TE"
+@att MAKE_CCDEPFLAGS += "--cpu=5TE"
+
+[processor_armv6]
+@att MAKE_CFLAGS += "--cpu=6"
+@att MAKE_CXXFLAGS += "--cpu=6"
+@att MAKE_CCDEPFLAGS += "--cpu=6"
+
+[arm_processor_cortex_a8]
+@att MAKE_CFLAGS += "--cpu=Cortex-A8.no_neon"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A8.no_neon"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A8.no_neon"
+
+[arm_processor_cortex_a8_neon]
+@att MAKE_CFLAGS += "--cpu=Cortex-A8"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A8"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A8"
+
+[arm_processor_cortex_a9]
+@att MAKE_CFLAGS += "--cpu=Cortex-A9.no_neon.no_vfp"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A9.no_neon.no_vfp"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A9.no_neon.no_vfp"
+
+[arm_processor_cortex_a9_vfp]
+@att MAKE_CFLAGS += "--cpu=Cortex-A9.no_neon"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A9.no_neon"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A9.no_neon"
+
+[arm_processor_cortex_a9_vfp_neon]
+@att MAKE_CFLAGS += "--cpu=Cortex-A9"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A9"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A9"
+
+[arm_processor_cortex_a15_vfp_neon]
+@att MAKE_CFLAGS += "--cpu=Cortex-A15"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A15"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A15"
+
+[arm_processor_cortex_a7_vfp_neon]
+@att MAKE_CFLAGS += "--cpu=Cortex-A7"
+@att MAKE_CXXFLAGS += "--cpu=Cortex-A7"
+@att MAKE_CCDEPFLAGS += "--cpu=Cortex-A7"
+
+# Set correct VFP type
+[arm_feature_vfp_soft.os_abi_soft_float]
+@att MAKE_CFLAGS += "--fpu=SoftVFP"
+@att MAKE_CXXFLAGS += "--fpu=SoftVFP"
+
+[arm_feature_vfp_v3_d16.os_abi_soft_float]
+@att MAKE_CFLAGS += "--fpu=SoftVFP+VFPv3_D16"
+@att MAKE_CXXFLAGS += "--fpu=SoftVFP+VFPv3_D16"
+
+[arm_feature_vfp_v3_d16.os_abi_hard_float]
+@att MAKE_CFLAGS += "--fpu=VFPv3_D16"
+@att MAKE_CXXFLAGS += "--fpu=VFPv3_D16"
+
+[arm_feature_vfp_v3_d32.os_abi_soft_float]
+@att MAKE_CFLAGS += "--fpu=SoftVFP+VFPv3"
+@att MAKE_CXXFLAGS += "--fpu=SoftVFP+VFPv3"
+
+[arm_feature_vfp_v3_d32.os_abi_hard_float]
+@att MAKE_CFLAGS += "--fpu=VFPv3"
+@att MAKE_CXXFLAGS += "--fpu=VFPv3"
+
+[arm_feature_vfp_v4_d16.os_abi_soft_float]
+@att MAKE_CFLAGS += "--fpu=SoftVFP+VFPv4_D16"
+@att MAKE_CXXFLAGS += "--fpu=SoftVFP+VFPv4_D16"
+
+[arm_feature_vfp_v4_d16.os_abi_hard_float]
+@att MAKE_CFLAGS += "--fpu=VFPv4_D16"
+@att MAKE_CXXFLAGS += "--fpu=VFPv4_D16"
+
+[arm_feature_vfp_v4_d32.os_abi_soft_float]
+@att MAKE_CFLAGS += "--fpu=SoftVFP+VFPv4"
+@att MAKE_CXXFLAGS += "--fpu=SoftVFP+VFPv4"
+
+[arm_feature_vfp_v4_d32.os_abi_hard_float]
+@att MAKE_CFLAGS += "--fpu=VFPv4"
+@att MAKE_CXXFLAGS += "--fpu=VFPv4"
+
+# Set misc processor flags
+[rvct_no_unaligned_access]
+@att MAKE_CFLAGS += "--no_unaligned_access"
+@att MAKE_CXXFLAGS += "--no_unaligned_access"
+
+[rvct_unaligned_access]
+@att MAKE_CFLAGS += "--unaligned_access"
+@att MAKE_CXXFLAGS += "--unaligned_access"
+
+[rvct_vectorize]
+@att MAKE_CFLAGS += "--vectorize"
+@att MAKE_CXXFLAGS += "--vectorize"
+
+# Floating point model
+[rvct_fpmode_ieee_full]
+@att MAKE_CFLAGS += "--fpmode=ieee_full"
+@att MAKE_CXXFLAGS += "--fpmode=ieee_full"
+
+[rvct_fpmode_ieee_fixed]
+@att MAKE_CFLAGS += "--fpmode=ieee_fixed"
+@att MAKE_CXXFLAGS += "--fpmode=ieee_fixed"
+
+[rvct_fpmode_ieee_no_fenv]
+@att MAKE_CFLAGS += "--fpmode=ieee_no_fenv"
+@att MAKE_CXXFLAGS += "--fpmode=ieee_no_fenv"
+
+[rvct_fpmode_ieee_none]
+@att MAKE_CFLAGS += "--fpmode=none"
+@att MAKE_CXXFLAGS += "--fpmode=none"
+
+[rvct_fpmode_std]
+@att MAKE_CFLAGS += "--fpmode=std"
+@att MAKE_CXXFLAGS += "--fpmode=std"
+
+[rvct_fpmode_fast]
+@att MAKE_CFLAGS += "--fpmode=fast"
+@att MAKE_CXXFLAGS += "--fpmode=fast"
+
+[rvct_code_gen_arm]
+@att MAKE_CFLAGS += "--arm"
+@att MAKE_CXXFLAGS += "--arm"
+
+[rvct_code_gen_arm_only]
+@att MAKE_CFLAGS += "--arm_only"
+@att MAKE_CXXFLAGS += "--arm_only"
+
+[rvct_code_gen_thumb]
+@att MAKE_CFLAGS += "--thumb"
+@att MAKE_CXXFLAGS += "--thumb"
+
+[mbuild_debug_symbols]
+@att MAKE_CFLAGS += "-g"
+@att MAKE_CXXFLAGS += "-g"
+
+[mbuild_optimise]
+@att MAKE_CFLAGS += "-O3"
+@att MAKE_CFLAGS += "-Otime"
+@att MAKE_CXXFLAGS += "-O3"
+@att MAKE_CXXFLAGS += "-Otime"
+
+[mbuild_no_optimise]
+@att MAKE_CFLAGS += "-O0"
+@att MAKE_CXXFLAGS += "-O0"
+
+[arm_thumb_interworking_support]
+@att MAKE_CFLAGS += "--apcs=/interwork"
+@att MAKE_CXXFLAGS += "--apcs=/interwork"
+
+[compiler_rvct_armcc.processor_armv8]
+@att MAKE_CFLAGS += '--cpu=8-A.64'
+@att MAKE_CXXFLAGS += '--cpu=8-A.64'
+@att MAKE_CFLAGS += '--fpu=FP-ARMv8'
+@att MAKE_CXXFLAGS += '--fpu=FP-ARMv8'
+@att MAKE_CCDEPFLAGS += "--cpu=8-A.64"
+@att MAKE_CCDEPFLAGS += "--fpu=FP-ARMv8"

@@ -1,0 +1,3 @@
+@doc attribute(MAKE_AR) = 'The archiver to use for creating static libraries.'
+@doc attribute(MAKE_ARFLAGS) = 'Flags to pass to MAKE_AR to get it to add an object file to the library.'
+

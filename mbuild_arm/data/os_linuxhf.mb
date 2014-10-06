@@ -1,0 +1,8 @@
+[os_linuxhf.config_type_dynamic_lib.compiler_rvct_armcc]
+@add armcc_dynamic_lib_options
+
+[os_linuxhf.config_type_dynamic_lib]
+@att EXT='.so'
+
+[os_linuxhf.config_type_static_lib]
+@att EXT='.a'

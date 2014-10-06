@@ -1,0 +1,78 @@
+# Project immediate dependencies:
+project_c
+
+# Project all dependencies:
+project_b
+project_c
+
+# Project actions:
+['archive', 'compile', 'use']
+
+# Project dimensions:
+['os', 'processor', 'flavour', 'toolchain', 'tool', 'project_c_dimension']
+
+# Project configurations (total:64):
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'debug', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'debug', 'os': 'linux', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'linux', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'linux', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'linux', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'osx', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'osx', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'osx', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'debug', 'os': 'osx', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2005', 'toolchain': 'msvs2005'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2008', 'toolchain': 'msvs2008'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2010', 'toolchain': 'msvs2010'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2012', 'toolchain': 'msvs2012'}
+{'flavour': 'release', 'os': 'windows', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'msvs2013', 'toolchain': 'msvs2013'}
+{'flavour': 'release', 'os': 'linux', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'linux', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'linux', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'linux', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'osx', 'processor': 'x86', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'osx', 'processor': 'x86', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'osx', 'processor': 'amd64', 'project_c_dimension': 'c0', 'tool': 'make', 'toolchain': 'gnu'}
+{'flavour': 'release', 'os': 'osx', 'processor': 'amd64', 'project_c_dimension': 'c1', 'tool': 'make', 'toolchain': 'gnu'}

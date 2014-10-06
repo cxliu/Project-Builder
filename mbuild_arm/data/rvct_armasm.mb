@@ -1,0 +1,78 @@
+[compiler_rvct_armcc]
+@att MAKE_AS = "armasm"
+@att MAKE_ASFLAGS_OUTPUT_FILE = "-o"
+
+# Set --cpu flag correctly
+[processor_armv5te]
+@att MAKE_ASFLAGS += "--cpu=5TE"
+
+[processor_armv6]
+@att MAKE_ASFLAGS += "--cpu=6"
+
+[arm_processor_cortex_a8]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A8.no_neon"
+
+[arm_processor_cortex_a8_neon]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A8"
+
+[arm_processor_cortex_a9]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A9.no_neon.no_vfp"
+
+[arm_processor_cortex_a9_vfp]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A9.no_neon"
+
+[arm_processor_cortex_a9_vfp_neon]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A9"
+
+[arm_processor_cortex_a15_vfp_neon]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A15"
+
+[arm_processor_cortex_a7_vfp_neon]
+@att MAKE_ASFLAGS += "--cpu=Cortex-A7"
+
+# Set correct VFP type
+[arm_feature_vfp_soft.os_abi_soft_float]
+@att MAKE_ASFLAGS += "--fpu=SoftVFP"
+
+[arm_feature_vfp_v3_d16.os_abi_soft_float]
+@att MAKE_ASFLAGS += "--fpu=SoftVFP+VFPv3_D16"
+
+[arm_feature_vfp_v3_d16.os_abi_hard_float]
+@att MAKE_ASFLAGS += "--fpu=VFPv3_D16"
+
+[arm_feature_vfp_v3_d32.os_abi_soft_float]
+@att MAKE_ASFLAGS += "--fpu=SoftVFP+VFPv3"
+
+[arm_feature_vfp_v3_d32.os_abi_hard_float]
+@att MAKE_ASFLAGS += "--fpu=VFPv3"
+
+[arm_feature_vfp_v4_d16.os_abi_soft_float]
+@att MAKE_ASFLAGS += "--fpu=SoftVFP+VFPv4_D16"
+
+[arm_feature_vfp_v4_d16.os_abi_hard_float]
+@att MAKE_ASFLAGS += "--fpu=VFPv4_D16"
+
+[arm_feature_vfp_v4_d32.os_abi_soft_float]
+@att MAKE_ASFLAGS += "--fpu=SoftVFP+VFPv4"
+
+[arm_feature_vfp_v4_d32.os_abi_hard_float]
+@att MAKE_ASFLAGS += "--fpu=VFPv4"
+
+[rvct_code_gen_arm]
+@att MAKE_ASFLAGS += "--arm"
+
+[rvct_code_gen_arm_only]
+@att MAKE_ASFLAGS += "--arm_only"
+
+[rvct_code_gen_thumb]
+@att MAKE_ASFLAGS += "--thumb"
+
+[armcc_dynamic_lib_options]
+@att MAKE_ASFLAGS += "--apcs=/fpic"
+
+[arm_thumb_interworking_support]
+@att MAKE_ASFLAGS += "--apcs=/interwork"
+
+[compiler_rvct_armcc.processor_armv8]
+@att MAKE_ASFLAGS += '--cpu=8-A.64'
+@att MAKE_ASFLAGS += '--fpu=FP-ARMv8'

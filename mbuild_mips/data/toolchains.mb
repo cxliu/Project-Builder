@@ -1,0 +1,9 @@
+[default]
+@att VALUES.toolchain += 'csmips'
+
+[toolchain_csmips]
+@add compiler_mips_gcc
+@add linker_mips_ld
+@add assembler_mips_as
+@add archiver_mips_ar
+

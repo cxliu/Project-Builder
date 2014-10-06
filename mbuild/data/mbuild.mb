@@ -1,0 +1,27 @@
+@doc keyword(default) = 'This keyword is always set'
+@doc keyword(never) = 'This keyword should never be set (otherwise unused attributes are set inside a [never] keyword to allow M-Build to work out their type)'
+
+@doc dimension(action) = "The step of the build process we are doing. This is a slightly special dimension, and has meaning only to the underlying build scripts. The values for this dimension are encoded in the build scripts. Unlike other dimensions which are fixed for a particular output file, multiple actions will be used when building a single output file."
+@doc keyword(action_compile) = 'Compiling source files into object files.'
+@doc keyword(action_link) = 'Combining object files into an executable or shared library.'
+@doc keyword(action_use) = 'Using a static library.'
+@doc keyword(action_archive) = 'Combining object files into a static library.'
+
+@doc tag(exclusive) = 'This will allow you to modify the name of the file from the perspective of M-Build deciding which files are mutually exclusive. By default, M-Build behaves as if every file has an "exclusive" tag with the basename of the file as the value. You can use this to allow multiple files of the same basename to be included in a project (though avoid this with .c files as their object files are often placed in the same directory). You can also use it to make sure an assembly version of a .c file is treated as mutually exclusive with the .c file.'
+
+@doc tag(internal) = 'Used to signify that a file is necessary during the release process, but should not be included in the final external release.'
+
+@doc attribute(VALUES) = 'This is a map of dimension names to dimension values. Each project managed by M-Build has a set of dimensions it can be configured across. Each dimension has a set of possible values, which are all stored in this attribute.'
+
+@doc attribute(CODE_ROOT) = "This is used as a suggestion to tools in M-Build to suggest that paths be written, should be relative to this one. The default value should be sensible in most cases. Typically there should be no references to files in directories above CODE_ROOT in the output build files."
+
+@doc keyword(mbuild_include_toplevel) = "Put the directory containing the 'mbuild' component into the include path."
+
+[mbuild_include_toplevel]
+@att INCLUDE += p'../..'
+
+[default]
+@att CODE_ROOT=p'../..'
+
+[never]
+@error '"never" keyword was set'

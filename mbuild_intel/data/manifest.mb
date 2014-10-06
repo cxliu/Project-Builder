@@ -1,0 +1,35 @@
+[default]
+intel.p2_plugin
+intel_toolchain.t3_plugin
+@import toolchains.mb
+@import ms_2010_icl.mb
+@import ms_2012_icl.mb
+@import ms_2013_icl.mb
+@import ms_2010_compiler_icl.mb
+@import ms_2012_compiler_icl.mb
+@import ms_2013_compiler_icl.mb
+@import ms_2010_linker_icl.mb
+@import ms_2012_linker_icl.mb
+@import ms_2013_linker_icl.mb
+@import force_dimensions.mb
+
+# Intel toolchain for Windows
+[compiler_icl]
+@import compiler_icl.mb
+
+[linker_icl]
+@import linker_icl.mb
+
+[archiver_icl]
+@import archiver_icl.mb
+
+# Intel toolchain for Linux and Mac
+[compiler_icc]
+@import compiler_icc.mb
+
+[linker_icc]
+@import linker_icc.mb
+
+[archiver_icc]
+@import archiver_icc.mb
+

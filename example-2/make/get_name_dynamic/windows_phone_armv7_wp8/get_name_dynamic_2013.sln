@@ -1,0 +1,58 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "get_name_dynamic", "get_name_dynamic_2013.vcxproj", "{1115865A-67D8-387D-9BC2-4739A7392883}"
+	ProjectSection(ProjectDependencies) = postProject
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93} = {D37008A0-06F2-37D9-923E-2A1C9E816B93}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libfoo_dynamic", "..\..\libfoo_dynamic\windows_phone_armv7_wp8\libfoo_dynamic_2013.vcxproj", "{D37008A0-06F2-37D9-923E-2A1C9E816B93}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		lower_add1_debug|ARM = lower_add1_debug|ARM
+		lower_add1_release|ARM = lower_add1_release|ARM
+		lower_add2_debug|ARM = lower_add2_debug|ARM
+		lower_add2_release|ARM = lower_add2_release|ARM
+		upper_add1_debug|ARM = upper_add1_debug|ARM
+		upper_add1_release|ARM = upper_add1_release|ARM
+		upper_add2_debug|ARM = upper_add2_debug|ARM
+		upper_add2_release|ARM = upper_add2_release|ARM
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_debug|ARM.ActiveCfg = lower_add1_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_debug|ARM.Build.0 = lower_add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_debug|ARM.ActiveCfg = add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_debug|ARM.Build.0 = add1_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_release|ARM.ActiveCfg = lower_add1_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add1_release|ARM.Build.0 = lower_add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_release|ARM.ActiveCfg = add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add1_release|ARM.Build.0 = add1_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_debug|ARM.ActiveCfg = lower_add2_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_debug|ARM.Build.0 = lower_add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_debug|ARM.ActiveCfg = add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_debug|ARM.Build.0 = add2_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_release|ARM.ActiveCfg = lower_add2_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.lower_add2_release|ARM.Build.0 = lower_add2_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_release|ARM.ActiveCfg = add2_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.lower_add2_release|ARM.Build.0 = add2_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_debug|ARM.ActiveCfg = upper_add1_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_debug|ARM.Build.0 = upper_add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_debug|ARM.ActiveCfg = add1_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_debug|ARM.Build.0 = add1_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_release|ARM.ActiveCfg = upper_add1_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add1_release|ARM.Build.0 = upper_add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_release|ARM.ActiveCfg = add1_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add1_release|ARM.Build.0 = add1_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_debug|ARM.ActiveCfg = upper_add2_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_debug|ARM.Build.0 = upper_add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_debug|ARM.ActiveCfg = add2_debug|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_debug|ARM.Build.0 = add2_debug|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_release|ARM.ActiveCfg = upper_add2_release|ARM
+		{1115865A-67D8-387D-9BC2-4739A7392883}.upper_add2_release|ARM.Build.0 = upper_add2_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_release|ARM.ActiveCfg = add2_release|ARM
+		{D37008A0-06F2-37D9-923E-2A1C9E816B93}.upper_add2_release|ARM.Build.0 = add2_release|ARM
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

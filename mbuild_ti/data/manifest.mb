@@ -1,0 +1,23 @@
+[compiler_cl6x]
+@import ti_cl6x.mb
+
+[compiler_c6run]
+@import ti_compiler_c6run.mb
+
+[linker_lnk6x]
+@import ti_lnk6x.mb
+
+[linker_c6run]
+@import ti_linker_c6run.mb
+
+[archiver_ar6x]
+@import ti_ar6x.mb
+
+[default]
+ti.p2_plugin
+ti_toolchain.t3_plugin
+@import cores.mb
+@import flavour.mb
+@import os_tisim.mb
+@import toolchains.mb
+@import force_dimensions.mb

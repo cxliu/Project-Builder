@@ -1,0 +1,21 @@
+[assembler_clang.os_osx]
+@att MAKE_AS="xcrun clang"
+
+[assembler_clang.os_ios]
+@att MAKE_AS="xcrun -sdk iphoneos clang"
+
+[assembler_clang.os_osx.processor_x86]
+@att MAKE_ASFLAGS += "-arch i386"
+
+[assembler_clang.os_osx.processor_amd64]
+@att MAKE_ASFLAGS += "-arch x86_64"
+
+[assembler_clang.os_ios.processor_armv7s]
+@att MAKE_ASFLAGS += "-arch armv7 -arch armv7s"
+
+[assembler_clang.os_ios.processor_arm64]
+@att MAKE_ASFLAGS += "-arch armv7 -arch armv7s -arch arm64"
+
+# When using mbuild_sensible_defaults, adjust flags accordingly
+[assembler_clang.mbuild_sensible_defaults]
+@att MAKE_ASFLAGS+=-c

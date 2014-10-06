@@ -1,0 +1,28 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "helloworld_frontend", "helloworld_frontend_2012.vcxproj", "{24FBE29D-A596-3C8C-8167-B01C8B681FE4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E} = {07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libhelloworld", "..\..\libhelloworld\windows_x86_icl\libhelloworld_2012.vcxproj", "{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		debug|Win32 = debug|Win32
+		release|Win32 = release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.debug|Win32.ActiveCfg = debug|Win32
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.debug|Win32.Build.0 = debug|Win32
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.debug|Win32.ActiveCfg = debug|Win32
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.debug|Win32.Build.0 = debug|Win32
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.release|Win32.ActiveCfg = release|Win32
+		{24FBE29D-A596-3C8C-8167-B01C8B681FE4}.release|Win32.Build.0 = release|Win32
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.release|Win32.ActiveCfg = release|Win32
+		{07B89A43-5881-3DAF-899B-2EA4FCB7AA6E}.release|Win32.Build.0 = release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

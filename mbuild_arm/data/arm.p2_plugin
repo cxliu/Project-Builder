@@ -1,0 +1,116 @@
+def get_symbols():
+	return {'arm_support': arm_support,
+	       }
+
+
+toolchains = ['rvct', 'rvct_cslibc', 'msvs2012', 'msvs2013', 'wp8', 'gnu']
+cores = ['armv5te',
+         'armv6',
+         'armv7',
+         'arm64',
+         'cortex_a8',
+         'cortex_a8_t2',
+         'cortex_a8_neon',
+         'cortex_a8_neon_t2',
+         'cortex_a9',
+         'cortex_a9_t2',
+         'cortex_a9_vfp',
+         'cortex_a9_vfp_t2',
+         'cortex_a9_vfp_neon',
+         'cortex_a9_vfp_neon_t2',
+         'cortex_a15_vfp_neon',
+         'cortex_a15_vfp_neon_t2',
+         'cortex_a7_vfp_neon',
+         'cortex_a7_vfp_neon_t2']
+operating_systems = ['rvbare', 'linux', 'linuxhf', 'qemu', 'windows_rt', 'windows_phone']
+flavours = ['arm_simulate', 'release', 'debug']
+
+def toolchain_rvct_exception(configuration, parent_answer, parent_function):
+
+	if not configuration['tool'] in ['make', 'msvs2012', 'msvs2013']:
+		return False
+	
+	if configuration['tool'] == 'msvs2012':
+		if not configuration['toolchain'] in ['msvs2012', 'wp8'] or \
+		   not configuration['os'] in ['windows_rt', 'windows_phone'] or \
+		   not configuration['processor'] == 'armv7' or \
+		   not configuration['flavour'] in ['release', 'debug']:
+			return False
+		
+		if configuration['toolchain'] == 'msvs2012':
+			if not configuration['os'] == 'windows_rt':
+				return False
+		
+		if configuration['toolchain'] == 'wp8':
+			if not configuration['os'] == 'windows_phone':
+				return False
+
+	if configuration['tool'] == 'msvs2013':
+		if not configuration['toolchain'] in ['msvs2013', 'wp8'] or \
+		   not configuration['os'] in ['windows_rt', 'windows_phone'] or \
+		   not configuration['processor'] == 'armv7' or \
+		   not configuration['flavour'] in ['release', 'debug']:
+			return False
+		
+		if configuration['toolchain'] == 'msvs2013':
+			if not configuration['os'] == 'windows_rt':
+				return False
+		
+		if configuration['toolchain'] == 'wp8':
+			if not configuration['os'] == 'windows_phone':
+				return False
+				
+	if configuration['tool'] == 'make':
+		if configuration['processor'] == 'armv7' or \
+		   configuration['os'] in ['windows_rt', 'windows_phone'] or \
+		   configuration['toolchain'] in ['msvs2012', 'msvs2013', 'wp8']:
+			return False
+	
+	if not configuration['toolchain'] in toolchains:
+		return False
+	
+	if not configuration['processor'] in cores:
+		return False
+	
+	if configuration["processor"] == "arm64":
+		if configuration["os"] != "linux" or configuration["toolchain"] not in ["gnu"]:
+			return False
+
+	if configuration['toolchain'] == 'gnu':
+		if configuration["os"] != "linux" or configuration["processor"] not in ["arm64"]:
+			return False
+		
+	if not configuration['os'] in operating_systems:
+		return False
+	
+	if configuration['os'] == 'linux':
+		if not configuration['toolchain'] in ['rvct_cslibc', 'gnu']:
+			return False
+			
+	if configuration['os'] == 'linuxhf':
+		if configuration['toolchain'] != 'rvct_cslibc':
+			return False
+	
+	if configuration['os'] == 'rvbare':
+		if configuration['toolchain'] != 'rvct':
+			return False
+	
+	if configuration['os'] == 'qemu':
+		if configuration['toolchain'] != 'rvct':
+			return False
+	
+	if not configuration['flavour'] in flavours:
+		return False
+	else:
+		if configuration['flavour'] == 'arm_simulate':
+			if configuration['os'] != 'rvbare':
+				return False
+	return True
+
+
+require('mbuild_pretend')
+require('mbuild_standard')
+require('mbuild_exception')
+arm_support = mbuild_exception(mbuild_pretend('os', {'rvbare': 'linux', 'qemu': 'linux', 'linuxhf': 'linux', 'windows_rt': 'windows', 'windows_phone': 'windows'}, \
+                               mbuild_standard), toolchain_rvct_exception)
+

@@ -1,0 +1,12 @@
+libhelloworld = ProjectSpec(
+	actions=mbuild_compile_and_archive,
+	depends=[],
+	build_configuration=mbuild_union(
+                          mbuild_standard,
+                          arm_support,
+                          ti_support,
+                          intel_support,
+                          mips_support,
+                          clang_support)
+)
+

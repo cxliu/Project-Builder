@@ -1,0 +1,13 @@
+helloworld_as_one_project = ProjectSpec(
+	actions=mbuild_compile_and_link,
+	depends=[],
+	build_configuration=mbuild_union(
+                          mbuild_standard,
+                          arm_support,
+                          ti_support,
+                          intel_support,
+                          mips_support,
+                          clang_support,
+                          android_support)
+)
+

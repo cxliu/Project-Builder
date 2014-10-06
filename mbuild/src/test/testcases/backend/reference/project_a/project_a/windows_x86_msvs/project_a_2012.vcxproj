@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<ItemGroup Label="ProjectConfigurations">
+<ProjectConfiguration Include="a0_c0_debug|Win32">
+<Configuration>a0_c0_debug</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a0_c0_release|Win32">
+<Configuration>a0_c0_release</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a0_c1_debug|Win32">
+<Configuration>a0_c1_debug</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a0_c1_release|Win32">
+<Configuration>a0_c1_release</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a1_c0_debug|Win32">
+<Configuration>a1_c0_debug</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a1_c0_release|Win32">
+<Configuration>a1_c0_release</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a1_c1_debug|Win32">
+<Configuration>a1_c1_debug</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration>
+<ProjectConfiguration Include="a1_c1_release|Win32">
+<Configuration>a1_c1_release</Configuration>
+<Platform>Win32</Platform></ProjectConfiguration></ItemGroup>
+<PropertyGroup Label="Globals">
+<Keyword>Win32Proj</Keyword>
+<ProjectName>project_a</ProjectName>
+<ProjectGuid>{FDCE7286-C15C-3873-8FBC-5959BE6A2DFC}</ProjectGuid>
+<RootNamespace>project_a</RootNamespace></PropertyGroup>
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>true</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>false</WholeProgramOptimization></PropertyGroup>
+<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'" Label="Configuration">
+<CharacterSet>Unicode</CharacterSet>
+<ConfigurationType>Application</ConfigurationType>
+<UseDebugLibraries>false</UseDebugLibraries>
+<PlatformToolset>v110</PlatformToolset>
+<WholeProgramOptimization>true</WholeProgramOptimization></PropertyGroup>
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+<ImportGroup Label="ExtensionSettings" />
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<ImportGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'" Label="PropertySheets">
+<Import Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" /></ImportGroup>
+<PropertyGroup Label="UserMacros" />
+<PropertyGroup>
+<_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'">false</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'">true</LinkIncremental>
+<IntDir Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'">$(Configuration)\VS2012\</IntDir>
+<OutDir Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'">$(SolutionDir)$(Configuration)\VS2012\</OutDir>
+<LinkIncremental Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'">false</LinkIncremental></PropertyGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_debug|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>true</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a0_c0_release|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_debug|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>true</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a0_c1_release|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_debug|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>true</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a1_c0_release|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_debug|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+<BufferSecurityCheck>true</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>true</MinimalRebuild>
+<Optimization>Disabled</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>false</FunctionLevelLinking>
+<IntrinsicFunctions>false</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>false</EnableCOMDATFolding>
+<GenerateDebugInformation>true</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>false</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='a1_c1_release|Win32'">
+<ClCompile>
+<AdditionalIncludeDirectories>..\..\..\..\input\project_a</AdditionalIncludeDirectories>
+<BasicRuntimeChecks>Default</BasicRuntimeChecks>
+<BufferSecurityCheck>false</BufferSecurityCheck>
+<CompileAs>Default</CompileAs>
+<DebugInformationFormat />
+<DisableSpecificWarnings />
+<ExceptionHandling />
+<MinimalRebuild>false</MinimalRebuild>
+<Optimization>MaxSpeed</Optimization>
+<DisableLanguageExtensions>false</DisableLanguageExtensions>
+<PreprocessorDefinitions>NDEBUG=1;PROJECT_A=1;WIN32=1;_CONSOLE=1;_CRT_SECURE_NO_DEPRECATE=1;_CRT_SECURE_NO_WARNINGS=1</PreprocessorDefinitions>
+<RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+<PrecompiledHeader />
+<WarningLevel>Level4</WarningLevel>
+<FunctionLevelLinking>true</FunctionLevelLinking>
+<IntrinsicFunctions>true</IntrinsicFunctions></ClCompile>
+<Link>
+<AdditionalDependencies />
+<AdditionalLibraryDirectories />
+<EnableCOMDATFolding>true</EnableCOMDATFolding>
+<GenerateDebugInformation>false</GenerateDebugInformation>
+<IgnoreSpecificDefaultLibraries />
+<ModuleDefinitionFile />
+<OptimizeReferences>true</OptimizeReferences>
+<OutputFile>$(OutDir)$(ProjectName).exe</OutputFile>
+<SubSystem>Console</SubSystem>
+<TargetMachine>MachineX86</TargetMachine>
+<ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers></Link></ItemDefinitionGroup>
+<ItemGroup>
+<ClCompile Include="..\..\..\..\input\project_a\file.c" /></ItemGroup>
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup />
+<ItemGroup>
+<ProjectReference Include="..\..\..\project_b\project_b\windows_x86_msvs\project_b_2012.vcxproj">
+<Project>{1BC296A3-0364-348E-8DD4-25F64960D6D5}</Project>
+<ReferenceOutputAssembly>false</ReferenceOutputAssembly></ProjectReference>
+<ProjectReference Include="..\..\..\project_c\project_c\windows_x86_msvs\project_c_2012.vcxproj">
+<Project>{596D4CB7-E932-366B-AAC7-5FCA6FC8C462}</Project>
+<ReferenceOutputAssembly>false</ReferenceOutputAssembly></ProjectReference></ItemGroup>
+<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+<ImportGroup Label="ExtensionTargets" /></Project>

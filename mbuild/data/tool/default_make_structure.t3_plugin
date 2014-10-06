@@ -1,0 +1,141 @@
+
+def get_symbols():
+	return {'structure_fn_check_default' : structure_fn_check_default
+	       }
+
+def structure_fn_check_default(actions):
+
+	required_actions_archive = ['compile', 'archive', 'use']
+	required_actions_link = ['compile', 'link', 'use']
+	
+	ret_function = default_make_structure
+
+	if set(actions) != set(required_actions_archive) and \
+	   set(actions) != set(required_actions_link): 
+		ret_function = None
+
+	return ret_function
+ 
+ 
+def default_make_structure(makefile):
+	
+	 # characters after which a new line will be created for variables
+	variable_line_length = 120
+	
+	if len(makefile.rules) == 0:
+		return ''
+	
+	text_list = ['']
+	
+	header_text = ['']
+	header_text.append('#-*-makefile-*-\n\n')
+	header_text.append('BASE=%s/\n' % (makefile.code_root_makefile))
+	
+	environment_check_text = makefile.get_environment_check_text()
+	
+	rule_variable_text = ['']
+	rule_variable_text.append(makefile.get_variable_text(variable_line_length,makefile.variables[0].RULE_VAR))
+	rule_variable_text.append('\n')
+	
+	file_variable_text = ['']
+	file_variable_text.extend([makefile.get_variable_text(variable_line_length,makefile.variables[0].COMMON_FILE_VAR),'\n'])
+	file_variable_text.extend([makefile.get_variable_text(variable_line_length,makefile.variables[0].INTERMEDIATE_OBJECT),'\n'])
+	file_variable_text.extend([makefile.get_variable_text(variable_line_length,makefile.variables[0].DEPENDENT_PROJECT_OUTPUT),'\n'])
+
+	targets = makefile.get_end_targets()
+	default_text = ['']
+	default_text.append('default: ')
+	for target in targets[0:len(targets)-1]:
+		default_text.extend([target,' '])
+	default_text.extend([targets[len(targets)-1],'\n\n'])
+	
+	help_targets = list(targets)
+	help_targets.append('default')
+	help_targets.append('clean')
+	help_targets.append('cleandeps')
+	help_targets.append('help')
+
+	help_list = ['This makefile has the following targets:']
+	for target in help_targets:
+		help_list.append(' ' + target)
+
+	help_text = ['']
+	help_text.append('help:\n')
+	for help_item in help_list:
+		help_text.extend(['\t','@echo "',help_item,'"','\n'])
+	help_text.append('\n')
+
+	rule_text = ['']
+	for rule in makefile.rules:
+		rule_text.append(rule.get_text(makefile.variables))
+
+	(sub_library_clean,sub_library_exts) = makefile.get_sub_library_info()
+
+	
+	intermediate_var_names = makefile.get_variable_names(makefile.variables[0].INTERMEDIATE_OBJECT)
+	
+	clean_depstext = ['']
+	clean_depstext.append(makefile.get_variable_text(variable_line_length,makefile.variables[0].SIDE_PRODUCT))
+
+	# get side product variables to be cleaned
+	var_names = makefile.get_variable_names(makefile.variables[0].SIDE_PRODUCT)
+	
+	if len(var_names) > 0:
+		clean_depstext.append('\ncleandeps:\n')
+		for var in var_names:
+			clean_depstext.extend(['\t$(RM) $(',var,')\n'])
+
+	clean_text = ['']
+	
+	# get all variables to be cleaned
+	var_names.extend(intermediate_var_names)
+	
+	clean_text.append('\nclean: cleanself\n')
+	for line in sub_library_clean:
+		clean_text.extend(['\t',line])
+	clean_text.append('\n')
+	
+	# Create a "cleanself" target, which doesn't call into child Makefiles
+	clean_text.append('cleanself:\n')
+	files_to_clean = makefile.get_all_output_files()
+	for var in var_names:
+		clean_text.extend(['\t$(RM) $(',var,')\n'])
+	for cfile in files_to_clean:
+		clean_text.extend(['\t$(RM) ',cfile,'\n'])
+	
+	clean_text.append('\n')
+	
+	
+	sub_project_rules_text = ['']
+	for suffix in sub_library_exts:
+		sub_project_rules_text.extend(['%',suffix,': FORCE\n\t$(MAKE) -C $(@D) $(@F)\n\n'])
+	sub_project_rules_text.append('\n')
+
+	phony_text = ['.PHONY: default FORCE clean cleandeps cleanself help\n\n']
+	phony_text.append('FORCE:\n\n')
+
+	include_text = ['']
+	include_files = makefile.get_files_to_include()
+	if include_files:
+		for inc_file in include_files:
+			include_text.extend(['include $(wildcard ',inc_file,')\n'])
+	include_text.append('\n')
+
+	full_text_list = [''.join(header_text)]
+	full_text_list.append(''.join(environment_check_text))
+	full_text_list.append(''.join(rule_variable_text))
+	full_text_list.append(''.join(file_variable_text))
+	full_text_list.append(''.join(default_text))
+	full_text_list.append(''.join(rule_text))
+	full_text_list.append(''.join(clean_depstext))
+	full_text_list.append(''.join(clean_text))
+	full_text_list.append(''.join(phony_text))
+	full_text_list.append(''.join(help_text))
+	full_text_list.append(''.join(include_text))
+	full_text_list.append(''.join(sub_project_rules_text))
+
+
+	full_text = ''.join(full_text_list)
+
+	return full_text
+

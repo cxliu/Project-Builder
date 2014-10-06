@@ -1,0 +1,5 @@
+[default]
+@att MBUILD_MAKE_SUPPORT.toolchain += 'icl'
+@att MBUILD_MAKE_SUPPORT.toolchain += 'icc'
+
+@att MBUILD_MSVS_SUPPORT.toolchain += 'icl'

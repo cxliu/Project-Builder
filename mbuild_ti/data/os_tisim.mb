@@ -1,0 +1,21 @@
+[default]
+@att VALUES.os += 'tisim_coffabi'
+@att VALUES.os += 'tisim_eabi'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_console.toolchain_ccs]
+@att EXT='.out'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_windowed.toolchain_ccs]
+@att EXT='.out'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_console.toolchain_c6run]
+@att EXT='.axf'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_windowed.toolchain_c6run]
+@att EXT='.axf'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_dynamic_lib]
+@att EXT='.so'
+
+[(os_tisim_coffabi+os_tisim_eabi).config_type_static_lib]
+@att EXT='.lib'

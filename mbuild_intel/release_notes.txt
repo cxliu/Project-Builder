@@ -1,0 +1,87 @@
+M-BUILD Intel 1.3.3 RELEASE NOTES
+=================================
+Release date: 10th April, 2014
+
+New Feature
+	- Supported VS2013 on platforms windows_x86_icl and windows_amd64_icl.
+		- The warning level of VS2013 is set to Level4 (/W4).
+		- All compiler warnings are enabled in VS2013 projects.
+		
+General
+	- Added rules to generate dependency files. (MB-228)
+	- Fixed the issue that an extra white space is needed when specifying compiler options using attribute MAKE_LDFLAGS_OUTPUT_FILE, etc.
+
+M-BUILD Intel 1.3.2 RELEASE NOTES
+=================================
+Release date: 16th January, 2014
+
+Metadata Changes
+	- Added attributes MBUILD_MAKE_SUPPORT and MBUILD_MSVS_SUPPORT to improve performance of M-Build.
+
+M-BUILD Intel 1.3.1 RELEASE NOTES
+=================================
+Release date: 8th January, 2014
+
+Metadata Changes
+	- Remove contents in system_lib.mb to mbuild/data/system_lib/manifest.mb
+
+M-BUILD Intel 1.3.0 RELEASE NOTES
+=================================
+Release date: 12th December, 2013
+
+New Feature
+	- Supported MSVS 2010 and MSVS 2012 on platforms windows_x86_icl and windows_amd64_icl.
+
+Metadata Changes
+	- Both default versions of icl in MSVS 2010 and MSVS 2012 are "Intel C++ Compiler XE 13.0". They could be overwritten by adding attributes VS2010_PLATFORM_TOOLSET and VS2012_PLATFORM_TOOLSET with higher priority.
+	  For example:
+	    [toolchain_icl.USER_SET_EXPRESSIONS]
+	    @att VS2010_PLATFORM_TOOLSET = "Intel C++ Compiler XE 12.0"
+	    @att VS2012_PLATFORM_TOOLSET = "Intel C++ Compiler XE 12.0"
+
+Updating From 1.2.x to 1.3
+	- M-Build v1.4.x is required.
+
+M-BUILD Intel 1.2.5 RELEASE NOTES
+=================================
+Release date: July 26, 2013
+
+This release did the following changes for icl:
+1. Added "/Qstd" to specific language standard, apply c99 to C source file and c++0x to C++ source file, and it's synchronized with icc now.
+2. Removed "/debug" which implied by "/Zi".
+3. Removed "/Ob2" which specifies the level of inline function expansion. It's implied by "/O2" or "/O3".
+
+
+M-BUILD Intel 1.2.4 RELEASE NOTES
+=================================
+Release date: July 12, 2013
+
+This release added IPP library path for OS X, and removed options "-fast", "-fno-alias" and "-fno-ansi" ("-fno-ansi" is an illegal option) which broken hilbert tests on linux_amd64_icc with model_armv6_release. Option "-fno-alias" determines whether aliasing should be assumed in the program, it is recommended only as an experiment, possibly to see whether a useful restrict keyword has been missed. It would mean that the compiler could ignore unproven aliasing hazards. Setting "-fno-alias" imply adding keyword "restrict" for every function.
+This release also added "-ansi-alias -Wstrict-aliasing" for icc and /Qunroll /Qansi-alias" for icl for better performance.
+
+
+M-BUILD Intel 1.2.3 RELEASE NOTES
+=================================
+Release date: May 10, 2013
+
+This release prevents complaints (remark #2415: variable "DLB_L10" of static storage duration was declared but never referenced; remark #981: operands are evaluated in unspecified order; remark #1572: floating-point equality and inequality comparisons are unreliable) in icc builds and tweak up icc build optimisations.
+
+
+M-BUILD Intel 1.2.2 RELEASE NOTES
+=================================
+Release date: Dec 13, 2012
+
+This changes the optimization level to O3 for release builds for Windows Intel toolchain. For Linux and Mac Intel toolchains, optimization level was already set to O3.
+
+
+M-BUILD Intel 1.2.1 RELEASE NOTES
+=================================
+Release date: Oct 17, 2012
+
+This fixes a bug in the set of build configurations, and makes some improvements to the arguments passed to the toolchain.
+
+M-BUILD Intel 1.2 RELEASE NOTES
+===============================
+Release date: Aug 15, 2012
+
+This plugin release is to add compatibility with M-Build version 1.3

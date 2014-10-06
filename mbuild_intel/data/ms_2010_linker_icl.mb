@@ -1,0 +1,30 @@
+[linker_icl.tool_msvs2010]
+@att VS2010_LINK_LIBRARY_DEPENDENCIES = false
+
+# Debug versus release options
+[linker_icl.tool_msvs2010.mbuild_debug_symbols]
+@att VS2010_LINK_INCREMENTAL = true
+@att VS2010_OPTIMIZE_REFERENCES = keep
+@att VS2010_ENABLE_COMDAT_FOLDING = false
+
+[linker_icl.tool_msvs2010.mbuild_optimise]
+@att VS2010_LINK_INCREMENTAL = false
+@att VS2010_OPTIMIZE_REFERENCES = eliminate
+@att VS2010_ENABLE_COMDAT_FOLDING = true
+
+# Set VS_SUBSYSTEM
+[linker_icl.tool_msvs2010.(config_type_console+config_type_dynamic_lib)]
+@att VS2010_SUBSYSTEM=console
+
+[linker_icl.tool_msvs2010.config_type_windowed]
+@att VS2010_SUBSYSTEM=windows
+
+[linker_icl.tool_msvs2010.config_type_static_lib]
+# No value (don't use linker)
+
+# Set up VS_TARGET_MACHINE
+[linker_icl.tool_msvs2010.processor_x86]
+@att VS2010_TARGET_MACHINE = x86
+
+[linker_icl.tool_msvs2010.processor_amd64]
+@att VS2010_TARGET_MACHINE = x64

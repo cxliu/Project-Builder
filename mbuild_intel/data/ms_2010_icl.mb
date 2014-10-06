@@ -1,0 +1,60 @@
+[compiler_icl.tool_msvs2010]
+@att VS2010_COMPILE_AS = default
+@att VS2010_WARNING_LEVEL = max
+@att VS2010_CPP_EXCEPTIONS = disabled
+
+[compiler_icl.tool_msvs2010.mbuild_debug_symbols]
+@att VS2010_OPTIMIZATION = disabled
+@att VS2010_MINIMAL_REBUILD = true
+@att VS2010_RUNTIME_CHECKS = both
+@att VS2010_RUNTIME_LIBRARY = threaded_debug_dll
+@att VS2010_BUFFER_SECURITY_CHECK = true
+@att VS2010_DEBUG_INFO_FORMAT = prog_db_edit_cont
+@att VS2010_GENERATE_DEBUG_INFO = true
+@att VS2010_FUNCTION_LEVEL_LINK = false
+@att VS2010_INTRINSIC_FUNCTIONS = false
+
+[compiler_icl.tool_msvs2010.mbuild_debug_symbols.processor_amd64]
+# Edit and continue is not supported for amd64 builds
+@att VS2010_DEBUG_INFO_FORMAT = prog_db
+@att VS2010_MINIMAL_REBUILD = false
+
+[compiler_icl.tool_msvs2010.mbuild_optimise]
+@att VS2010_OPTIMIZATION = max_speed
+@att VS2010_MINIMAL_REBUILD = false
+@att VS2010_RUNTIME_CHECKS = default
+@att VS2010_RUNTIME_LIBRARY = threaded
+@att VS2010_BUFFER_SECURITY_CHECK = false
+@att VS2010_DEBUG_INFO_FORMAT = disabled
+@att VS2010_GENERATE_DEBUG_INFO = false
+@att VS2010_FUNCTION_LEVEL_LINK = true
+@att VS2010_INTRINSIC_FUNCTIONS = true
+
+# Turn off overly noisy warnings
+[compiler_icl.tool_msvs2010]
+@att DEFINE._CRT_SECURE_NO_WARNINGS = 1
+@att DEFINE._CRT_SECURE_NO_DEPRECATE = 1
+@att VS2010_DISABLE_SPECIFIC_WARNINGS += ""
+
+[compiler_icl.tool_msvs2010.cpp_exceptions]
+@att VS2010_CPP_EXCEPTIONS = enabled
+
+[compiler_icl.tool_msvs2010.vs_cpp_exceptions_with_seh]
+@att VS2010_CPP_EXCEPTIONS = enabled_seh
+
+[compiler_icl.tool_msvs2010.cpp_exceptions_with_extern_c]
+@att VS2010_CPP_EXCEPTIONS = enabled_extern_c
+
+# if using a static runtime library
+[compiler_icl.tool_msvs2010.toolchain_static_runtime.mbuild_debug_symbols]
+@att VS2010_RUNTIME_LIBRARY = threaded_debug
+
+[compiler_icl.tool_msvs2010.toolchain_static_runtime.mbuild_optimise]
+@att VS2010_RUNTIME_LIBRARY = threaded
+ 
+# if using a dynamic runtime library
+[compiler_icl.tool_msvs2010.toolchain_dynamic_runtime.mbuild_debug_symbols]
+@att VS2010_RUNTIME_LIBRARY = threaded_debug_dll
+
+[compiler_icl.tool_msvs2010.toolchain_dynamic_runtime.mbuild_optimise]
+@att VS2010_RUNTIME_LIBRARY = threaded_dll

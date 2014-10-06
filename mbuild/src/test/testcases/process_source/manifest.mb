@@ -1,0 +1,3 @@
+[default]
+@import ../../../../manifest.mb
+@import strip_example/manifest.mb

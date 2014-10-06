@@ -1,0 +1,30 @@
+# .project files should always be "reachable" by starting with the "default"
+# keyword. 
+
+@doc keyword(project_helloworld_as_one_project) = "The helloworld example, with the library and frontend together in one project"
+@doc keyword(project_helloworld_frontend) = "The frontend to the helloworld library"
+@doc keyword(project_libhelloworld) = "The helloworld library, built as a static library"
+
+[default]
+helloworld_as_one_project.project
+helloworld_frontend.project
+libhelloworld.project
+
+# For each project, we define what config_type it is, and what object files 
+# should go into it. 
+
+[project_helloworld_as_one_project]
+@add config_type_console
+@add helloworld_frontend
+@add helloworld_objects
+@add syslib_math
+
+[project_helloworld_frontend]
+@add config_type_console
+@add helloworld_frontend
+@add syslib_math
+
+[project_libhelloworld]
+@add config_type_static_lib
+@add helloworld_objects
+@add syslib_math

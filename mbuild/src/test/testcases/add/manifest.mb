@@ -1,0 +1,20 @@
+[a]
+@add b
+
+one
+
+[b.c]
+@add d
+
+two
+
+[d.a]
+@add e
+@add f
+
+three
+
+[e.f.b.j]
+@add a
+
+four

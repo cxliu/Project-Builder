@@ -1,0 +1,41 @@
+@doc keyword(framework_foundation) = "Add the linker option for using Foundation framework"
+
+[linker_clang.os_osx]
+@att MAKE_LD = "xcrun clang"
+
+[linker_clang.os_ios]
+@att MAKE_LD = "xcrun -sdk iphoneos clang"
+
+[linker_clang]
+@att MAKE_LDFLAGS_OUTPUT_FILE = "-o"
+
+# If using the c++ linker
+[linker_clang.cpp_linker.os_osx]
+@att MAKE_LD = "xcrun clang++"
+
+[linker_clang.cpp_linker.os_ios]
+@att MAKE_LD = "xcrun -sdk iphoneos clang++"
+
+# Release flag
+[linker_clang.flavour_release]
+@att MAKE_LDFLAGS += "-O2"
+
+# Dynamic library flags
+[linker_clang.config_type_dynamic_lib]
+@att MAKE_LDFLAGS += "-fPIC"
+@att MAKE_LDFLAGS += "-shared"
+
+[linker_clang.os_osx.processor_x86]
+@att MAKE_LDFLAGS += "-arch i386"
+
+[linker_clang.os_osx.processor_amd64]
+@att MAKE_LDFLAGS += "-arch x86_64"
+
+[linker_clang.os_ios.processor_armv7s]
+@att MAKE_LDFLAGS += "-arch armv7 -arch armv7s"
+
+[linker_clang.os_ios.processor_arm64]
+@att MAKE_LDFLAGS += "-arch armv7 -arch armv7s -arch arm64"
+
+[linker_clang.framework_foundation]
+@att MAKE_LDFLAGS += "-framework Foundation"
