@@ -75,7 +75,10 @@ class ElementTree(_ElementTree.ElementTree):
 			
 			if node.text or len(node):
 				if node.text:
+					self._indent += 1
+					file.write("\n" + "\t"*self._indent)
 					file.write(_escape_cdata(node.text, encoding))
+					self._indent -= 1
 				for n in node:
 					self._indent += 1
 					self._write(file, n, encoding, namespaces)
