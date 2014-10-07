@@ -1,31 +1,97 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<ItemGroup>
-<Filter Include="example-2">
-<UniqueIdentifier>{56b0fa29-7fb3-30c5-88f5-d7c92893a77c}</UniqueIdentifier></Filter>
-<Filter Include="example-2\frontend">
-<UniqueIdentifier>{1a78176b-f2d0-3691-b0a5-5167d5f05bd2}</UniqueIdentifier></Filter>
-<Filter Include="example-2\include">
-<UniqueIdentifier>{d1543bbf-0186-39a6-b064-6dc1018e1896}</UniqueIdentifier></Filter>
-<Filter Include="example-2\src">
-<UniqueIdentifier>{cdf7d75b-deb6-3ad8-bf95-c8c89542261b}</UniqueIdentifier></Filter>
-<Filter Include="example-2\src\get_name">
-<UniqueIdentifier>{56a22bbc-9a17-340e-8b94-9f93fdfdd619}</UniqueIdentifier></Filter>
-<Filter Include="example-2\src\get_name\target">
-<UniqueIdentifier>{33bc7284-98a7-30fe-81c2-074ba224f052}</UniqueIdentifier></Filter>
-<Filter Include="example-2\src\get_name\target\windows">
-<UniqueIdentifier>{2cdee9ff-93ce-319e-8490-aef35ded8870}</UniqueIdentifier></Filter></ItemGroup>
-<ItemGroup>
-<ClCompile Include="..\..\..\frontend\main.c">
-<Filter>example-2\frontend</Filter></ClCompile>
-<ClCompile Include="..\..\..\src\get_name\get_name.c">
-<Filter>example-2\src\get_name</Filter></ClCompile>
-<ClCompile Include="..\..\..\src\get_name\target\windows\get_name_raw.c">
-<Filter>example-2\src\get_name\target\windows</Filter></ClCompile></ItemGroup>
-<ItemGroup>
-<ClInclude Include="..\..\..\include\get_name.h">
-<Filter>example-2\include</Filter></ClInclude></ItemGroup>
-<ItemGroup />
-<ItemGroup />
-<ItemGroup />
-<ItemGroup /></Project>
+<Project
+	ToolsVersion="4.0"
+	xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+	>
+	<ItemGroup>
+		<Filter
+			Include="example-2"
+			>
+			<UniqueIdentifier>
+				{56b0fa29-7fb3-30c5-88f5-d7c92893a77c}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\frontend"
+			>
+			<UniqueIdentifier>
+				{1a78176b-f2d0-3691-b0a5-5167d5f05bd2}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\include"
+			>
+			<UniqueIdentifier>
+				{d1543bbf-0186-39a6-b064-6dc1018e1896}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\src"
+			>
+			<UniqueIdentifier>
+				{cdf7d75b-deb6-3ad8-bf95-c8c89542261b}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\src\get_name"
+			>
+			<UniqueIdentifier>
+				{56a22bbc-9a17-340e-8b94-9f93fdfdd619}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\src\get_name\target"
+			>
+			<UniqueIdentifier>
+				{33bc7284-98a7-30fe-81c2-074ba224f052}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-2\src\get_name\target\windows"
+			>
+			<UniqueIdentifier>
+				{2cdee9ff-93ce-319e-8490-aef35ded8870}
+			</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile
+			Include="..\..\..\frontend\main.c"
+			>
+			<Filter>
+				example-2\frontend
+			</Filter>
+		</ClCompile>
+		<ClCompile
+			Include="..\..\..\src\get_name\get_name.c"
+			>
+			<Filter>
+				example-2\src\get_name
+			</Filter>
+		</ClCompile>
+		<ClCompile
+			Include="..\..\..\src\get_name\target\windows\get_name_raw.c"
+			>
+			<Filter>
+				example-2\src\get_name\target\windows
+			</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude
+			Include="..\..\..\include\get_name.h"
+			>
+			<Filter>
+				example-2\include
+			</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+</Project>

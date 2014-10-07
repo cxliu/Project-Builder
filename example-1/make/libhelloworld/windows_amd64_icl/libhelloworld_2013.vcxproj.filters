@@ -1,19 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-<ItemGroup>
-<Filter Include="example-1">
-<UniqueIdentifier>{5e109bfb-a66f-36f9-b53a-49b211f717b0}</UniqueIdentifier></Filter>
-<Filter Include="example-1\include">
-<UniqueIdentifier>{40327a6d-2f6e-3205-89dd-a50151967d8b}</UniqueIdentifier></Filter>
-<Filter Include="example-1\src">
-<UniqueIdentifier>{071b9b39-6ce2-3ade-8061-e26be759f495}</UniqueIdentifier></Filter></ItemGroup>
-<ItemGroup>
-<ClCompile Include="..\..\..\src\helloworld.c">
-<Filter>example-1\src</Filter></ClCompile></ItemGroup>
-<ItemGroup>
-<ClInclude Include="..\..\..\include\helloworld.h">
-<Filter>example-1\include</Filter></ClInclude></ItemGroup>
-<ItemGroup />
-<ItemGroup />
-<ItemGroup />
-<ItemGroup /></Project>
+<Project
+	ToolsVersion="4.0"
+	xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+	>
+	<ItemGroup>
+		<Filter
+			Include="example-1"
+			>
+			<UniqueIdentifier>
+				{5e109bfb-a66f-36f9-b53a-49b211f717b0}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-1\include"
+			>
+			<UniqueIdentifier>
+				{40327a6d-2f6e-3205-89dd-a50151967d8b}
+			</UniqueIdentifier>
+		</Filter>
+		<Filter
+			Include="example-1\src"
+			>
+			<UniqueIdentifier>
+				{071b9b39-6ce2-3ade-8061-e26be759f495}
+			</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile
+			Include="..\..\..\src\helloworld.c"
+			>
+			<Filter>
+				example-1\src
+			</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude
+			Include="..\..\..\include\helloworld.h"
+			>
+			<Filter>
+				example-1\include
+			</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+	<ItemGroup
+	/>
+</Project>
